@@ -10,9 +10,8 @@ import {
   ChevronRight,
   Cpu,
   RotateCcw,
-  SlidersHorizontal,
 } from 'lucide-react';
-import communityData from '@/data';
+import communityData, { EcosystemItem } from '@/data';
 import {
   GrafanaLogo,
   PrometheusLogo,
@@ -30,19 +29,82 @@ import {
 } from '@/components/icons';
 
 const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
-  grafana: (props) => <div className="p-1 rounded-lg bg-orange-500/10"><GrafanaLogo className="h-7 w-7 text-orange-400" {...props} /></div>,
-  loki: (props) => <LokiLogo className="h-9 w-9" {...props} />,
-  tempo: (props) => <TempoLogo className="h-9 w-9" {...props} />,
-  mimir: (props) => <MimirLogo className="h-9 w-9" {...props} />,
-  pyroscope: (props) => <PyroscopeLogo className="h-9 w-9" {...props} />,
-  alloy: (props) => <AlloyLogo className="h-9 w-9" {...props} />,
-  beyla: (props) => <BeylaLogo className="h-9 w-9" {...props} />,
-  k6: (props) => <K6Logo className="h-9 w-9" {...props} />,
-  oncall: (props) => <OnCallLogo className="h-9 w-9" {...props} />,
-  faro: (props) => <FaroLogo className="h-9 w-9" {...props} />,
-  prometheus: (props) => <PrometheusLogo className="h-9 w-9" {...props} />,
-  opentelemetry: (props) => <OpenTelemetryLogo className="h-9 w-9" {...props} />,
+  grafana: (props) => (
+    <div className="p-0.5 rounded-lg bg-orange-500/10">
+      <GrafanaLogo className="h-7 w-7 text-orange-400" {...props} />
+    </div>
+  ),
+  loki: (props) => <LokiLogo className="h-8 w-8" {...props} />,
+  tempo: (props) => <TempoLogo className="h-8 w-8" {...props} />,
+  mimir: (props) => <MimirLogo className="h-8 w-8" {...props} />,
+  pyroscope: (props) => <PyroscopeLogo className="h-8 w-8" {...props} />,
+  alloy: (props) => <AlloyLogo className="h-8 w-8" {...props} />,
+  beyla: (props) => <BeylaLogo className="h-8 w-8" {...props} />,
+  k6: (props) => <K6Logo className="h-8 w-8" {...props} />,
+  oncall: (props) => <OnCallLogo className="h-8 w-8" {...props} />,
+  faro: (props) => <FaroLogo className="h-8 w-8" {...props} />,
+  prometheus: (props) => <PrometheusLogo className="h-8 w-8" {...props} />,
+  opentelemetry: (props) => <OpenTelemetryLogo className="h-8 w-8" {...props} />,
 };
+
+function EcosystemCard({ item }: { item: EcosystemItem }) {
+  const [imgError, setImgError] = useState(false);
+  const FallbackIcon = iconMap[item.icon] || Cpu;
+
+  return (
+    <div className="group relative flex flex-col justify-between p-6 sm:p-7 rounded-2xl bg-zinc-900/60 border border-zinc-800/80 hover:border-orange-500/50 hover:bg-zinc-900/90 transition-all duration-300 shadow-xl hover:-translate-y-1 hover:shadow-2xl hover:shadow-orange-500/5">
+      <div>
+        <div className="flex items-start justify-between gap-3 mb-4">
+          <div className="relative flex h-12 w-12 items-center justify-center rounded-xl bg-zinc-950/80 border border-zinc-800 group-hover:scale-105 transition-transform shadow-inner p-1.5 overflow-hidden">
+            {item.svgUrl && !imgError ? (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img
+                src={item.svgUrl}
+                alt={`${item.name} official logo`}
+                onError={() => setImgError(true)}
+                className="h-full w-full object-contain"
+                loading="lazy"
+              />
+            ) : (
+              <FallbackIcon />
+            )}
+          </div>
+          <span
+            className={`text-[10px] sm:text-xs font-semibold px-2.5 py-1 rounded-full border ${
+              item.status.includes('CNCF')
+                ? 'bg-blue-500/10 text-blue-400 border-blue-500/30'
+                : 'bg-orange-500/10 text-orange-400 border-orange-500/30'
+            }`}
+          >
+            {item.badge}
+          </span>
+        </div>
+
+        <h3 className="text-lg sm:text-xl font-bold text-white group-hover:text-orange-400 transition-colors">
+          {item.name}
+        </h3>
+        <p className="text-xs text-orange-400/90 font-mono mt-0.5">{item.category}</p>
+
+        <p className="mt-3 text-xs sm:text-sm text-zinc-400 leading-relaxed font-normal">
+          {item.description}
+        </p>
+      </div>
+
+      <div className="mt-6 pt-4 border-t border-zinc-800/80 flex items-center justify-between">
+        <span className="text-[11px] text-zinc-500 font-mono">{item.status}</span>
+        <a
+          href={item.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-1 text-xs font-semibold text-orange-400 hover:text-orange-300 transition-colors"
+        >
+          <span>Documentation</span>
+          <ExternalLink className="h-3.5 w-3.5 group-hover:translate-x-0.5 transition-transform" />
+        </a>
+      </div>
+    </div>
+  );
+}
 
 const categories = [
   'All Tools',
@@ -240,54 +302,9 @@ export default function EcosystemSection() {
         {/* Bento Grid / Tool Cards */}
         {filteredItems.length > 0 ? (
           <div className="mt-6 sm:mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 max-w-5xl mx-auto">
-            {paginatedItems.map((item) => {
-              const IconComponent = iconMap[item.icon] || Cpu;
-              return (
-                <div
-                  key={item.id}
-                  className="group relative flex flex-col justify-between p-6 sm:p-7 rounded-2xl bg-zinc-900/60 border border-zinc-800/80 hover:border-orange-500/50 hover:bg-zinc-900/90 transition-all duration-300 shadow-xl hover:-translate-y-1 hover:shadow-2xl hover:shadow-orange-500/5"
-                >
-                  <div>
-                    <div className="flex items-start justify-between gap-3 mb-4">
-                      <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-zinc-950/80 border border-zinc-800 group-hover:scale-105 transition-transform shadow-inner">
-                        <IconComponent />
-                      </div>
-                      <span
-                        className={`text-[10px] sm:text-xs font-semibold px-2.5 py-1 rounded-full border ${
-                          item.status.includes('CNCF')
-                            ? 'bg-blue-500/10 text-blue-400 border-blue-500/30'
-                            : 'bg-orange-500/10 text-orange-400 border-orange-500/30'
-                        }`}
-                      >
-                        {item.badge}
-                      </span>
-                    </div>
-
-                    <h3 className="text-lg sm:text-xl font-bold text-white group-hover:text-orange-400 transition-colors">
-                      {item.name}
-                    </h3>
-                    <p className="text-xs text-orange-400/90 font-mono mt-0.5">{item.category}</p>
-
-                    <p className="mt-3 text-xs sm:text-sm text-zinc-400 leading-relaxed font-normal">
-                      {item.description}
-                    </p>
-                  </div>
-
-                  <div className="mt-6 pt-4 border-t border-zinc-800/80 flex items-center justify-between">
-                    <span className="text-[11px] text-zinc-500 font-mono">{item.status}</span>
-                    <a
-                      href={item.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1 text-xs font-semibold text-orange-400 hover:text-orange-300 transition-colors"
-                    >
-                      <span>Documentation</span>
-                      <ExternalLink className="h-3.5 w-3.5 group-hover:translate-x-0.5 transition-transform" />
-                    </a>
-                  </div>
-                </div>
-              );
-            })}
+            {paginatedItems.map((item) => (
+              <EcosystemCard key={item.id} item={item} />
+            ))}
           </div>
         ) : (
           /* Empty Search State */
