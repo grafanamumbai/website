@@ -41,7 +41,7 @@
       "rsvpUrl": "",
       "cfpUrl": ""
     },
-    "hasUpcomingEvent": true,
+    "hasUpcomingEvent": false,
     "eventType": "Cloud Native Mumbai Community Event",
     "communityPartners": [
       {
