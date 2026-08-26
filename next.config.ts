@@ -19,6 +19,7 @@ const nextConfig: NextConfig = {
       { protocol: 'https', hostname: 'drive.google.com', port: '', pathname: '/**' }
     ],
   },
+  serverExternalPackages: ['@genkit-ai/google-genai', '@genkit-ai/next', 'genkit'],
 };
 
 export default nextConfig;
