@@ -30,6 +30,15 @@ const getSocialIcon = (key: string) => {
   return <LinkIcon className="h-4 w-4" />;
 };
 
+const getAvatarUrl = (url: string | undefined) => {
+  if (!url) return '/placeholder-avatar.png';
+  const driveMatch = url.match(/drive\.google\.com\/file\/d\/([a-zA-Z0-9_-]+)/);
+  if (driveMatch && driveMatch[1]) {
+    return `https://drive.google.com/uc?export=view&id=${driveMatch[1]}`;
+  }
+  return url;
+};
+
 export default function SpeakersSection() {
   const { speakers, socials } = communityData;
 
@@ -64,7 +73,7 @@ export default function SpeakersSection() {
                 {/* Avatar */}
                 <div className="relative h-16 w-16 sm:h-20 sm:w-20 shrink-0 rounded-2xl overflow-hidden border border-zinc-800 bg-zinc-800">
                   <Image
-                    src={speaker.avatar || '/placeholder-avatar.png'}
+                    src={getAvatarUrl(speaker.avatar)}
                     alt={speaker.name}
                     fill
                     unoptimized

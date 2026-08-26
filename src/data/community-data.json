@@ -24,15 +24,15 @@
     "cfp": "https://grafana.qualtrics.com/jfe/form/SV_4OQ9dzUAbSHfrAG"
   },
   "currentEvent": {
-    "title": "September 2026 Mumbai Meetup",
+    "title": "Cloud Native Mumbai",
     "edition": "September 2026",
-    "theme": "Cloud Native, AI & Open Source",
-    "date": "Saturday, Yet to be Announced",
+    "theme": "Cloud Native & Open Source",
+    "date": "Saturday, 12th September 2026",
     "time": "",
     "targetDateISO": "",
     "venue": {
-      "name": "Yet to be Announced",
-      "address": "Yet to be Announced",
+      "name": "DevX",
+      "address": "Marol, Mumbai, Maharashtra, India",
       "mapUrl": ""
     },
     "registration": {
@@ -41,8 +41,8 @@
       "rsvpUrl": "",
       "cfpUrl": ""
     },
-    "hasUpcomingEvent": false,
-    "eventType": "Septermber Meetup Community Event",
+    "hasUpcomingEvent": true,
+    "eventType": "Cloud Native Mumbai Community Event",
     "communityPartners": [
       {
         "id": "grafana-friends-mumbai",
@@ -63,12 +63,12 @@
     "collaborationPartners": [
       {
         "id": "devx",
-        "name": "Yet to be Announced",
+        "name": "DevX",
         "type": "Collaboration Partner"
       },
       {
         "id": "indierepair",
-        "name": "Yet to be Announced",
+        "name": "IndieRepair",
         "type": "Collaboration Partner"
       }
     ]

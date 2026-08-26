@@ -26,6 +26,15 @@ const getSocialIcon = (key: string) => {
   return <LinkIcon className="h-4 w-4" />; // default icon
 };
 
+const getAvatarUrl = (url: string | undefined) => {
+  if (!url) return '/placeholder-avatar.png';
+  const driveMatch = url.match(/drive\.google\.com\/file\/d\/([a-zA-Z0-9_-]+)/);
+  if (driveMatch && driveMatch[1]) {
+    return `https://drive.google.com/uc?export=view&id=${driveMatch[1]}`;
+  }
+  return url;
+};
+
 const roleIcons: Record<string, any> = {
   'Lead Organizer': Users,
   'Co-Organizer': Users,
@@ -72,7 +81,7 @@ export default function CoreTeamSection() {
                 <div className="relative mb-5 sm:mb-6 h-28 w-28 sm:h-32 sm:w-32 rounded-full p-1 bg-gradient-to-br from-zinc-800 to-zinc-900 group-hover:from-orange-500/50 group-hover:to-yellow-500/50 transition-colors duration-500">
                   <div className="relative h-full w-full overflow-hidden rounded-full border-2 border-zinc-950 bg-zinc-800">
                     <Image
-                      src={member.avatar || '/placeholder-avatar.png'}
+                      src={getAvatarUrl(member.avatar)}
                       alt={member.name}
                       fill
                       unoptimized
