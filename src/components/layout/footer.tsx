@@ -15,7 +15,7 @@ import {
   MapPin,
 } from 'lucide-react';
 import communityData from '@/data';
-import { MeetupLogo, GrafanaLogo, CncfIcon, GrotMascot } from '@/components/icons';
+import { MeetupLogo, CncfIcon, GrotMascot } from '@/components/icons';
 
 export default function Footer() {
   const { chapter, socials, currentEvent } = communityData;
@@ -29,8 +29,13 @@ export default function Footer() {
           {/* Col 1: Chapter info & Grot */}
           <div className="md:col-span-2 space-y-4">
             <Link href="/" className="flex items-center gap-3">
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-zinc-900 border border-orange-500/30 p-1.5 shadow-md shadow-orange-500/10">
-                <GrafanaLogo className="h-full w-full text-orange-500" />
+              <div className="relative h-10 w-10 rounded-full bg-orange-500/10 p-1 ring-1 ring-orange-500/30 overflow-hidden">
+                <Image 
+                  src="/grafana-logo.png" 
+                  alt={chapter.name} 
+                  fill 
+                  className="object-cover" 
+                />
               </div>
               <span className="text-base sm:text-lg font-bold tracking-tight text-white">
                 {chapter.name}

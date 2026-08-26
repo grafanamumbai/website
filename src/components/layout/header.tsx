@@ -29,7 +29,6 @@ import {
   MessageSquare,
 } from 'lucide-react';
 import communityData from '@/data';
-import { GrafanaLogo } from '@/components/icons';
 
 const navLinks = [
   { href: '/#about', label: 'About', icon: Info },
@@ -56,8 +55,13 @@ export default function Header() {
           href="/" 
           className="group flex items-center gap-2.5 sm:gap-3.5 transition-opacity hover:opacity-90 shrink-0"
         >
-          <div className="relative flex h-10 w-10 sm:h-11 sm:w-11 items-center justify-center rounded-xl bg-zinc-900 border border-orange-500/30 p-1.5 transition-transform duration-300 group-hover:scale-105 shadow-md shadow-orange-500/10">
-            <GrafanaLogo className="h-full w-full text-orange-500" />
+          <div className="relative h-10 w-10 sm:h-12 sm:w-12 rounded-full bg-orange-500/10 p-1 ring-1 ring-orange-500/30 transition-transform duration-300 group-hover:scale-105 overflow-hidden">
+            <Image 
+              src="/grafana-logo.png" 
+              alt={chapter.name} 
+              fill 
+              className="object-cover" 
+            />
           </div>
           <div className="flex flex-col">
             <div className="flex items-center gap-2">
@@ -155,8 +159,8 @@ export default function Header() {
                       className="flex items-center gap-3 text-lg font-bold text-white" 
                       onClick={() => setIsOpen(false)}
                     >
-                      <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-zinc-900 border border-orange-500/30 p-1">
-                        <GrafanaLogo className="h-full w-full text-orange-500" />
+                      <div className="relative h-9 w-9 rounded-full bg-orange-500/10 p-1 ring-1 ring-orange-500/30 overflow-hidden">
+                        <Image src="/grafana-logo.png" alt={chapter.name} fill className="object-cover" />
                       </div>
                       <span>{chapter.shortName}</span>
                     </Link>
