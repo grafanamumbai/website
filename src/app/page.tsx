@@ -9,18 +9,25 @@ import ContestsSection from '@/components/sections/contests';
 import SponsorsSection from '@/components/sections/sponsors';
 import GallerySection from '@/components/sections/gallery';
 import FaqSection from '@/components/sections/faq';
+import communityData from '@/data';
 
 export default function Home() {
+  const { hasUpcomingEvent } = communityData.currentEvent;
+
   return (
     <div className="flex flex-col min-h-screen bg-[#0c0e14]">
       <Header />
       <main className="flex-1">
         <HeroSection />
         <AboutSection />
-        <SpeakersSection />
-        <ScheduleSection />
+        {hasUpcomingEvent && (
+          <>
+            <SpeakersSection />
+            <ScheduleSection />
+          </>
+        )}
         <CoreTeamSection />
-        <ContestsSection />
+        {hasUpcomingEvent && <ContestsSection />}
         <SponsorsSection />
         <GallerySection />
         <FaqSection />
