@@ -66,7 +66,6 @@ export default function HeroSection() {
           <div className="flex flex-col items-center select-none font-black tracking-tighter" style={{ fontFamily: '"Arial Black", Arial, sans-serif' }}>
             <h1 className="text-[12vw] sm:text-7xl md:text-8xl lg:text-9xl mb-1 mt-6 drop-shadow-lg" 
                 style={{ 
-                  color: '#FFE26E', 
                   backgroundImage: 'linear-gradient(to bottom, #FFC900, #FF6A00)',
                   WebkitBackgroundClip: 'text',
                   color: 'transparent',
