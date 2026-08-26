@@ -31,7 +31,7 @@ jobs:
       run: |
         git config --global user.name "Grafana & Friends Mumbai"
         git config --global user.email "grafanamumbai@gmail.com"
-        git add src/data/community-data.json src/data/speakers.json
+        git add src/data/event.json src/data/community-data.json src/data/speakers.json
         if ! git diff --staged --quiet; then
           git commit -m "chore: auto-sync Meetup event and confirmed speakers data"
           git push
