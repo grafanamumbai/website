@@ -4,7 +4,9 @@ import { fileURLToPath } from 'url';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-const DATA_FILE = path.join(__dirname, '../src/data/community-data.json');
+
+const EVENT_FILE = path.join(__dirname, '../src/data/event.json');
+const COMMUNITY_DATA_FILE = path.join(__dirname, '../src/data/community-data.json');
 
 async function updateMeetupData() {
   console.log('Fetching Meetup page...');
@@ -75,34 +77,38 @@ async function updateMeetupData() {
   if (earliestUpcoming) {
     console.log('Fetched Upcoming Event:', earliestUpcoming.title, 'at', earliestUpcoming.dateTime);
   } else {
-    console.log('No upcoming future events found.');
+    console.log('No upcoming future events found on Meetup.');
   }
 
-  const data = JSON.parse(fs.readFileSync(DATA_FILE, 'utf-8'));
-  let updated = false;
+  // Load existing files
+  const communityData = JSON.parse(fs.readFileSync(COMMUNITY_DATA_FILE, 'utf-8'));
+  const eventData = JSON.parse(fs.readFileSync(EVENT_FILE, 'utf-8'));
 
-  // Update member count
+  let communityUpdated = false;
+  let eventUpdated = false;
+
+  // 1. Update member count in community-data.json
   if (memberCount) {
     const rounded = Math.floor(memberCount / 100) * 100;
     const membersString = `${rounded}+`;
-    if (data.chapter.stats.members !== membersString) {
-       console.log(`Updating members: ${data.chapter.stats.members} -> ${membersString}`);
-       data.chapter.stats.members = membersString;
-       updated = true;
+    if (communityData.chapter.stats.members !== membersString) {
+       console.log(`Updating members count: ${communityData.chapter.stats.members} -> ${membersString}`);
+       communityData.chapter.stats.members = membersString;
+       communityUpdated = true;
     }
   }
 
-  // Update event details
+  // 2. Update event details in event.json
   if (earliestUpcoming) {
-    if (data.currentEvent.hasUpcomingEvent !== true) {
-      data.currentEvent.hasUpcomingEvent = true;
-      updated = true;
+    if (eventData.currentEvent.hasUpcomingEvent !== true) {
+      eventData.currentEvent.hasUpcomingEvent = true;
+      eventUpdated = true;
     }
 
-    const newTitle = earliestUpcoming.title || data.currentEvent.title;
-    if (data.currentEvent.title !== newTitle) {
-      data.currentEvent.title = newTitle;
-      updated = true;
+    const newTitle = earliestUpcoming.title || eventData.currentEvent.title;
+    if (eventData.currentEvent.title !== newTitle) {
+      eventData.currentEvent.title = newTitle;
+      eventUpdated = true;
     }
 
     const eventDate = new Date(earliestUpcoming.dateTime);
@@ -113,14 +119,13 @@ async function updateMeetupData() {
       month: 'long',
       year: 'numeric'
     });
-    // Add ordinal suffix logic (st, nd, rd, th) can be skipped for simplicity or done like:
     const day = eventDate.getDate();
     const suffix = ["th", "st", "nd", "rd"][day % 10 > 3 ? 0 : (day % 100 - day % 10 != 10) * (day % 10)];
     const finalDateStr = formattedDate.replace(day.toString(), `${day}${suffix}`);
     
-    if (data.currentEvent.date !== finalDateStr) {
-      data.currentEvent.date = finalDateStr;
-      updated = true;
+    if (eventData.currentEvent.date !== finalDateStr) {
+      eventData.currentEvent.date = finalDateStr;
+      eventUpdated = true;
     }
 
     const formattedTime = eventDate.toLocaleTimeString('en-US', {
@@ -129,20 +134,20 @@ async function updateMeetupData() {
       timeZone: 'Asia/Kolkata',
       timeZoneName: 'short'
     });
-    if (data.currentEvent.time !== formattedTime) {
-      data.currentEvent.time = formattedTime;
-      updated = true;
+    if (eventData.currentEvent.time !== formattedTime) {
+      eventData.currentEvent.time = formattedTime;
+      eventUpdated = true;
     }
 
-    if (data.currentEvent.targetDateISO !== earliestUpcoming.dateTime) {
-      data.currentEvent.targetDateISO = earliestUpcoming.dateTime;
-      updated = true;
+    if (eventData.currentEvent.targetDateISO !== earliestUpcoming.dateTime) {
+      eventData.currentEvent.targetDateISO = earliestUpcoming.dateTime;
+      eventUpdated = true;
     }
 
     const url = earliestUpcoming.eventUrl;
-    if (url && data.currentEvent.registration.rsvpUrl !== url) {
-      data.currentEvent.registration.rsvpUrl = url;
-      updated = true;
+    if (url && eventData.currentEvent.registration.rsvpUrl !== url) {
+      eventData.currentEvent.registration.rsvpUrl = url;
+      eventUpdated = true;
     }
 
     // Attempt to extract venue
@@ -156,36 +161,42 @@ async function updateMeetupData() {
        }
     }
     
-    if (data.currentEvent.venue.name !== venueName) {
-      data.currentEvent.venue.name = venueName;
-      updated = true;
+    if (eventData.currentEvent.venue.name !== venueName) {
+      eventData.currentEvent.venue.name = venueName;
+      eventUpdated = true;
     }
-    if (data.currentEvent.venue.address !== venueAddress) {
-      data.currentEvent.venue.address = venueAddress;
-      updated = true;
+    if (eventData.currentEvent.venue.address !== venueAddress) {
+      eventData.currentEvent.venue.address = venueAddress;
+      eventUpdated = true;
     }
     
     // Status text
     const statusText = earliestUpcoming.status === 'ACTIVE' ? 'Registrations Open' : 'Limited Seats Available';
-    if (data.currentEvent.registration.statusText !== statusText) {
-       data.currentEvent.registration.statusText = statusText;
-       updated = true;
+    if (eventData.currentEvent.registration.statusText !== statusText) {
+       eventData.currentEvent.registration.statusText = statusText;
+       eventUpdated = true;
     }
 
   } else {
     // No upcoming event
-    if (data.currentEvent.hasUpcomingEvent !== false) {
-      console.log('Transitioning to no-upcoming-event state.');
-      data.currentEvent.hasUpcomingEvent = false;
-      updated = true;
+    if (eventData.currentEvent.hasUpcomingEvent !== false) {
+      console.log('Transitioning to no-upcoming-event state in event.json.');
+      eventData.currentEvent.hasUpcomingEvent = false;
+      eventUpdated = true;
     }
   }
 
-  if (updated) {
-    fs.writeFileSync(DATA_FILE, JSON.stringify(data, null, 2) + '\n');
-    console.log('Updated community-data.json successfully!');
-  } else {
-    console.log('No updates needed.');
+  // Write changes
+  if (communityUpdated) {
+    fs.writeFileSync(COMMUNITY_DATA_FILE, JSON.stringify(communityData, null, 2) + '\n');
+    console.log('Updated community-data.json with latest stats!');
+  }
+  if (eventUpdated) {
+    fs.writeFileSync(EVENT_FILE, JSON.stringify(eventData, null, 2) + '\n');
+    console.log('Updated event.json with latest upcoming event details!');
+  }
+  if (!communityUpdated && !eventUpdated) {
+    console.log('No updates needed. Both event.json and community-data.json are current.');
   }
 }
 

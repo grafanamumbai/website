@@ -2,6 +2,7 @@ import rawData from './community-data.json';
 import speakersData from './speakers.json';
 import teamData from './team.json';
 import sponsorsData from './sponsors.json';
+import eventData from './event.json';
 
 export interface ChapterInfo {
   name: string;
@@ -179,10 +180,11 @@ export interface CommunityData {
 export const communityData: CommunityData = {
   ...rawData,
   currentEvent: {
-    ...rawData.currentEvent,
+    ...eventData.currentEvent,
     communityPartners: (sponsorsData.communityPartners || []) as unknown as PartnerItem[],
     collaborationPartners: (sponsorsData.collaborationPartners || []) as unknown as PartnerItem[],
   },
+  schedule: (eventData.schedule || []) as unknown as ScheduleItem[],
   speakers: speakersData as unknown as Speaker[],
   coreTeam: (teamData.coreTeam || []) as unknown as TeamMember[],
   volunteers: (teamData.volunteers || []) as unknown as TeamMember[],
@@ -190,4 +192,4 @@ export const communityData: CommunityData = {
 } as CommunityData;
 
 export default communityData;
-export { sponsorsData, speakersData, teamData };
+export { eventData, sponsorsData, speakersData, teamData };
