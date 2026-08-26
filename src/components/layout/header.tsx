@@ -32,7 +32,7 @@ import communityData from '@/data';
 
 const navLinks = [
   { href: '/#about', label: 'About', icon: Info },
-  { href: '/#ecosystem', label: 'CNCF Stack', icon: Layers },
+  { href: '/#tracks', label: 'Meetup Tracks', icon: Layers },
   { href: '/#mascot', label: 'Grot', icon: Smile },
   { href: '/#speakers', label: 'Speakers', icon: Mic2 },
   { href: '/#schedule', label: 'Schedule', icon: CalendarDays },
