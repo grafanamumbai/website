@@ -89,11 +89,11 @@ export interface Speaker {
   id: string;
   name: string;
   role: string;
-  company: string;
-  topic: string;
-  bio: string;
-  avatar: string;
-  socials: Record<string, string>;
+  company?: string;
+  topic?: string;
+  bio?: string;
+  avatar?: string;
+  socials?: Record<string, string | undefined>;
   featured?: boolean;
 }
 
@@ -101,9 +101,9 @@ export interface TeamMember {
   id: string;
   name: string;
   role: string;
-  company: string;
-  avatar: string;
-  socials: Record<string, string>;
+  company?: string;
+  avatar?: string;
+  socials?: Record<string, string | undefined>;
 }
 
 export interface Sponsor {
@@ -163,9 +163,9 @@ export interface CommunityData {
 
 export const communityData: CommunityData = {
   ...rawData,
-  speakers: speakersData,
-  coreTeam: teamData.coreTeam,
-  volunteers: teamData.volunteers
+  speakers: speakersData as unknown as Speaker[],
+  coreTeam: (teamData.coreTeam || []) as unknown as TeamMember[],
+  volunteers: (teamData.volunteers || []) as unknown as TeamMember[]
 } as CommunityData;
 
 export default communityData;
