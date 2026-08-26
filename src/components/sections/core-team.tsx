@@ -3,12 +3,8 @@
 import { useState } from 'react';
 import {
   Users,
-  ShieldCheck,
   Heart,
-  Sparkles,
   User,
-  ArrowRight,
-  ExternalLink,
   Linkedin,
   Twitter,
   Github,
@@ -17,7 +13,6 @@ import {
   Link as LinkIcon,
 } from 'lucide-react';
 import communityData, { TeamMember } from '@/data';
-import { Button } from '@/components/ui/button';
 
 const getSocialIcon = (key: string) => {
   const k = key.toLowerCase();
@@ -178,11 +173,7 @@ function VolunteerCard({ member }: { member: TeamMember }) {
 }
 
 export default function CoreTeamSection() {
-  const { coreTeam, volunteers, chapter } = communityData;
-  const [filter, setFilter] = useState<'all' | 'core' | 'volunteers'>('all');
-
-  const showCore = filter === 'all' || filter === 'core';
-  const showVolunteers = filter === 'all' || filter === 'volunteers';
+  const { coreTeam, volunteers } = communityData;
 
   return (
     <section id="team" className="py-16 sm:py-24 md:py-28 2xl:py-36 bg-[#090b0e] text-white border-t border-zinc-800/80">
@@ -200,58 +191,22 @@ export default function CoreTeamSection() {
           <p className="mt-4 text-sm sm:text-base md:text-lg 2xl:text-xl text-zinc-400">
             Meet the passionate organizers, advocates, and volunteers driving Mumbai&apos;s observability community.
           </p>
+        </div>
 
-          {/* Filter Tabs */}
-          <div className="mt-8 inline-flex items-center gap-1.5 p-1.5 rounded-2xl bg-zinc-900 border border-zinc-800/80">
-            <button
-              onClick={() => setFilter('all')}
-              className={`px-4 py-1.5 rounded-xl text-xs font-semibold transition-all ${
-                filter === 'all'
-                  ? 'bg-orange-500 text-white shadow-md shadow-orange-500/20'
-                  : 'text-zinc-400 hover:text-white'
-              }`}
-            >
-              All Contributors ({coreTeam.length + volunteers.length})
-            </button>
-            <button
-              onClick={() => setFilter('core')}
-              className={`px-4 py-1.5 rounded-xl text-xs font-semibold transition-all ${
-                filter === 'core'
-                  ? 'bg-orange-500 text-white shadow-md shadow-orange-500/20'
-                  : 'text-zinc-400 hover:text-white'
-              }`}
-            >
-              Core Organizers ({coreTeam.length})
-            </button>
-            <button
-              onClick={() => setFilter('volunteers')}
-              className={`px-4 py-1.5 rounded-xl text-xs font-semibold transition-all ${
-                filter === 'volunteers'
-                  ? 'bg-orange-500 text-white shadow-md shadow-orange-500/20'
-                  : 'text-zinc-400 hover:text-white'
-              }`}
-            >
-              Community Volunteers ({volunteers.length})
-            </button>
+        {/* 1. Core Organizing Leadership */}
+        <div className="mt-12 sm:mt-16">
+          <div className="text-center mb-6">
+            <h3 className="text-lg sm:text-xl font-bold text-white">Core Organizing Leadership</h3>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-4xl mx-auto">
+            {coreTeam.map((member) => (
+              <CoreLeaderCard key={member.id} member={member} />
+            ))}
           </div>
         </div>
 
-        {/* 1. Core Organizers Spotlight */}
-        {showCore && (
-          <div className="mt-12 sm:mt-16">
-            <div className="text-center mb-6">
-              <h3 className="text-lg sm:text-xl font-bold text-white">Core Organizing Leadership</h3>
-            </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-4xl mx-auto">
-              {coreTeam.map((member) => (
-                <CoreLeaderCard key={member.id} member={member} />
-              ))}
-            </div>
-          </div>
-        )}
-
         {/* 2. Community Volunteers & Champions Wall */}
-        {showVolunteers && volunteers.length > 0 && (
+        {volunteers && volunteers.length > 0 && (
           <div className="mt-14 sm:mt-18">
             <div className="text-center mb-6">
               <div className="inline-flex items-center gap-1.5 text-xs font-semibold text-orange-400 uppercase tracking-wider mb-1">
@@ -268,29 +223,6 @@ export default function CoreTeamSection() {
             </div>
           </div>
         )}
-
-        {/* Volunteer Callout Banner */}
-        <div className="mt-16 sm:mt-20 rounded-3xl border border-zinc-800/80 bg-zinc-900/40 p-6 sm:p-8 text-center max-w-3xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-6">
-          <div className="flex items-center gap-4 text-left">
-            <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-orange-500/10 border border-orange-500/20 text-orange-400">
-              <Sparkles className="h-6 w-6" />
-            </div>
-            <div>
-              <h4 className="text-base sm:text-lg font-bold text-white">Want to join the team?</h4>
-              <p className="text-xs sm:text-sm text-zinc-400 mt-0.5">Help organize meetups, manage stage AV, design swag, or lead workshops.</p>
-            </div>
-          </div>
-          <Button
-            asChild
-            variant="outline"
-            className="shrink-0 border-zinc-700 bg-zinc-900 hover:bg-zinc-800 text-zinc-200 hover:text-white rounded-full px-6 h-10 text-xs sm:text-sm font-semibold"
-          >
-            <a href={`mailto:${chapter.email}?subject=Interested in volunteering for Grafana %26 Friends Mumbai`} className="flex items-center gap-2">
-              <span>Join as Volunteer</span>
-              <ArrowRight className="h-3.5 w-3.5 text-orange-400" />
-            </a>
-          </Button>
-        </div>
 
       </div>
     </section>
