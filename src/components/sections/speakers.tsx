@@ -32,7 +32,7 @@ const getSocialIcon = (key: string) => {
 
 const getAvatarUrl = (url: string | undefined) => {
   if (!url) return '/placeholder-avatar.png';
-  const driveMatch = url.match(/drive\.google\.com\/file\/d\/([a-zA-Z0-9_-]+)/);
+  const driveMatch = url.match(/drive\.google\.com\/(?:file\/d\/|drive\/folders\/|open\?id=)([a-zA-Z0-9_-]+)/);
   if (driveMatch && driveMatch[1]) {
     return `https://drive.google.com/thumbnail?id=${driveMatch[1]}&sz=w500-h500`;
   }
