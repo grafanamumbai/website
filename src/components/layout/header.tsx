@@ -54,12 +54,12 @@ export default function Header() {
           href="/" 
           className="group flex items-center gap-2.5 sm:gap-3.5 transition-opacity hover:opacity-90 shrink-0"
         >
-          <div className="relative h-10 w-24 sm:h-12 sm:w-28 transition-transform duration-300 group-hover:scale-105">
+          <div className="relative h-10 w-10 sm:h-12 sm:w-12 rounded-full bg-orange-500/10 p-1 ring-1 ring-orange-500/30 transition-transform duration-300 group-hover:scale-105 overflow-hidden">
             <Image 
-              src="/gf-mumbai-logo-white.png" 
+              src="/grafana-logo.png" 
               alt={chapter.name} 
               fill 
-              className="object-contain" 
+              className="object-cover" 
             />
           </div>
           <div className="flex flex-col">
@@ -155,8 +155,8 @@ export default function Header() {
                       className="flex items-center gap-3 text-lg font-bold text-white" 
                       onClick={() => setIsOpen(false)}
                     >
-                      <div className="relative h-8 w-24">
-                        <Image src="/gf-mumbai-logo-white.png" alt={chapter.name} fill className="object-contain" />
+                      <div className="relative h-9 w-9 rounded-full bg-orange-500/10 p-1 ring-1 ring-orange-500/30 overflow-hidden">
+                        <Image src="/grafana-logo.png" alt={chapter.name} fill className="object-cover" />
                       </div>
                       <span>{chapter.shortName}</span>
                     </Link>
