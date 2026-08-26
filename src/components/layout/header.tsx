@@ -54,24 +54,21 @@ export default function Header() {
           href="/" 
           className="group flex items-center gap-2.5 sm:gap-3.5 transition-opacity hover:opacity-90 shrink-0"
         >
-          <div className="relative h-9 w-9 sm:h-11 sm:w-11 rounded-xl bg-orange-500/10 p-1.5 ring-1 ring-orange-500/30 transition-transform duration-300 group-hover:scale-105">
+          <div className="relative h-10 w-24 sm:h-12 sm:w-28 transition-transform duration-300 group-hover:scale-105">
             <Image 
-              src="/logo-header.png" 
+              src="/gf-mumbai-logo-white.png" 
               alt={chapter.name} 
               fill 
-              className="object-contain p-0.5" 
+              className="object-contain" 
             />
           </div>
           <div className="flex flex-col">
             <div className="flex items-center gap-1.5">
-              <span className="text-sm sm:text-base md:text-lg font-bold tracking-tight text-white">
+              <span className="text-sm sm:text-base md:text-lg font-bold tracking-tight text-white hidden sm:block">
                 {chapter.shortName}
               </span>
-              <span className="rounded-full bg-orange-500/20 px-2 py-0.5 text-[10px] sm:text-xs font-semibold text-orange-400 border border-orange-500/30">
-                Chapter
-              </span>
             </div>
-            <span className="text-[10px] sm:text-xs text-zinc-400 font-medium">
+            <span className="text-[10px] sm:text-xs text-zinc-400 font-medium hidden sm:block">
               Powered by Grafana Labs
             </span>
           </div>
@@ -158,8 +155,8 @@ export default function Header() {
                       className="flex items-center gap-3 text-lg font-bold text-white" 
                       onClick={() => setIsOpen(false)}
                     >
-                      <div className="relative h-8 w-8 rounded-lg bg-orange-500/10 p-1 ring-1 ring-orange-500/30">
-                        <Image src="/logo-header.png" alt={chapter.name} fill className="object-contain" />
+                      <div className="relative h-8 w-24">
+                        <Image src="/gf-mumbai-logo-white.png" alt={chapter.name} fill className="object-contain" />
                       </div>
                       <span>{chapter.shortName}</span>
                     </Link>
