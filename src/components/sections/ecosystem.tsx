@@ -1,5 +1,6 @@
 'use client';
 
+import { useState } from 'react';
 import {
   Activity,
   FileText,
@@ -20,35 +21,192 @@ import {
   MimirLogo,
   PyroscopeLogo,
   BeylaLogo,
+  AlloyLogo,
 } from '@/components/icons';
 
-const trackIcons: Record<string, React.ReactNode> = {
+const techIconMap: Record<string, { svgUrl?: string; fallback?: React.ReactNode }> = {
+  'Prometheus': {
+    svgUrl: 'https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/svg/prometheus.svg',
+    fallback: <PrometheusLogo className="h-3.5 w-3.5" />,
+  },
+  'Grafana Mimir': {
+    svgUrl: 'https://cdn.jsdelivr.net/gh/selfhst/icons/svg/grafana-mimir.svg',
+    fallback: <MimirLogo className="h-3.5 w-3.5" />,
+  },
+  'Infinity Plugin': {
+    svgUrl: 'https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/svg/grafana.svg',
+    fallback: <GrafanaLogo className="h-3.5 w-3.5 text-orange-400" />,
+  },
+  'Alertmanager': {
+    svgUrl: 'https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/svg/prometheus.svg',
+    fallback: <PrometheusLogo className="h-3.5 w-3.5" />,
+  },
+  'Grafana Loki': {
+    svgUrl: 'https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/svg/loki.svg',
+    fallback: <LokiLogo className="h-3.5 w-3.5" />,
+  },
+  'Promtail': {
+    svgUrl: 'https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/svg/loki.svg',
+    fallback: <LokiLogo className="h-3.5 w-3.5" />,
+  },
+  'LogQL': {
+    svgUrl: 'https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/svg/grafana.svg',
+    fallback: <GrafanaLogo className="h-3.5 w-3.5 text-orange-400" />,
+  },
+  'Grafana Alloy': {
+    svgUrl: 'https://cdn.jsdelivr.net/gh/selfhst/icons/svg/grafana-alloy.svg',
+    fallback: <AlloyLogo className="h-3.5 w-3.5" />,
+  },
+  'OpenTelemetry': {
+    svgUrl: 'https://cdn.jsdelivr.net/gh/selfhst/icons/svg/opentelemetry.svg',
+    fallback: <OpenTelemetryLogo className="h-3.5 w-3.5" />,
+  },
+  'Grafana Tempo': {
+    svgUrl: 'https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/svg/tempo.svg',
+    fallback: <TempoLogo className="h-3.5 w-3.5" />,
+  },
+  'TraceQL': {
+    svgUrl: 'https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/svg/tempo.svg',
+    fallback: <TempoLogo className="h-3.5 w-3.5" />,
+  },
+  'Jaeger': {
+    svgUrl: 'https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/svg/jaeger.svg',
+  },
+  'Grafana Beyla': {
+    svgUrl: 'https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/svg/grafana.svg',
+    fallback: <BeylaLogo className="h-3.5 w-3.5" />,
+  },
+  'Grafana Pyroscope': {
+    svgUrl: 'https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/svg/grafana.svg',
+    fallback: <PyroscopeLogo className="h-3.5 w-3.5" />,
+  },
+  'eBPF': {
+    svgUrl: 'https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/svg/cilium.svg',
+  },
+  'AI Observability': {
+    svgUrl: 'https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/svg/grafana.svg',
+    fallback: <Sparkles className="h-3 w-3 text-amber-400" />,
+  },
+};
+
+function TechBadge({ tech }: { tech: string }) {
+  const [imgError, setImgError] = useState(false);
+  const iconConfig = techIconMap[tech];
+
+  return (
+    <span className="inline-flex items-center gap-1.5 text-[11px] font-semibold font-mono px-2.5 py-1 rounded-lg bg-zinc-950/90 border border-zinc-800 text-zinc-200 group-hover:border-zinc-700 hover:border-orange-500/40 hover:bg-zinc-900 transition-all">
+      {iconConfig?.svgUrl && !imgError ? (
+        // eslint-disable-next-line @next/next/no-img-element
+        <img
+          src={iconConfig.svgUrl}
+          alt={`${tech} logo`}
+          onError={() => setImgError(true)}
+          className="h-3.5 w-3.5 object-contain shrink-0"
+          loading="lazy"
+        />
+      ) : iconConfig?.fallback ? (
+        <span className="shrink-0">{iconConfig.fallback}</span>
+      ) : null}
+      <span>{tech}</span>
+    </span>
+  );
+}
+
+const trackHeaderIcons: Record<string, React.ReactNode> = {
   metrics: (
-    <div className="flex items-center gap-1.5">
-      <div className="p-1 rounded-lg bg-orange-500/10">
-        <GrafanaLogo className="h-5 w-5 text-orange-400" />
+    <div className="flex items-center gap-2">
+      <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-zinc-900 border border-zinc-800 p-1.5">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/svg/grafana.svg"
+          alt="Grafana"
+          className="h-full w-full object-contain"
+        />
       </div>
-      <PrometheusLogo className="h-7 w-7" />
+      <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-zinc-900 border border-zinc-800 p-1.5">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/svg/prometheus.svg"
+          alt="Prometheus"
+          className="h-full w-full object-contain"
+        />
+      </div>
+      <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-zinc-900 border border-zinc-800 p-1.5">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="https://cdn.jsdelivr.net/gh/selfhst/icons/svg/grafana-mimir.svg"
+          alt="Mimir"
+          className="h-full w-full object-contain"
+        />
+      </div>
     </div>
   ),
   logs: (
-    <div className="flex items-center gap-1.5">
-      <LokiLogo className="h-7 w-7" />
-      <div className="p-1.5 rounded-lg bg-cyan-500/10 text-cyan-400">
-        <FileText className="h-4 w-4" />
+    <div className="flex items-center gap-2">
+      <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-zinc-900 border border-zinc-800 p-1.5">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/svg/loki.svg"
+          alt="Loki"
+          className="h-full w-full object-contain"
+        />
+      </div>
+      <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-zinc-900 border border-zinc-800 p-1.5">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="https://cdn.jsdelivr.net/gh/selfhst/icons/svg/grafana-alloy.svg"
+          alt="Alloy"
+          className="h-full w-full object-contain"
+        />
       </div>
     </div>
   ),
   traces: (
-    <div className="flex items-center gap-1.5">
-      <OpenTelemetryLogo className="h-7 w-7" />
-      <TempoLogo className="h-7 w-7" />
+    <div className="flex items-center gap-2">
+      <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-zinc-900 border border-zinc-800 p-1.5">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="https://cdn.jsdelivr.net/gh/selfhst/icons/svg/opentelemetry.svg"
+          alt="OpenTelemetry"
+          className="h-full w-full object-contain"
+        />
+      </div>
+      <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-zinc-900 border border-zinc-800 p-1.5">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/svg/tempo.svg"
+          alt="Tempo"
+          className="h-full w-full object-contain"
+        />
+      </div>
+      <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-zinc-900 border border-zinc-800 p-1.5">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/svg/jaeger.svg"
+          alt="Jaeger"
+          className="h-full w-full object-contain"
+        />
+      </div>
     </div>
   ),
   profiling: (
-    <div className="flex items-center gap-1.5">
-      <BeylaLogo className="h-7 w-7" />
-      <PyroscopeLogo className="h-7 w-7" />
+    <div className="flex items-center gap-2">
+      <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-zinc-900 border border-zinc-800 p-1.5">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/svg/cilium.svg"
+          alt="Cilium / eBPF"
+          className="h-full w-full object-contain"
+        />
+      </div>
+      <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-zinc-900 border border-zinc-800 p-1.5">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/svg/grafana.svg"
+          alt="Beyla & Pyroscope"
+          className="h-full w-full object-contain"
+        />
+      </div>
     </div>
   ),
 };
@@ -94,10 +252,10 @@ export default function EcosystemSection() {
               className="group relative flex flex-col justify-between p-6 sm:p-8 rounded-3xl bg-zinc-900/50 border border-zinc-800/80 hover:border-orange-500/50 hover:bg-zinc-900/80 transition-all duration-300 shadow-xl hover:-translate-y-1 hover:shadow-2xl hover:shadow-orange-500/5"
             >
               <div>
-                {/* Header with Icons & Badge */}
+                {/* Header with DashboardIcons & Badge */}
                 <div className="flex items-center justify-between gap-4 mb-5">
-                  <div className="flex h-12 items-center justify-center rounded-2xl bg-zinc-950 border border-zinc-800 px-3 shadow-inner">
-                    {trackIcons[track.icon] || <Activity className="h-6 w-6 text-orange-400" />}
+                  <div className="flex items-center gap-1.5 p-1 rounded-2xl bg-zinc-950/80 border border-zinc-800/80 shadow-inner">
+                    {trackHeaderIcons[track.icon] || <Activity className="h-6 w-6 text-orange-400" />}
                   </div>
                   <span className="text-xs font-semibold px-3 py-1 rounded-full bg-orange-500/10 text-orange-400 border border-orange-500/30">
                     {track.badge}
@@ -128,16 +286,11 @@ export default function EcosystemSection() {
                 </div>
               </div>
 
-              {/* Technologies Tag Strip */}
-              <div className="mt-6 pt-4 border-t border-zinc-800/80 flex items-center gap-1.5 flex-wrap">
+              {/* Technologies Tag Strip with Official DashboardIcons */}
+              <div className="mt-6 pt-4 border-t border-zinc-800/80 flex items-center gap-2 flex-wrap">
                 <span className="text-[11px] text-zinc-500 font-mono mr-1">Stack:</span>
                 {track.technologies.map((tech) => (
-                  <span
-                    key={tech}
-                    className="text-[11px] font-semibold font-mono px-2.5 py-0.5 rounded-lg bg-zinc-950 border border-zinc-800 text-zinc-300 group-hover:border-zinc-700 transition-colors"
-                  >
-                    {tech}
-                  </span>
+                  <TechBadge key={tech} tech={tech} />
                 ))}
               </div>
             </div>
