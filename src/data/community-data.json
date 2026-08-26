@@ -26,7 +26,7 @@
   "currentEvent": {
     "title": "September 2026 Mumbai Meetup",
     "edition": "September 2026",
-    "theme": "Cloud Native & Open Source",
+    "theme": "Cloud Native, AI & Open Source",
     "date": "Saturday, Yet to be Announced",
     "time": "",
     "targetDateISO": "",
@@ -42,7 +42,7 @@
       "cfpUrl": ""
     },
     "hasUpcomingEvent": true,
-    "eventType": "Cloud Native Mumbai Community Event",
+    "eventType": "Septermber Meetup Community Event",
     "communityPartners": [
       {
         "id": "grafana-friends-mumbai",
