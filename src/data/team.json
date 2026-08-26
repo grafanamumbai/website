@@ -23,13 +23,15 @@
       }
     },
     {
-      "id": "om",
-      "name": "Om Songire",
+      "id": "Santosh",
+      "name": "Om Santosh Songire",
       "role": "Co-Organizer",
       "company": "Grafana & Friends Mumbai",
       "avatar": "https://drive.google.com/file/d/1ruiyYMjlgWLQl8lehUbIwDaLVh7CjfLm/view?usp=sharing",
       "socials": {
-        "github": "https://github.com/Omsongire23"
+        "github": "https://github.com/Omsongire23",
+        "X": "https://x.com/OmSongire2005",
+        "Linkedin": "https://www.linkedin.com/in/omsongire"
       }
     }
   ],
