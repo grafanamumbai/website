@@ -34,7 +34,7 @@ const getAvatarUrl = (url: string | undefined) => {
   if (!url) return '/placeholder-avatar.png';
   const driveMatch = url.match(/drive\.google\.com\/file\/d\/([a-zA-Z0-9_-]+)/);
   if (driveMatch && driveMatch[1]) {
-    return `https://drive.google.com/uc?export=view&id=${driveMatch[1]}`;
+    return `https://drive.google.com/thumbnail?id=${driveMatch[1]}&sz=w500-h500`;
   }
   return url;
 };
@@ -72,12 +72,11 @@ export default function SpeakersSection() {
               <div className="flex items-start gap-4 sm:gap-6">
                 {/* Avatar */}
                 <div className="relative h-16 w-16 sm:h-20 sm:w-20 shrink-0 rounded-2xl overflow-hidden border border-zinc-800 bg-zinc-800">
-                  <Image
+                  <img
                     src={getAvatarUrl(speaker.avatar)}
                     alt={speaker.name}
-                    fill
-                    unoptimized
-                    className="object-cover transition-transform duration-500 group-hover:scale-110"
+                    className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
+                    referrerPolicy="no-referrer"
                   />
                 </div>
                 

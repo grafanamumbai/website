@@ -30,7 +30,7 @@ const getAvatarUrl = (url: string | undefined) => {
   if (!url) return '/placeholder-avatar.png';
   const driveMatch = url.match(/drive\.google\.com\/file\/d\/([a-zA-Z0-9_-]+)/);
   if (driveMatch && driveMatch[1]) {
-    return `https://drive.google.com/uc?export=view&id=${driveMatch[1]}`;
+    return `https://drive.google.com/thumbnail?id=${driveMatch[1]}&sz=w500-h500`;
   }
   return url;
 };
@@ -80,12 +80,11 @@ export default function CoreTeamSection() {
                 {/* Image Container with Glow */}
                 <div className="relative mb-5 sm:mb-6 h-28 w-28 sm:h-32 sm:w-32 rounded-full p-1 bg-gradient-to-br from-zinc-800 to-zinc-900 group-hover:from-orange-500/50 group-hover:to-yellow-500/50 transition-colors duration-500">
                   <div className="relative h-full w-full overflow-hidden rounded-full border-2 border-zinc-950 bg-zinc-800">
-                    <Image
+                    <img
                       src={getAvatarUrl(member.avatar)}
                       alt={member.name}
-                      fill
-                      unoptimized
-                      className="object-cover transition-transform duration-500 group-hover:scale-110"
+                      className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
+                      referrerPolicy="no-referrer"
                     />
                   </div>
                   {/* Floating Role Icon */}
