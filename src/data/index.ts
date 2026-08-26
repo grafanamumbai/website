@@ -27,6 +27,7 @@ export interface SocialLinks {
 }
 
 export interface CurrentEvent {
+  hasUpcomingEvent: boolean;
   title: string;
   edition: string;
   theme: string;
