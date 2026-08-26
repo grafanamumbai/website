@@ -14,15 +14,20 @@
       "id": "afzal",
       "name": "Afzal Hassan",
       "role": "Co-Organizer",
-      "company": "",
-      "avatar": "",
-      "socials": {}
+      "company": "Grafana & Friends Mumbai",
+      "avatar": "https://avatars.githubusercontent.com/u/136967348?v=4",
+      "socials": {
+        "linkeidn" "https://linkedin.com/in/iemafzalhassan",
+        "X" "https://x.com/iemafzalhassan",
+        "Github" "https://github.com/iemafzalhassan",
+        "website" "https://iemafzalhassan.tech"
+      }
     },
     {
       "id": "om",
       "name": "Om Songire",
       "role": "Co-Organizer",
-      "company": "",
+      "company": "Grafana & Friends Mumbai",
       "avatar": "",
       "socials": {}
     }
