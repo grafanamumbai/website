@@ -12,90 +12,212 @@ import {
   SheetTitle,
   SheetDescription,
 } from '@/components/ui/sheet';
-import { Menu } from 'lucide-react';
+import {
+  Menu,
+  ArrowRight,
+  Sparkles,
+  Home,
+  Info,
+  Mic2,
+  CalendarDays,
+  Trophy,
+  Users2,
+  Camera,
+  HelpCircle,
+  Award,
+  ExternalLink,
+  MessageSquare,
+} from 'lucide-react';
+import communityData from '@/data';
 
 const navLinks = [
-  { href: '/', label: 'Home' },
-  { href: '/#about', label: 'About' },
-  { href: '/#speakers', label: 'Speakers' },
-  // { href: '/#schedule', label: 'Schedule' },
-  { href: '/#contests', label: 'Contests' },
-  { href: '/badge', label: 'Badge' },
-  { href: '/#faq', label: 'FAQ' },
+  { href: '/#about', label: 'About', icon: Info },
+  { href: '/#speakers', label: 'Speakers', icon: Mic2 },
+  { href: '/#schedule', label: 'Schedule', icon: CalendarDays },
+  { href: '/#contests', label: 'Contests & Swag', icon: Trophy },
+  { href: '/#team', label: 'Team', icon: Users2 },
+  { href: '/#gallery', label: 'Gallery', icon: Camera },
+  { href: '/#faq', label: 'FAQ', icon: HelpCircle },
+  { href: '/badge', label: 'Badge', icon: Award },
 ];
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
+  const { chapter, currentEvent, socials } = communityData;
 
   return (
-    <header
-      className="sticky top-0 z-50 w-full border-b bg-[#f9a825]"
-    >
-      <div className="container mx-auto flex h-16 items-center justify-between px-4 md:px-6">
-        <Link href="/" className="group flex items-center gap-2 font-headline text-lg font-semibold text-primary-foreground transition-all duration-300 hover:opacity-90">
-          <div className="relative h-8 w-8 transition-transform duration-500 ease-in-out group-hover:rotate-12 group-hover:scale-110">
-            <Image src="/logo-header.png" alt="Grafana & Friends Mumbai" fill className="object-contain" />
+    <header className="sticky top-0 z-50 w-full border-b border-zinc-800/80 bg-[#0e1117]/90 backdrop-blur-xl transition-all duration-300">
+      <div className="mx-auto flex h-16 sm:h-20 max-w-7xl 2xl:max-w-[1600px] 3xl:max-w-[1800px] items-center justify-between px-4 sm:px-6 md:px-8 lg:px-12">
+        
+        {/* Brand Logo & Name */}
+        <Link 
+          href="/" 
+          className="group flex items-center gap-2.5 sm:gap-3.5 transition-opacity hover:opacity-90 shrink-0"
+        >
+          <div className="relative h-9 w-9 sm:h-11 sm:w-11 rounded-xl bg-orange-500/10 p-1.5 ring-1 ring-orange-500/30 transition-transform duration-300 group-hover:scale-105">
+            <Image 
+              src="/logo-header.png" 
+              alt={chapter.name} 
+              fill 
+              className="object-contain p-0.5" 
+            />
           </div>
-          <span className="relative text-base sm:text-lg whitespace-nowrap">
-            Grafana & Friends Mumbai
-            <span className="absolute -bottom-1 left-0 h-0.5 w-full origin-left scale-x-0 rounded-full bg-white transition-transform duration-300 ease-out group-hover:scale-x-100" />
-          </span>
+          <div className="flex flex-col">
+            <div className="flex items-center gap-1.5">
+              <span className="text-sm sm:text-base md:text-lg font-bold tracking-tight text-white">
+                {chapter.shortName}
+              </span>
+              <span className="rounded-full bg-orange-500/20 px-2 py-0.5 text-[10px] sm:text-xs font-semibold text-orange-400 border border-orange-500/30">
+                Chapter
+              </span>
+            </div>
+            <span className="text-[10px] sm:text-xs text-zinc-400 font-medium">
+              Powered by Grafana Labs
+            </span>
+          </div>
         </Link>
-        <nav className="hidden items-center gap-8 text-lg font-bold md:flex">
-          {navLinks.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className="group relative px-1 py-2 text-primary-foreground/90 transition-all duration-300 hover:text-white"
-            >
-              <span className="relative z-10 transition-transform duration-300 group-hover:-translate-y-0.5">{link.label}</span>
-              <span className="absolute inset-x-0 bottom-0 h-0.5 origin-left scale-x-0 rounded-full bg-white transition-transform duration-300 ease-out group-hover:scale-x-100" />
-            </Link>
-          ))}
+
+        {/* Desktop Navigation (>= lg) */}
+        <nav className="hidden lg:flex items-center gap-1 xl:gap-2 text-sm font-medium">
+          {navLinks.map((link) => {
+            const Icon = link.icon;
+            return (
+              <Link
+                key={link.href}
+                href={link.href}
+                className="flex items-center gap-1.5 px-3 py-2 text-zinc-300 hover:text-white hover:bg-zinc-800/60 rounded-lg transition-all"
+              >
+                <Icon className="h-4 w-4 text-orange-400/80" />
+                <span>{link.label}</span>
+              </Link>
+            );
+          })}
         </nav>
-        <div className="flex items-center gap-4">
-            <Button asChild className="hidden md:inline-flex bg-blue-200 hover:bg-blue-300 text-blue-900 rounded-full shadow-md transition-all duration-300 hover:scale-105 hover:shadow-lg hover:ring-2 hover:ring-blue-400/50">
-                <Link href="/join">
-                Join Now
-                </Link>
-            </Button>
-            <Sheet open={isOpen} onOpenChange={setIsOpen}>
-                <SheetTrigger asChild>
-                <Button variant="outline" size="icon" className="md:hidden border-primary-foreground/50 transition-all duration-300 hover:bg-primary-foreground/20 hover:scale-110 hover:border-primary-foreground shrink-0 ml-2">
-                    <Menu className="h-6 w-6 text-blue-600" />
-                    <span className="sr-only">Toggle navigation menu</span>
-                </Button>
-                </SheetTrigger>
-                <SheetContent side="right">
-                  <SheetHeader>
-                    <SheetTitle asChild>
-                      <Link href="/" className="flex items-center gap-2 text-lg font-semibold" onClick={() => setIsOpen(false)}>
-                          <Image src="/logo-header.png" alt="G&F Mumbai" width={32} height={32} className="h-8 w-auto" />
-                          <span>G&F Mumbai</span>
-                      </Link>
-                    </SheetTitle>
-                     <SheetDescription className="sr-only">Main navigation menu</SheetDescription>
-                  </SheetHeader>
-                  <nav className="grid gap-6 text-lg font-medium mt-8">
-                      {navLinks.map((link) => (
-                      <Link
-                          key={link.href}
-                          href={link.href}
-                          className="text-muted-foreground transition-colors hover:text-primary"
-                          onClick={() => setIsOpen(false)}
-                      >
-                          {link.label}
-                      </Link>
-                      ))}
-                      <Button asChild className="bg-white text-black text-lg font-bold mt-4 w-full h-12 rounded-full shadow-lg hover:scale-105 hover:shadow-xl hover:bg-gray-50 transition-all duration-300" onClick={() => setIsOpen(false)}>
-                          <Link href="/join">
-                          Join Now
-                          </Link>
-                      </Button>
-                  </nav>
-                </SheetContent>
-            </Sheet>
+
+        {/* Desktop CTA Action Buttons */}
+        <div className="hidden lg:flex items-center gap-3 shrink-0">
+          <Button 
+            asChild 
+            variant="ghost" 
+            size="sm" 
+            className="text-zinc-300 hover:text-white hover:bg-zinc-800 text-sm h-10 px-4 rounded-xl"
+          >
+            <Link href="/join">Join Community</Link>
+          </Button>
+
+          <Button 
+            asChild 
+            size="sm" 
+            className="bg-orange-500 hover:bg-orange-600 text-white font-semibold rounded-xl h-10 px-5 shadow-lg shadow-orange-500/20 transition-all hover:scale-105 active:scale-95"
+          >
+            <a 
+              href={currentEvent.registration.rsvpUrl} 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="flex items-center gap-2"
+            >
+              <span>RSVP Now</span>
+              <ArrowRight className="h-4 w-4" />
+            </a>
+          </Button>
         </div>
+
+        {/* Mobile Hamburger & Quick RSVP (< lg) */}
+        <div className="flex items-center gap-2 lg:hidden">
+          <Button 
+            asChild 
+            size="sm" 
+            className="bg-orange-500 hover:bg-orange-600 text-white font-bold rounded-lg text-xs h-9 px-3.5 shadow-md"
+          >
+            <a 
+              href={currentEvent.registration.rsvpUrl} 
+              target="_blank" 
+              rel="noopener noreferrer"
+            >
+              RSVP
+            </a>
+          </Button>
+
+          <Sheet open={isOpen} onOpenChange={setIsOpen}>
+            <SheetTrigger asChild>
+              <Button 
+                variant="outline" 
+                size="icon" 
+                className="h-9 w-9 border-zinc-800 bg-zinc-900 text-zinc-200 hover:text-white hover:bg-zinc-800 rounded-lg"
+                aria-label="Open Navigation Menu"
+              >
+                <Menu className="h-5 w-5" />
+              </Button>
+            </SheetTrigger>
+            <SheetContent side="right" className="w-[85vw] max-w-sm bg-[#0e1117] border-zinc-800 text-white p-6 flex flex-col justify-between overflow-y-auto">
+              <div>
+                <SheetHeader className="text-left border-b border-zinc-800/80 pb-4">
+                  <SheetTitle asChild>
+                    <Link 
+                      href="/" 
+                      className="flex items-center gap-3 text-lg font-bold text-white" 
+                      onClick={() => setIsOpen(false)}
+                    >
+                      <div className="relative h-8 w-8 rounded-lg bg-orange-500/10 p-1 ring-1 ring-orange-500/30">
+                        <Image src="/logo-header.png" alt={chapter.name} fill className="object-contain" />
+                      </div>
+                      <span>{chapter.shortName}</span>
+                    </Link>
+                  </SheetTitle>
+                  <SheetDescription className="text-xs text-zinc-400 mt-1">
+                    {chapter.tagline}
+                  </SheetDescription>
+                </SheetHeader>
+                
+                {/* Nav Links with Lucide Icons */}
+                <nav className="flex flex-col gap-1.5 mt-6">
+                  {navLinks.map((link) => {
+                    const Icon = link.icon;
+                    return (
+                      <Link
+                        key={link.href}
+                        href={link.href}
+                        className="flex items-center gap-3.5 px-3.5 py-3 rounded-xl text-zinc-300 hover:text-white hover:bg-zinc-800/80 active:bg-orange-500/20 active:text-orange-400 transition-colors text-base font-medium"
+                        onClick={() => setIsOpen(false)}
+                      >
+                        <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-zinc-900 border border-zinc-800 text-orange-400">
+                          <Icon className="h-4 w-4" />
+                        </div>
+                        <span>{link.label}</span>
+                      </Link>
+                    );
+                  })}
+                </nav>
+              </div>
+
+              {/* Bottom Drawer Actions */}
+              <div className="flex flex-col gap-3 pt-6 border-t border-zinc-800/80 mt-6">
+                <Button 
+                  asChild 
+                  className="w-full bg-orange-500 hover:bg-orange-600 text-white font-bold rounded-xl h-12 text-base shadow-lg shadow-orange-500/25" 
+                  onClick={() => setIsOpen(false)}
+                >
+                  <a href={currentEvent.registration.rsvpUrl} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-2">
+                    <span>RSVP for Meetup</span>
+                    <ArrowRight className="h-4 w-4" />
+                  </a>
+                </Button>
+                <Button 
+                  asChild 
+                  variant="outline" 
+                  className="w-full border-zinc-700 bg-zinc-900 text-zinc-200 hover:bg-zinc-800 rounded-xl h-11 text-sm" 
+                  onClick={() => setIsOpen(false)}
+                >
+                  <Link href="/join" className="flex items-center justify-center gap-2">
+                    <MessageSquare className="h-4 w-4 text-orange-400" />
+                    <span>Join Community Channels</span>
+                  </Link>
+                </Button>
+              </div>
+            </SheetContent>
+          </Sheet>
+        </div>
+
       </div>
     </header>
   );

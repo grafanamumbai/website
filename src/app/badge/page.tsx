@@ -1,24 +1,36 @@
 'use client';
+
 import { useRef, useState, useEffect } from 'react';
 import Header from '@/components/layout/header';
 import Footer from '@/components/layout/footer';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { useToast } from '@/hooks/use-toast';
-import { Copy, Download, Upload } from 'lucide-react';
+import {
+  Copy,
+  Download,
+  Upload,
+  Sparkles,
+  Check,
+  Award,
+  Share2,
+  Image as ImageIcon,
+} from 'lucide-react';
 import Image from 'next/image';
-import { PlaceHolderImages } from '@/lib/placeholder-images';
-import { Card, CardContent } from '@/components/ui/card';
-import TwitterTimeline from '@/components/twitter-timeline';
+import communityData from '@/data';
 
 export default function BadgePage() {
   const { toast } = useToast();
-  const socialText = "I am attending Grafana and Friends Mumbai 2026. #gafm26 #grafanafriendsmumbai #observability #mumbai #grafana";
-  const badgeTemplate = PlaceHolderImages.find(p => p.id === 'badge-template');
-  const badgeNoPhoto = PlaceHolderImages.find(p => p.id === 'badge-no-photo');
+  const { chapter, currentEvent } = communityData;
+  const socialText = `I am attending ${currentEvent.title}! Join me in Mumbai for a full day of observability, Grafana deep-dives, and networking. #GrafanaMumbai #GrafanaConLocal #Observability #DevOps #SRE`;
+  
+  const badgeTemplateUrl = '/badge1.png';
+  const badgeNoPhotoUrl = '/badge2.png';
+
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [userImage, setUserImage] = useState<string | null>(null);
   const [isClient, setIsClient] = useState(false);
+  const [copied, setCopied] = useState(false);
 
   useEffect(() => {
     setIsClient(true);
@@ -26,10 +38,12 @@ export default function BadgePage() {
 
   const handleCopyToClipboard = () => {
     navigator.clipboard.writeText(socialText);
+    setCopied(true);
     toast({
       title: 'Copied to Clipboard!',
-      description: 'You can now share it on your social media.',
+      description: 'You can now share it on LinkedIn and Twitter/X.',
     });
+    setTimeout(() => setCopied(false), 3000);
   };
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -48,39 +62,24 @@ export default function BadgePage() {
 
     const canvas = canvasRef.current;
     const ctx = canvas?.getContext('2d');
-    if (!ctx || !canvas || !badgeTemplate) return;
+    if (!ctx || !canvas) return;
 
     const badgeImage = new (window as any).Image();
     badgeImage.crossOrigin = 'anonymous';
-    // Use window.location.origin to create an absolute URL for local assets
-    const badgeUrl = photoUrl ? badgeTemplate.imageUrl : (badgeNoPhoto?.imageUrl || '');
+    const badgeUrl = photoUrl ? badgeTemplateUrl : badgeNoPhotoUrl;
     badgeImage.src = badgeUrl.startsWith('/') ? window.location.origin + badgeUrl : badgeUrl;
 
-
     badgeImage.onload = () => {
-      // Set canvas to image dimensions
       canvas.width = badgeImage.width;
       canvas.height = badgeImage.height;
 
-      // Draw the badge template
       ctx.drawImage(badgeImage, 0, 0, canvas.width, canvas.height);
-
-      // Draw Date
-      const date = new Date();
-      const month = date.toLocaleString('default', { month: 'long' }).toUpperCase();
-      const year = date.getFullYear();
-
-      ctx.font = 'bold 20px cormorant Garamond';
-      ctx.fillStyle = '#000000';
-      ctx.textAlign = 'right';
-      ctx.fillText(`${month} ${year}`, canvas.width - 30, 55);
 
       if (photoUrl) {
         const user_image = new (window as any).Image();
         user_image.crossOrigin = 'anonymous';
         user_image.src = photoUrl;
         user_image.onload = () => {
-          // You might need to adjust these values based on your new badge template
           const size = 300;
           const x = (canvas.width / 2) - (size / 2) - 250;
           const y = (canvas.height / 2) - (size / 2) - 105;
@@ -91,7 +90,6 @@ export default function BadgePage() {
           ctx.closePath();
           ctx.clip();
           
-          // Calculate aspect ratio for center crop
           const aspect = user_image.width / user_image.height;
           let srcX = 0;
           let srcY = 0;
@@ -99,11 +97,9 @@ export default function BadgePage() {
           let srcH = user_image.height;
 
           if (aspect > 1) {
-            // Landscape
             srcW = user_image.height;
             srcX = (user_image.width - srcW) / 2;
           } else {
-            // Portrait
             srcH = user_image.width;
             srcY = (user_image.height - srcH) / 2;
           }
@@ -112,7 +108,7 @@ export default function BadgePage() {
 
           ctx.beginPath();
           ctx.arc(x + size / 2, y + size / 2, size / 2, 0, Math.PI * 2, true);
-          ctx.strokeStyle = '#FFC107'; // Example color
+          ctx.strokeStyle = '#F47A20';
           ctx.lineWidth = 10;
           ctx.stroke();
           ctx.restore();
@@ -127,16 +123,13 @@ export default function BadgePage() {
         }
       }
     };
-     badgeImage.onerror = () => {
-      console.error('Failed to load badge image:', badgeImage.src);
-    }
   };
 
   const downloadCanvasAsImage = () => {
     const canvas = canvasRef.current;
     if (canvas) {
       const link = document.createElement('a');
-      link.download = 'gafm-badge.png';
+      link.download = 'grafana-mumbai-attendee-badge.png';
       link.href = canvas.toDataURL('image/png');
       link.click();
     }
@@ -148,150 +141,148 @@ export default function BadgePage() {
 
   const handleDownloadWithoutPhoto = () => {
     drawBadge(true);
-  }
-
-  const renderSocialText = () => {
-    return socialText.split(' ').map((word, index) => {
-      if (word.startsWith('#')) {
-        return <span key={index} className="text-primary">{word} </span>;
-      }
-      return `${word} `;
-    });
   };
 
-
   return (
-    <>
+    <div className="flex flex-col min-h-screen bg-[#0c0e14] text-white">
       <Header />
-      <main className="container mx-auto px-4 py-12 md:px-6">
-        <div className="mx-auto max-w-4xl">
-          <h1 className="mb-2 text-center font-headline text-4xl font-bold tracking-tight sm:text-5xl text-primary"
-            style={{
-              background: 'linear-gradient(90deg, #F9A825, #FF5722)',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent'
-            }}
-          >
-            DOWNLOAD YOUR BADGE
+      <main className="flex-1 container mx-auto px-4 sm:px-6 md:px-8 py-12 sm:py-20 max-w-4xl 2xl:max-w-5xl relative">
+        
+        {/* Header box */}
+        <div className="text-center mb-10 sm:mb-14">
+          <div className="inline-flex items-center gap-2 rounded-full border border-orange-500/30 bg-orange-500/10 px-4 py-1 text-xs font-semibold text-orange-400 mb-4">
+            <Award className="h-3.5 w-3.5" />
+            <span>Attendee Social Kit</span>
+          </div>
+          <h1 className="text-2xl xs:text-3xl sm:text-5xl font-black tracking-tight text-white leading-tight">
+            Generate Your Attendee Badge
           </h1>
-          <div className="mx-auto mt-2 h-1 w-24 bg-accent"></div>
+          <p className="mt-3 text-xs sm:text-base text-zinc-300 max-w-md mx-auto">
+            Showcase that you're joining the Grafana community in Mumbai on LinkedIn, X, and Instagram.
+          </p>
+        </div>
 
-          <section className="mt-12">
-            <h2 className="font-headline text-2xl font-semibold">Share on Social Media</h2>
-            <div className="mt-4 rounded-lg border border-dashed border-primary/50 bg-muted/50 p-6">
-              <p className="text-base text-muted-foreground">{renderSocialText()}</p>
-            </div>
-            <Button onClick={handleCopyToClipboard} className="mt-4 bg-accent hover:bg-accent/90 text-accent-foreground">
-              <Copy className="mr-2 h-4 w-4" /> Copy to Clipboard
+        {/* Social Share Box */}
+        <div className="p-5 sm:p-7 rounded-2xl bg-zinc-900/60 border border-zinc-800/80 mb-10 sm:mb-12 shadow-xl">
+          <div className="flex items-center gap-2 text-xs sm:text-sm font-bold text-orange-400 uppercase tracking-wider mb-2">
+            <Share2 className="h-4 w-4" />
+            <span>Social Share Template</span>
+          </div>
+          <p className="text-xs sm:text-sm text-zinc-300 font-mono bg-zinc-950 p-4 rounded-xl border border-zinc-800 leading-relaxed overflow-x-auto">
+            {socialText}
+          </p>
+          <div className="mt-4">
+            <Button
+              onClick={handleCopyToClipboard}
+              size="sm"
+              className="bg-orange-500 hover:bg-orange-600 text-white font-bold rounded-full px-5 h-10 text-xs sm:text-sm"
+            >
+              {copied ? <Check className="h-4 w-4 mr-1.5" /> : <Copy className="h-4 w-4 mr-1.5" />}
+              <span>{copied ? 'Copied to Clipboard!' : 'Copy Share Text'}</span>
             </Button>
-          </section>
+          </div>
+        </div>
 
-          <div className="mt-12 grid gap-8 md:grid-cols-2">
-            <section>
-              <h2 className="font-headline text-2xl font-semibold">With your Photo</h2>
-              <Card className="mt-4">
-                <CardContent className="p-6">
-                  <div className="relative w-full">
-                    {/* Canvas for drawing is hidden but used for download */}
-                    <canvas ref={canvasRef} className="absolute inset-0 w-full h-full" style={{ display: 'none' }} />
-
-                    {/* This is the preview area */}
-                    <div className="relative w-full">
-                      {badgeTemplate &&
-                        <Image
-                          src={badgeTemplate.imageUrl}
-                          alt="Badge preview background"
-                          width={1200}
-                          height={630}
-                          className="w-full h-auto rounded-md"
-                          data-ai-hint={badgeTemplate.imageHint}
-                          priority
-                        />
-                      }
-                      {userImage && (
-                        <div 
-                          className="absolute aspect-square rounded-full overflow-hidden border-4 border-amber-400"
-                          style={{
-                            // Adjust these values to position the photo correctly on the badge
-                            top: '30.7%', 
-                            left: '13.3%', 
-                            width: '27%',
-                          }}
-                        >
-                          <Image
-                            src={userImage}
-                            alt="Your photo"
-                            fill
-                            className="object-cover"
-                          />
-                        </div>
-                      )}
-                      {!userImage && (
-                        <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/30 rounded-md">
-                          <Upload className="h-10 w-10 text-white" />
-                          <p className="text-white mt-2">Upload a photo</p>
-                        </div>
-                      )}
-                    </div>
-
-                  </div>
-                  <div className="mt-4 grid grid-cols-2 gap-4">
-                    <Button asChild variant="outline">
-                      <label htmlFor="file-upload" className="cursor-pointer">
-                        <Upload className="mr-2 h-4 w-4" /> Choose File
-                      </label>
-                    </Button>
-                    <Input id="file-upload" type="file" accept="image/*" className="hidden" onChange={handleFileChange} />
-
-                    <Button onClick={handleDownload} disabled={!userImage} className="bg-accent hover:bg-accent/90 text-accent-foreground">
-                      <Download className="mr-2 h-4 w-4" /> Download
-                    </Button>
-                  </div>
-                </CardContent>
-              </Card>
-            </section>
-
-            <section>
-              <h2 className="font-headline text-2xl font-semibold">Without your Photo</h2>
-              <Card className="mt-4">
-                <CardContent className="p-6">
-                  {badgeNoPhoto && (
+        {/* Badge Generation Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
+          
+          {/* Card 1: Custom Photo Badge */}
+          <div className="p-5 sm:p-7 rounded-2xl bg-zinc-900/60 border border-zinc-800/80 shadow-xl flex flex-col justify-between">
+            <div>
+              <div className="flex items-center gap-2 mb-1">
+                <ImageIcon className="h-4 w-4 text-orange-400" />
+                <h3 className="text-base sm:text-lg font-bold text-white">Custom Photo Badge</h3>
+              </div>
+              <p className="text-xs text-zinc-400 mb-4">Upload your picture to embed inside the official template.</p>
+              
+              <div className="relative w-full aspect-[1200/630] rounded-xl overflow-hidden bg-zinc-950 border border-zinc-800 flex items-center justify-center">
+                <canvas ref={canvasRef} className="hidden" />
+                <Image
+                  src={badgeTemplateUrl}
+                  alt="Badge Template"
+                  fill
+                  className="object-cover"
+                />
+                {userImage && (
+                  <div
+                    className="absolute aspect-square rounded-full overflow-hidden border-4 border-orange-500"
+                    style={{
+                      top: '30.7%',
+                      left: '13.3%',
+                      width: '27%',
+                    }}
+                  >
                     <Image
-                      src={badgeNoPhoto.imageUrl}
-                      alt="Badge template"
-                      width={1200}
-                      height={630}
-                      className="rounded-md w-full h-auto"
-                      data-ai-hint={badgeNoPhoto.imageHint}
-                      priority
+                      src={userImage}
+                      alt="Your photo"
+                      fill
+                      className="object-cover"
                     />
-                  )}
-                  <Button onClick={handleDownloadWithoutPhoto} className="mt-4 w-full bg-accent hover:bg-accent/90 text-accent-foreground">
-                    <Download className="mr-2 h-4 w-4" /> Download Badge
-                  </Button>
-                </CardContent>
-              </Card>
-            </section>
+                  </div>
+                )}
+                {!userImage && (
+                  <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/50 backdrop-blur-[1px]">
+                    <Upload className="h-8 w-8 text-orange-400 mb-1.5" />
+                    <span className="text-xs font-bold text-white">Upload your photo</span>
+                  </div>
+                )}
+              </div>
+            </div>
+
+            <div className="mt-6 grid grid-cols-2 gap-3">
+              <Button asChild variant="outline" className="border-zinc-700 bg-zinc-900 text-zinc-200 hover:bg-zinc-800 text-xs sm:text-sm h-11">
+                <label htmlFor="file-upload" className="cursor-pointer flex items-center justify-center">
+                  <Upload className="h-4 w-4 mr-1.5 text-orange-400" />
+                  <span>Choose Photo</span>
+                </label>
+              </Button>
+              <Input id="file-upload" type="file" accept="image/*" className="hidden" onChange={handleFileChange} />
+
+              <Button
+                onClick={handleDownload}
+                disabled={!userImage}
+                className="bg-orange-500 hover:bg-orange-600 disabled:opacity-50 text-white font-bold text-xs sm:text-sm h-11"
+              >
+                <Download className="h-4 w-4 mr-1.5" />
+                <span>Download</span>
+              </Button>
+            </div>
           </div>
 
-          <section className="mt-16 text-center">
-            {/* <Button asChild size="lg" className="bg-gradient-to-r from-orange-400 to-rose-400 text-white">
-              <a href="https://bit.ly/gafm-volunteer" target="_blank" rel="noopener noreferrer">
-                Become the face of Community
-              </a>
-            </Button> */}
-          </section>
-
-          {/* <section className="mt-16">
-            <h2 className="text-center font-headline text-2xl font-semibold">Community on Twitter/X</h2>
-            <div className="mt-6 mx-auto max-w-xl">
-              <TwitterTimeline />
+          {/* Card 2: Standard Badge */}
+          <div className="p-5 sm:p-7 rounded-2xl bg-zinc-900/60 border border-zinc-800/80 shadow-xl flex flex-col justify-between">
+            <div>
+              <div className="flex items-center gap-2 mb-1">
+                <Award className="h-4 w-4 text-orange-400" />
+                <h3 className="text-base sm:text-lg font-bold text-white">Standard Badge</h3>
+              </div>
+              <p className="text-xs text-zinc-400 mb-4">Official event card ready to download and share instantly.</p>
+              
+              <div className="relative w-full aspect-[1200/630] rounded-xl overflow-hidden bg-zinc-950 border border-zinc-800">
+                <Image
+                  src={badgeNoPhotoUrl}
+                  alt="Standard Badge"
+                  fill
+                  className="object-cover"
+                />
+              </div>
             </div>
-          </section> */}
+
+            <div className="mt-6">
+              <Button
+                onClick={handleDownloadWithoutPhoto}
+                className="w-full bg-orange-500 hover:bg-orange-600 text-white font-bold text-xs sm:text-sm h-11"
+              >
+                <Download className="h-4 w-4 mr-1.5" />
+                <span>Download Standard Badge</span>
+              </Button>
+            </div>
+          </div>
 
         </div>
+
       </main>
       <Footer />
-    </>
+    </div>
   );
 }
