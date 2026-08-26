@@ -28,7 +28,7 @@ export default function JoinPage() {
     {
       name: 'Meetup Community Group',
       subtitle: 'Join to RSVP for all upcoming in-person & virtual meetups',
-      icon: <Calendar className="h-5 w-5 text-white" />,
+      icon: <MeetupLogo className="h-5 w-5 text-white" />,
       href: socials.meetup,
       badge: 'Main RSVP Hub',
     },
