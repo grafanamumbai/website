@@ -20,6 +20,7 @@ import {
   ExternalLink,
 } from 'lucide-react';
 import communityData from '@/data';
+import { MeetupLogo } from '@/components/icons/meetup-logo';
 
 export default function HeroSection() {
   const { chapter, currentEvent, socials } = communityData;
@@ -166,7 +167,7 @@ export default function HeroSection() {
                 rel="noopener noreferrer"
                 className="flex items-center justify-center gap-2.5"
               >
-                <Flame className="h-4 w-4" />
+                <MeetupLogo className="h-4 w-4" />
                 <span>RSVP for Meetup (Free)</span>
                 <ArrowRight className="h-4 w-4 ml-1" />
               </a>

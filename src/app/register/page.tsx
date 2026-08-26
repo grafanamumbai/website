@@ -21,6 +21,7 @@ import {
 } from 'lucide-react';
 import Link from 'next/link';
 import communityData from '@/data';
+import { MeetupLogo } from '@/components/icons/meetup-logo';
 
 export default function RegisterPage() {
   const { currentEvent, chapter } = communityData;
@@ -172,7 +173,7 @@ export default function RegisterPage() {
                 className="w-full sm:w-auto bg-orange-500 hover:bg-orange-600 active:scale-95 text-white font-bold px-8 h-12 rounded-full shadow-lg shadow-orange-500/25 transition-all hover:scale-105"
               >
                 <a href={currentEvent.registration.rsvpUrl} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-2">
-                  <Ticket className="h-4 w-4" />
+                  <MeetupLogo className="h-4 w-4" />
                   <span>Confirm RSVP on Meetup</span>
                   <ArrowRight className="h-4 w-4" />
                 </a>
