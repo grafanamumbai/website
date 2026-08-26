@@ -1,114 +1,83 @@
 'use client';
-import { Clock } from 'lucide-react';
-import Image from 'next/image';
-import { useEffect, useRef, useState } from 'react';
 
-const schedule = [
-  { time: '3:00 pm', title: 'Intro & Welcome', description: '' },
-  { time: '3:15 pm - 4:00 pm', title: 'Grafanacon Local Keynote', description: 'Jayesh Asrani' },
-  { time: '4:00 pm - 4:45 pm', title: 'Building Observable and Durable AI Agents', description: 'Shubham Londhe' },
-  { time: '4:45 pm - 5:30 pm', title: 'Visualise your APIs with the Grafana Infinity Plugin', description: 'Yash Garudkar & Nikita Shinde' },
-  { time: '5:30 pm - 6:00 pm', title: 'Snacks and Networking', description: '' },
-];
+import { Clock, User, Sparkles, Coffee, Presentation, Trophy, Users } from 'lucide-react';
+import communityData from '@/data';
 
 export default function ScheduleSection() {
-    const containerRef = useRef<HTMLDivElement>(null);
-    const [scrollProgress, setScrollProgress] = useState(0);
-    const [activeItems, setActiveItems] = useState<number[]>([]);
+  const { schedule, currentEvent } = communityData;
 
-    useEffect(() => {
-        const handleScroll = () => {
-            if (!containerRef.current) return;
-            const rect = containerRef.current.getBoundingClientRect();
-            const windowHeight = window.innerHeight;
-            
-            // Calculate progress line
-            const offset = windowHeight / 2; // Center of screen
-            let progress = (offset - rect.top) / rect.height;
-            progress = Math.max(0, Math.min(1, progress));
-            setScrollProgress(progress);
+  const getTypeBadge = (type: string) => {
+    switch (type) {
+      case 'keynote':
+        return <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-amber-500/20 text-amber-300 border border-amber-500/30"><Sparkles className="h-3 w-3" /> Keynote</span>;
+      case 'talk':
+        return <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-blue-500/20 text-blue-300 border border-blue-500/30"><Presentation className="h-3 w-3" /> Deep Dive</span>;
+      case 'break':
+        return <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-zinc-800 text-zinc-300 border border-zinc-700"><Coffee className="h-3 w-3" /> Break & Networking</span>;
+      case 'workshop':
+        return <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-purple-500/20 text-purple-300 border border-purple-500/30"><Users className="h-3 w-3" /> Community Demos</span>;
+      case 'contest':
+        return <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30"><Trophy className="h-3 w-3" /> Quiz & Swag</span>;
+      default:
+        return <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-orange-500/20 text-orange-300 border border-orange-500/30">Session</span>;
+    }
+  };
 
-            // Calculate active items based on scroll
-            const newActiveItems: number[] = [];
-            const itemElements = containerRef.current.querySelectorAll('.schedule-item');
-            
-            itemElements.forEach((el, index) => {
-                const elRect = el.getBoundingClientRect();
-                // Item becomes active when it passes the 75% mark of the screen
-                if (elRect.top < windowHeight * 0.75) {
-                    newActiveItems.push(index);
-                }
-            });
-            setActiveItems(newActiveItems);
-        };
+  return (
+    <section id="schedule" className="py-20 md:py-28 bg-[#0e1117] text-white border-t border-zinc-800/80">
+      <div className="container mx-auto px-4 md:px-6">
+        <div className="mx-auto max-w-3xl text-center">
+          <div className="inline-flex items-center gap-2 rounded-full border border-orange-500/30 bg-orange-500/10 px-3.5 py-1 text-xs font-semibold text-orange-400 mb-4">
+            <Clock className="h-3.5 w-3.5" />
+            <span>Event Agenda</span>
+          </div>
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight">
+            Schedule & Sessions
+          </h2>
+          <p className="mt-4 text-base sm:text-lg text-zinc-300">
+            A packed day of observability keynotes, practical demonstrations, and networking.
+          </p>
+        </div>
 
-        window.addEventListener('scroll', handleScroll);
-        // initial trigger
-        handleScroll();
-        return () => window.removeEventListener('scroll', handleScroll);
-    }, []);
-
-    return (
-        <section id="schedule" className="relative bg-[#ffffff] py-24 px-4 w-full border-t-8 border-black border-b-8 overflow-hidden z-20" style={{ backgroundImage: 'radial-gradient(circle, rgba(0,0,0,0.3) 2px, transparent 2px)', backgroundSize: '24px 24px' }}>
-            <div className="container mx-auto max-w-[1000px]">
-                <div className="mx-auto max-w-3xl mb-16 relative bg-white border-[4px] border-black p-6 md:p-8 shadow-[12px_12px_0px_0px_rgba(0,0,0,1)] text-center mt-8">
-                    <h2 className="text-4xl md:text-[50px] font-black uppercase tracking-widest text-black mb-4">
-                        EVENT SCHEDULE
-                    </h2>
-                    <p className="mt-4 text-xl font-bold max-w-xl mx-auto text-black">
-                        A day packed with learning and fun. The schedule is tentative and subject to change.
-                    </p>
+        {/* Schedule Timeline */}
+        <div className="mt-16 max-w-4xl mx-auto space-y-4">
+          {schedule.map((item, index) => (
+            <div
+              key={index}
+              className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-6 rounded-2xl bg-zinc-900/60 border border-zinc-800/80 shadow-md hover:border-orange-500/40 hover:bg-zinc-900/90 transition-all duration-200"
+            >
+              <div className="flex-1 space-y-2">
+                <div className="flex flex-wrap items-center gap-2.5">
+                  <div className="flex items-center gap-1.5 text-orange-400 font-mono text-sm font-semibold">
+                    <Clock className="h-4 w-4" />
+                    <span>{item.time}</span>
+                  </div>
+                  {getTypeBadge(item.type)}
                 </div>
 
-                <div ref={containerRef} className="relative mt-12 md:px-8">
-                    {/* Vertical line background timeline */}
-                    <div className="absolute left-[36px] md:left-1/2 md:-translate-x-1/2 top-4 bottom-4 w-[6px] bg-black" aria-hidden="true"></div>
-                    
-                    {/* Filled foreground timeline */}
-                    <div 
-                        className="absolute left-[36px] md:left-1/2 md:-translate-x-1/2 top-4 w-[6px] bg-[#fbbc05] origin-top z-0 border-r-[2px] border-l-[2px] border-black" 
-                        style={{ height: `calc(${scrollProgress * 100}% - 2rem)`, bottom: '2rem', transition: 'height 0.1s ease-out' }}
-                        aria-hidden="true"
-                    ></div>
-                    
-                    <div className="relative flex flex-col gap-y-10 z-10 block">
-                        {schedule.map((item, index) => {
-                            const isActive = activeItems.includes(index);
-                            const colors = ['bg-[#00d2ff] text-black', 'bg-[#ff8cbc] text-black', 'bg-[#fbbc05] text-black', 'bg-white text-black', 'bg-[#4285F4] text-white'];
-                            const bgColor = colors[index % colors.length];
-                            
-                            return (
-                                <div 
-                                    key={item.time} 
-                                    className={`schedule-item relative flex items-center justify-between md:justify-normal group ${index % 2 === 0 ? 'md:flex-row-reverse' : 'flex-row'} transition-transform duration-700 ease-out transform ${isActive ? 'translate-y-0 opacity-100' : 'translate-y-12 opacity-0'}`}
-                                >
-                                    {/* Center dot */}
-                                    <div className={`absolute left-[36px] md:left-1/2 -ml-[20px] w-[40px] h-[40px] bg-white border-[4px] border-black flex items-center justify-center z-10 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-transform duration-500 overflow-hidden ${isActive ? 'scale-110' : 'scale-100'} group-hover:scale-125`}>
-                                        <Image src="/logo-header.png" alt="Logo" width={32} height={32} className={`w-full h-full object-contain p-1 transition-opacity duration-300 ${isActive ? 'opacity-100' : 'opacity-50'}`} />
-                                    </div>
+                <h3 className="text-lg font-bold text-white leading-snug">
+                  {item.title}
+                </h3>
 
-                                    {/* Content Card */}
-                                    <div className={`w-full md:w-[calc(50%_-_2rem)] pl-[80px] md:pl-0 ${index % 2 === 0 ? 'md:mr-auto md:pr-10' : 'md:ml-auto md:pl-10'}`}>
-                                        <div className={`${bgColor} p-8 sm:p-10 min-h-[160px] shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] border-[4px] border-black transition-transform duration-500 ease-out hover:-translate-y-2 hover:shadow-[12px_12px_0px_0px_rgba(0,0,0,1)] ${index % 2 === 0 ? 'md:text-right' : 'text-left'}`}>
-                                            <div className={`font-black text-[15px] uppercase tracking-wider flex items-center gap-2 mb-4 bg-black text-white inline-flex px-3 py-1 ${index % 2 === 0 && false /* adjust float if needed */} shadow-[2px_2px_0px_0px_rgba(255,255,255,0.5)]`}>
-                                                <Clock className={`h-[18px] w-[18px] text-white`} strokeWidth={3} />
-                                                {item.time}
-                                            </div>
-                                            <h3 className={`text-[26px] font-black leading-tight tracking-tighter ${item.description ? 'mb-3' : ''}`}>{item.title}</h3>
-                                            {item.description && (
-                                                <p className="font-bold text-[17px] leading-relaxed opacity-90">{item.description}</p>
-                                            )}
-                                        </div>
-                                    </div>
-                                    
-                                    <div className="hidden md:block w-[calc(50%_-_2rem)]"></div>
-                                </div>
-                            );
-                        })}
-                    </div>
+                {item.description && (
+                  <p className="text-sm text-zinc-400 leading-relaxed">
+                    {item.description}
+                  </p>
+                )}
+              </div>
+
+              {item.speaker && (
+                <div className="sm:text-right shrink-0">
+                  <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-zinc-950/80 border border-zinc-800 text-xs font-medium text-zinc-300">
+                    <User className="h-3.5 w-3.5 text-orange-400" />
+                    <span>{item.speaker}</span>
+                  </div>
                 </div>
+              )}
             </div>
-        </section>
-    );
+          ))}
+        </div>
+      </div>
+    </section>
+  );
 }
-

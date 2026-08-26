@@ -1,0 +1,381 @@
+{
+  "chapter": {
+    "name": "Grafana & Friends Mumbai",
+    "shortName": "G&F Mumbai",
+    "tagline": "The Official Observability & Open-Source Community in Mumbai",
+    "description": "A vibrant community of developers, SREs, DevOps engineers, and cloud-native enthusiasts in Mumbai, powered by Grafana Labs. We meet to explore metrics, logs, traces, dashboards, and modern observability practices.",
+    "location": "Mumbai, Maharashtra, India",
+    "email": "grafanamumbai@gmail.com",
+    "stats": {
+      "members": "500+",
+      "meetups": "10+",
+      "speakers": "20+",
+      "communityType": "100% Free & Open"
+    }
+  },
+  "socials": {
+    "website": "https://www.grafanafriendsmumbai.in/",
+    "meetup": "https://www.meetup.com/grafana-and-friends-mumbai/",
+    "linkedin": "https://www.linkedin.com/in/grafana-user-group-mumbai-50149b386/",
+    "twitter": "https://twitter.com/grafanamumbai",
+    "instagram": "https://www.instagram.com/grafanamumbai?igsh=Mmhqcnh3Zmd2bmU5",
+    "slack": "https://grafana.slack.com/archives/C01FMSQ6A8L",
+    "github": "https://github.com/grafanamumbai/website",
+    "cfp": "https://grafana.qualtrics.com/jfe/form/SV_4OQ9dzUAbSHfrAG"
+  },
+  "currentEvent": {
+    "title": "GrafanaCon Local Mumbai 2026",
+    "edition": "2026 Edition",
+    "theme": "Modern Observability, OpenTelemetry & Intelligent Dashboards",
+    "date": "Saturday, 13th June 2026",
+    "time": "10:00 AM - 5:00 PM IST",
+    "targetDateISO": "2026-06-13T10:00:00+05:30",
+    "venue": {
+      "name": "Mumbai",
+      "address": "Venue details to be announced soon",
+      "mapUrl": "https://maps.google.com/?q=Mumbai,+Maharashtra,+India"
+    },
+    "registration": {
+      "isOpen": true,
+      "statusText": "Limited Seats Available",
+      "rsvpUrl": "https://www.meetup.com/grafana-and-friends-mumbai/events/313668351/",
+      "cfpUrl": "https://grafana.qualtrics.com/jfe/form/SV_4OQ9dzUAbSHfrAG"
+    }
+  },
+  "schedule": [
+    {
+      "time": "10:00 AM - 10:30 AM",
+      "title": "Registration & Welcome Coffee",
+      "speaker": "Organizing Team",
+      "description": "Check-in, grab your attendee badges, and connect with fellow community members over coffee.",
+      "type": "welcome"
+    },
+    {
+      "time": "10:30 AM - 11:15 AM",
+      "title": "Keynote: What's New in the Grafana Observability Ecosystem",
+      "speaker": "Community Keynote Speaker",
+      "description": "A comprehensive deep dive into the latest updates across Grafana, Prometheus, Loki, Tempo, and Pyroscope.",
+      "type": "keynote"
+    },
+    {
+      "time": "11:15 AM - 12:00 PM",
+      "title": "Building Observable & Durable AI Agents",
+      "speaker": "Shubham Londhe",
+      "description": "Architecting resilient LLM pipelines with real-time tracing, metric evaluations, and dashboard alerts.",
+      "type": "talk"
+    },
+    {
+      "time": "12:00 PM - 1:00 PM",
+      "title": "Visualizing Custom APIs with the Grafana Infinity Plugin",
+      "speaker": "Yash Garudkar & Nikita Shinde",
+      "description": "How to query, transform, and render diverse REST APIs, GraphQL, and CSV feeds directly in Grafana.",
+      "type": "talk"
+    },
+    {
+      "time": "1:00 PM - 2:00 PM",
+      "title": "Lunch Break & Interactive Hallway Track",
+      "speaker": "Everyone",
+      "description": "Enjoy complimentary lunch, explore sponsor booths, and network with peers.",
+      "type": "break"
+    },
+    {
+      "time": "2:00 PM - 2:45 PM",
+      "title": "Zero-to-Hero with OpenTelemetry & Grafana LGTM Stack",
+      "speaker": "Guest Speaker",
+      "description": "Hands-on instrumentation for microservices using OpenTelemetry SDKs, Tempo tracing, and Loki logs.",
+      "type": "talk"
+    },
+    {
+      "time": "2:45 PM - 3:30 PM",
+      "title": "Community Lightning Talks & Demos",
+      "speaker": "Community Members",
+      "description": "Fast-paced 7-minute demos from community members showing innovative dashboards and observability hacks.",
+      "type": "workshop"
+    },
+    {
+      "time": "3:30 PM - 4:15 PM",
+      "title": "Live Observability Quiz & Swag Giveaway",
+      "speaker": "Core Team",
+      "description": "Test your knowledge in a live Kahoot quiz with exclusive Grafana swag packs for the winners!",
+      "type": "contest"
+    },
+    {
+      "time": "4:15 PM - 5:00 PM",
+      "title": "Closing Remarks & High Tea Networking",
+      "speaker": "Organizing Team",
+      "description": "Event recap, community photo session, feedback, and open networking over tea and snacks.",
+      "type": "networking"
+    }
+  ],
+  "speakers": [
+    {
+      "id": "nikita-shinde",
+      "name": "Nikita Shinde",
+      "role": "Lead Organizer & Speaker",
+      "company": "Grafana & Friends Mumbai",
+      "topic": "Visualizing Custom APIs with Grafana Infinity",
+      "bio": "Community organizer, observability advocate, and speaker passionate about developer communities.",
+      "avatar": "/nikita.png",
+      "socials": {
+        "linkedin": "https://www.linkedin.com/in/shinde-nikita/",
+        "twitter": "https://twitter.com/grafanamumbai"
+      },
+      "featured": true
+    },
+    {
+      "id": "yash-kalwani",
+      "name": "Yash Kalwani",
+      "role": "DevOps & Observability Engineer",
+      "company": "Community Speaker",
+      "topic": "Prometheus & Loki at Scale",
+      "bio": "Specializes in high-volume metrics ingestion, query optimization, and alerting architectures.",
+      "avatar": "/speaker2.png",
+      "socials": {
+        "linkedin": "https://www.linkedin.com/in/kalwani-yash/"
+      },
+      "featured": true
+    },
+    {
+      "id": "pratik-parik",
+      "name": "Pratik Parikh",
+      "role": "Cloud Architect & SRE",
+      "company": "Community Speaker",
+      "topic": "Kubernetes Cluster Monitoring & Cost Analytics",
+      "bio": "Passionate about Kubernetes observability, eBPF telemetry, and Grafana dashboard craftsmanship.",
+      "avatar": "/speaker3.png",
+      "socials": {
+        "linkedin": "https://www.linkedin.com/in/parikh-pratik/"
+      },
+      "featured": true
+    },
+    {
+      "id": "mandar-sarfare",
+      "name": "Mandar Sarfare",
+      "role": "SRE @ IBM",
+      "company": "IBM",
+      "topic": "Site Reliability Engineering with Grafana & Mimir",
+      "bio": "SRE practitioner with deep expertise in incident management, SLIs/SLOs, and multi-tenant metric stores.",
+      "avatar": "/mandar.jpeg",
+      "socials": {
+        "linkedin": "https://www.linkedin.com/in/mandar-sarfare/"
+      },
+      "featured": true
+    }
+  ],
+  "coreTeam": [
+    {
+      "id": "nikita",
+      "name": "Nikita Shinde",
+      "role": "Lead Organizer",
+      "company": "Grafana & Friends Mumbai",
+      "avatar": "/nikita.png",
+      "socials": {
+        "linkedin": "https://www.linkedin.com/in/shinde-nikita/"
+      }
+    },
+    {
+      "id": "prajwal",
+      "name": "Prajwal Deshpande",
+      "role": "Co-Organizer",
+      "company": "Grafana & Friends Mumbai",
+      "avatar": "/prajwal.png",
+      "socials": {
+        "linkedin": "https://www.linkedin.com/in/d-prajwal/"
+      }
+    },
+    {
+      "id": "mandar",
+      "name": "Mandar Sarfare",
+      "role": "Operations & Speaker Liaison",
+      "company": "SRE @ IBM",
+      "avatar": "/mandar.jpeg",
+      "socials": {
+        "linkedin": "https://www.linkedin.com/in/mandar-sarfare/"
+      }
+    },
+    {
+      "id": "dhruva",
+      "name": "Dhruva Wani",
+      "role": "Web & Tech Lead",
+      "company": "Web Developer",
+      "avatar": "/dhruva.png",
+      "socials": {
+        "linkedin": "https://www.linkedin.com/in/dhruvawani17/"
+      }
+    },
+    {
+      "id": "krisha",
+      "name": "Krisha Thakkar",
+      "role": "Social Media & Outreach Lead",
+      "company": "Social Media Lead",
+      "avatar": "/krisha.png",
+      "socials": {
+        "linkedin": "https://www.linkedin.com/in/krisha-thakkar-bb1687311/"
+      }
+    },
+    {
+      "id": "sandesh",
+      "name": "Sandesh Deshpande",
+      "role": "Community Advisor",
+      "company": "Solutions Architect @ Team Computers",
+      "avatar": "/sandy.png",
+      "socials": {
+        "linkedin": "https://www.linkedin.com/in/sandesh-deshpande-32700940/"
+      }
+    },
+    {
+      "id": "uddhav",
+      "name": "Uddhav More",
+      "role": "Infrastructure & Logistics",
+      "company": "Cloud Infra Support @ Wipro",
+      "avatar": "/uddhav.jpg",
+      "socials": {
+        "linkedin": "https://www.linkedin.com/in/uddhav-more/"
+      }
+    },
+    {
+      "id": "vanshika",
+      "name": "Vanshika Jain",
+      "role": "Community Coordinator",
+      "company": "Grafana & Friends Mumbai",
+      "avatar": "/vanshika.jpeg",
+      "socials": {
+        "linkedin": "https://www.linkedin.com/in/vanshikajain622"
+      }
+    }
+  ],
+  "volunteers": [
+    {
+      "id": "vol-1",
+      "name": "Community Volunteers",
+      "role": "Event Logistics & Attendee Support",
+      "avatar": "/logo-header.png",
+      "socials": {
+        "meetup": "https://www.meetup.com/grafana-and-friends-mumbai/"
+      }
+    }
+  ],
+  "sponsors": [
+    {
+      "id": "grafana-labs",
+      "name": "Grafana Labs",
+      "tier": "Powered By",
+      "logo": "/grafanalogo.png",
+      "url": "https://grafana.com/",
+      "description": "Grafana Labs provides the open and composable observability stack built around Grafana, Prometheus, Loki, Tempo, and Mimir."
+    }
+  ],
+  "swags": [
+    {
+      "id": "swag-tshirt",
+      "name": "Exclusive Community T-Shirt",
+      "description": "Custom Grafana & Friends Mumbai edition tee for quiz winners and active participants.",
+      "image": "/logo-header.png"
+    },
+    {
+      "id": "swag-stickers",
+      "name": "Holographic Sticker Pack",
+      "description": "Grafana, Loki, Tempo, Mimir, and Prometheus vinyl laptop stickers for all attendees.",
+      "image": "/logo-header.png"
+    },
+    {
+      "id": "swag-plushie",
+      "name": "Grot Plushie / Goodies",
+      "description": "Official Grafana mascot collectibles and special speaker tokens.",
+      "image": "/logo-header.png"
+    }
+  ],
+  "contests": [
+    {
+      "id": "refer-and-earn",
+      "title": "Refer & Grow the Community",
+      "icon": "Gift",
+      "description": "Invite fellow developers and SREs to join the Grafana & Friends Mumbai meetup group.",
+      "rules": [
+        "Register for the meetup on Meetup.com / Konfhub.",
+        "Share the event link with your college or team networks.",
+        "Top referrers receive exclusive Grafana swag bundles at the event check-in desk!"
+      ]
+    },
+    {
+      "id": "social-mania",
+      "title": "Social Media Mania & Meme Contest",
+      "icon": "Sparkles",
+      "description": "Share your observability stories, memes, and event excitement across LinkedIn and X/Twitter.",
+      "rules": [
+        "Create an observability meme or post about your favorite Grafana dashboard.",
+        "Tag @grafanamumbai on Twitter/LinkedIn with the hashtag #GrafanaMumbai.",
+        "Best posts win premium Grafana merchandise and will be featured on stage!"
+      ]
+    }
+  ],
+  "gallery": [
+    {
+      "id": "event-1",
+      "title": "Community Keynote Session",
+      "description": "Packed house exploring distributed tracing with Tempo and OpenTelemetry.",
+      "image": "/event1.jpeg",
+      "date": "Previous Meetup"
+    },
+    {
+      "id": "event-2",
+      "title": "Hands-on Dashboard Workshop",
+      "description": "Attendees building real-time alerting dashboards in Grafana.",
+      "image": "/event2.jpeg",
+      "date": "Previous Meetup"
+    },
+    {
+      "id": "event-3",
+      "title": "Networking & Hallway Conversations",
+      "description": "Connecting SREs, DevOps professionals, and open-source contributors.",
+      "image": "/event3.jpg",
+      "date": "Previous Meetup"
+    },
+    {
+      "id": "event-4",
+      "title": "Community Swag & Quiz Winners",
+      "description": "Celebrating our active community participants with official Grafana goodies.",
+      "image": "/event4.png",
+      "date": "Previous Meetup"
+    },
+    {
+      "id": "event-5",
+      "title": "Group Photo of Mumbai Chapter",
+      "description": "The passionate observability community in Mumbai gathering together.",
+      "image": "/event5.jpg",
+      "date": "Previous Meetup"
+    }
+  ],
+  "faqs": [
+    {
+      "question": "What is Grafana & Friends Mumbai and how can I join?",
+      "answer": "Grafana & Friends Mumbai is the official local community chapter for developers, SREs, DevOps engineers, and students passionate about observability. You can join for free on Meetup.com to get notified about all upcoming in-person and virtual meetups.",
+      "category": "General"
+    },
+    {
+      "question": "Is attending the meetups free?",
+      "answer": "Yes! All Grafana & Friends Mumbai community meetups, workshops, and events are 100% free of charge and open to everyone, powered by Grafana Labs and our community partners.",
+      "category": "Registration"
+    },
+    {
+      "question": "How can I become a speaker or present a talk?",
+      "answer": "We welcome community talks of all experience levels! Whether you want to share a 10-minute lightning demo or a 30-minute deep-dive talk on metrics, logs, traces, or incident response, submit your proposal through our open Call for Speakers (CFP) form.",
+      "category": "Speaking"
+    },
+    {
+      "question": "What is the format and typical agenda of a meetup?",
+      "answer": "Our meetups typically feature 2-3 technical talks, hands-on demonstrations, community Q&A, interactive quizzes with swag giveaways, and dedicated networking over complimentary food and beverages.",
+      "category": "Event"
+    },
+    {
+      "question": "Can my company sponsor or host a future meetup?",
+      "answer": "Yes! We are always looking for venue partners, community sponsors, and food/swag collaborators in Mumbai. Please reach out to our organizing team at grafanamumbai@gmail.com.",
+      "category": "Sponsorship"
+    },
+    {
+      "question": "What Code of Conduct applies to community events?",
+      "answer": "We adhere strictly to the Grafana Events Code of Conduct and Contributor Covenant to ensure a safe, inclusive, welcoming, and harassment-free environment for all participants.",
+      "category": "Guidelines"
+    }
+  ]
+}
