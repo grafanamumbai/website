@@ -8,8 +8,6 @@ import {
   Carousel,
   CarouselContent,
   CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
 } from "@/components/ui/carousel";
 import {
   Mic2,
@@ -179,16 +177,6 @@ export default function SpeakersSection() {
                 </CarouselItem>
               ))}
             </CarouselContent>
-
-            {/* Carousel Controls with Autoplay indicator */}
-            <div className="flex items-center justify-center gap-4 mt-10">
-              <CarouselPrevious className="position-static transform-none static h-11 w-11 border-zinc-800 bg-zinc-900/70 hover:bg-orange-500 hover:text-white transition-colors" />
-              <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-zinc-900/80 border border-zinc-800 text-[11px] font-mono text-zinc-400">
-                <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
-                <span>Auto-sliding Loop</span>
-              </div>
-              <CarouselNext className="position-static transform-none static h-11 w-11 border-zinc-800 bg-zinc-900/70 hover:bg-orange-500 hover:text-white transition-colors" />
-            </div>
           </Carousel>
         </div>
 
