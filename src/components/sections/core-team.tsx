@@ -48,7 +48,8 @@ const roleIcons: Record<string, any> = {
 };
 
 export default function CoreTeamSection() {
-  const { coreTeam } = communityData;
+  const { coreTeam, volunteers } = communityData;
+  const allMembers = [...coreTeam, ...(volunteers || [])];
 
   return (
     <section id="team" className="py-16 sm:py-24 md:py-28 2xl:py-36 bg-[#0a0c10] text-white">
@@ -58,19 +59,19 @@ export default function CoreTeamSection() {
         <div className="mx-auto max-w-3xl 2xl:max-w-4xl text-center">
           <div className="inline-flex items-center gap-2 rounded-full border border-orange-500/30 bg-orange-500/10 px-3.5 py-1 text-xs font-semibold text-orange-400 mb-4">
             <Users className="h-3.5 w-3.5" />
-            <span>Community Core Team</span>
+            <span>Community Team & Volunteers</span>
           </div>
           <h2 className="text-2xl xs:text-3xl sm:text-4xl md:text-5xl 2xl:text-6xl font-black tracking-tight leading-tight">
             The People Behind the Scenes
           </h2>
           <p className="mt-4 text-sm sm:text-base md:text-lg 2xl:text-xl text-zinc-400">
-            Meet the volunteers dedicated to bringing the Grafana community together in Mumbai.
+            Meet the core team and volunteers dedicated to bringing the Grafana community together in Mumbai.
           </p>
         </div>
 
         {/* Team Grid */}
         <div className="mt-12 sm:mt-16 md:mt-20 grid gap-6 sm:gap-8 md:gap-10 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 justify-items-center">
-          {coreTeam.map((member) => {
+          {allMembers.map((member) => {
             const Icon = roleIcons[member.role] || Users;
             return (
               <div

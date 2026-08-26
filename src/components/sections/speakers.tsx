@@ -1,6 +1,13 @@
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
+import {
   Mic2,
   Building2,
   Sparkles,
@@ -34,13 +41,78 @@ const getAvatarUrl = (url: string | undefined) => {
   if (!url) return '/placeholder-avatar.png';
   const driveMatch = url.match(/drive\.google\.com\/(?:file\/d\/|drive\/folders\/|open\?id=)([a-zA-Z0-9_-]+)/);
   if (driveMatch && driveMatch[1]) {
-    return `https://drive.google.com/thumbnail?id=${driveMatch[1]}&sz=w500-h500`;
+    return `https://drive.google.com/thumbnail?id=\${driveMatch[1]}&sz=w500-h500`;
   }
   return url;
 };
 
 export default function SpeakersSection() {
   const { speakers, socials } = communityData;
+
+  const SpeakerCard = ({ speaker }: { speaker: any }) => (
+    <div
+      className={`group flex h-full flex-col rounded-3xl border \${
+        speaker.featured ? 'border-orange-500/50 bg-orange-500/5' : 'border-zinc-800/80 bg-zinc-900/40'
+      } p-6 sm:p-8 backdrop-blur-md transition-all duration-300 hover:border-orange-500/30 hover:bg-zinc-900 hover:-translate-y-1 hover:shadow-2xl hover:shadow-orange-500/10`}
+    >
+      <div className="flex items-start gap-4 sm:gap-6">
+        {/* Avatar */}
+        <div className="relative h-16 w-16 sm:h-20 sm:w-20 shrink-0 rounded-2xl overflow-hidden border border-zinc-800 bg-zinc-800">
+          <img
+            src={getAvatarUrl(speaker.avatar)}
+            alt={speaker.name}
+            className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
+            referrerPolicy="no-referrer"
+          />
+        </div>
+        
+        {/* Info */}
+        <div className="flex-1">
+          <h3 className="text-lg sm:text-xl font-bold text-white group-hover:text-orange-400 transition-colors">
+            {speaker.name}
+          </h3>
+          <p className="text-sm font-semibold text-zinc-400 mt-0.5">{speaker.role}</p>
+          {speaker.company && (
+            <div className="flex items-center gap-1.5 mt-1.5 text-xs text-zinc-500">
+              <Building2 className="h-3.5 w-3.5" />
+              <span>{speaker.company}</span>
+            </div>
+          )}
+        </div>
+      </div>
+
+      {/* Talk Topic */}
+      <div className="mt-6 flex-1">
+        <div className="inline-block rounded-lg bg-zinc-800/80 px-3 py-1.5 text-xs font-semibold text-zinc-300 mb-3 border border-zinc-700/50">
+          Talk Topic
+        </div>
+        <h4 className="text-base sm:text-lg font-bold text-zinc-100 leading-snug">
+          {speaker.topic}
+        </h4>
+        {speaker.bio && (
+          <p className="mt-3 text-sm text-zinc-400 line-clamp-3 leading-relaxed">
+            {speaker.bio}
+          </p>
+        )}
+      </div>
+
+      {/* Social Links */}
+      <div className="mt-6 flex items-center gap-2 pt-4 border-t border-zinc-800/60">
+        {speaker.socials && Object.entries(speaker.socials).map(([key, url]) => (
+          <a
+            key={key}
+            href={url as string}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={`\${speaker.name}'s \${key}`}
+            className="flex h-9 w-9 items-center justify-center rounded-xl bg-zinc-800/80 text-zinc-300 hover:bg-orange-500 hover:text-white transition-all active:scale-95"
+          >
+            {getSocialIcon(key)}
+          </a>
+        ))}
+      </div>
+    </div>
+  );
 
   return (
     <section id="speakers" className="py-16 sm:py-24 md:py-28 2xl:py-36 bg-[#0a0c10] text-white border-t border-zinc-800/80">
@@ -60,73 +132,35 @@ export default function SpeakersSection() {
           </p>
         </div>
 
-        {/* Speakers Grid */}
-        <div className="mt-12 sm:mt-16 md:mt-20 grid gap-6 sm:gap-8 md:gap-10 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-          {speakers.map((speaker) => (
-            <div
-              key={speaker.id}
-              className={`group flex flex-col rounded-3xl border ${
-                speaker.featured ? 'border-orange-500/50 bg-orange-500/5' : 'border-zinc-800/80 bg-zinc-900/40'
-              } p-6 sm:p-8 backdrop-blur-md transition-all duration-300 hover:border-orange-500/30 hover:bg-zinc-900 hover:-translate-y-1 hover:shadow-2xl hover:shadow-orange-500/10`}
-            >
-              <div className="flex items-start gap-4 sm:gap-6">
-                {/* Avatar */}
-                <div className="relative h-16 w-16 sm:h-20 sm:w-20 shrink-0 rounded-2xl overflow-hidden border border-zinc-800 bg-zinc-800">
-                  <img
-                    src={getAvatarUrl(speaker.avatar)}
-                    alt={speaker.name}
-                    className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
-                    referrerPolicy="no-referrer"
-                  />
-                </div>
-                
-                {/* Info */}
-                <div className="flex-1">
-                  <h3 className="text-lg sm:text-xl font-bold text-white group-hover:text-orange-400 transition-colors">
-                    {speaker.name}
-                  </h3>
-                  <p className="text-sm font-semibold text-zinc-400 mt-0.5">{speaker.role}</p>
-                  {speaker.company && (
-                    <div className="flex items-center gap-1.5 mt-1.5 text-xs text-zinc-500">
-                      <Building2 className="h-3.5 w-3.5" />
-                      <span>{speaker.company}</span>
-                    </div>
-                  )}
-                </div>
-              </div>
-
-              {/* Talk Topic */}
-              <div className="mt-6 flex-1">
-                <div className="inline-block rounded-lg bg-zinc-800/80 px-3 py-1.5 text-xs font-semibold text-zinc-300 mb-3 border border-zinc-700/50">
-                  Talk Topic
-                </div>
-                <h4 className="text-base sm:text-lg font-bold text-zinc-100 leading-snug">
-                  {speaker.topic}
-                </h4>
-                {speaker.bio && (
-                  <p className="mt-3 text-sm text-zinc-400 line-clamp-3 leading-relaxed">
-                    {speaker.bio}
-                  </p>
-                )}
-              </div>
-
-              {/* Social Links dynamically rendered */}
-              <div className="mt-6 flex items-center gap-2 pt-4 border-t border-zinc-800/60">
-                {speaker.socials && Object.entries(speaker.socials).map(([key, url]) => (
-                  <a
-                    key={key}
-                    href={url as string}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label={`${speaker.name}'s ${key}`}
-                    className="flex h-9 w-9 items-center justify-center rounded-xl bg-zinc-800/80 text-zinc-300 hover:bg-orange-500 hover:text-white transition-all active:scale-95"
-                  >
-                    {getSocialIcon(key)}
-                  </a>
-                ))}
-              </div>
+        {/* Speakers Layout */}
+        <div className="mt-12 sm:mt-16 md:mt-20">
+          {speakers.length <= 3 ? (
+            <div className="grid gap-6 sm:gap-8 md:gap-10 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+              {speakers.map((speaker) => (
+                <SpeakerCard key={speaker.id} speaker={speaker} />
+              ))}
             </div>
-          ))}
+          ) : (
+            <Carousel
+              opts={{
+                align: "start",
+                loop: true,
+              }}
+              className="w-full"
+            >
+              <CarouselContent className="-ml-4 sm:-ml-6 md:-ml-8">
+                {speakers.map((speaker) => (
+                  <CarouselItem key={speaker.id} className="pl-4 sm:pl-6 md:pl-8 md:basis-1/2 lg:basis-1/3">
+                    <SpeakerCard speaker={speaker} />
+                  </CarouselItem>
+                ))}
+              </CarouselContent>
+              <div className="flex items-center justify-center gap-4 mt-12">
+                <CarouselPrevious className="position-static transform-none static h-12 w-12 border-zinc-800 bg-zinc-900/50 hover:bg-orange-500 hover:text-white" />
+                <CarouselNext className="position-static transform-none static h-12 w-12 border-zinc-800 bg-zinc-900/50 hover:bg-orange-500 hover:text-white" />
+              </div>
+            </Carousel>
+          )}
         </div>
 
         {/* CFP Banner Card */}

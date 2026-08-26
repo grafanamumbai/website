@@ -13,6 +13,7 @@ import communityData from '@/data';
 
 export default function Home() {
   const { hasUpcomingEvent } = communityData.currentEvent;
+  const hasSpeakers = communityData.speakers && communityData.speakers.length > 0;
 
   return (
     <div className="flex flex-col min-h-screen bg-[#0c0e14]">
@@ -20,12 +21,8 @@ export default function Home() {
       <main className="flex-1">
         <HeroSection />
         <AboutSection />
-        {hasUpcomingEvent && (
-          <>
-            <SpeakersSection />
-            <ScheduleSection />
-          </>
-        )}
+        {(hasUpcomingEvent || hasSpeakers) && <SpeakersSection />}
+        {hasUpcomingEvent && <ScheduleSection />}
         <CoreTeamSection />
         {hasUpcomingEvent && <ContestsSection />}
         <SponsorsSection />
