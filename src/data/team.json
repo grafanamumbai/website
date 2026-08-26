@@ -1,19 +1,19 @@
 {
   "coreTeam": [
     {
-      "id": "nikita",
+      "id": "nikita-shinde",
       "name": "Nikita Shinde",
-      "role": "Lead Organizer",
-      "company": "Grafana & Friends Mumbai",
-      "avatar": "/nikita.png",
+      "role": "Lead Organizer & Grafana Champion",
+      "company": "DevOps Engineer",
+      "avatar": "https://drive.google.com/open?id=1ux2trBg5-idGNpPwdefzGEJMrBkU85Yz",
       "socials": {
         "linkedin": "https://www.linkedin.com/in/shinde-nikita/",
         "github": "https://github.com/1-Nikita",
-        "Instagram": "https://www.instagram.com/techtalkswithniki"
+        "twitter": "https://linktr.ee/Nikita_010"
       }
     },
     {
-      "id": "afzal",
+      "id": "afzal-hassan",
       "name": "Afzal Hassan",
       "role": "Co-Organizer",
       "company": "Grafana & Friends Mumbai",
@@ -25,28 +25,52 @@
       }
     },
     {
-      "id": "Santosh",
+      "id": "om-songire",
       "name": "Om Santosh Songire",
       "role": "Co-Organizer",
-      "company": "Grafana & Friends Mumbai",
+      "company": "ML & Data Enthusiast",
       "avatar": "https://drive.google.com/file/d/1ruiyYMjlgWLQl8lehUbIwDaLVh7CjfLm/view?usp=sharing",
       "socials": {
+        "linkedin": "https://www.linkedin.com/in/omsongire/",
         "github": "https://github.com/Omsongire23",
-        "X": "https://x.com/OmSongire2005",
-        "Linkedin": "https://www.linkedin.com/in/omsongire"
+        "twitter": "https://x.com/OmSongire2005"
       }
     }
   ],
   "volunteers": [
     {
-      "id": "vol-1",
+      "id": "yash-pawar",
       "name": "Yash Pawar",
       "role": "DevOps Engineer @deboistech",
-      "avatar": "https://drive.google.com/file/d/1qxvA6rDa4QcSHS7b5PhVRnNp2_zdWtU5/view?usp=sharing",
+      "company": "Cloud Native Nashik Organizer",
+      "avatar": "https://drive.google.com/open?id=1qxvA6rDa4QcSHS7b5PhVRnNp2_zdWtU5",
       "socials": {
+        "linkedin": "https://www.linkedin.com/in/yash-sanjivkumar-pawar-862702287/",
         "github": "https://github.com/yashpawar6849",
-        "X": "https://x.com/yashpawar6849",
-        "Linkedin": "https://www.linkedin.com/in/yash-sanjivkumar-pawar-862702287"
+        "twitter": "https://x.com/yashpawar6849"
+      }
+    },
+    {
+      "id": "dishant-gandhi",
+      "name": "Dishant Gandhi",
+      "role": "AI Consultant at Encoura",
+      "company": "Public Speaker",
+      "avatar": "https://drive.google.com/open?id=1I2zGUDBXU8KuPq0_7oujE7lOMszuQA1Z",
+      "socials": {
+        "linkedin": "https://www.linkedin.com/in/dishant-gandhi/",
+        "github": "https://github.com/horizon733",
+        "instagram": "https://instagram.com/droidcity_"
+      }
+    },
+    {
+      "id": "inshirah-shaikh",
+      "name": "Inshirah Shaikh",
+      "role": "Community Volunteer",
+      "company": "Tech Enthusiast",
+      "avatar": "https://drive.google.com/open?id=1FsxbnCzihcbpUmlpk1ZayVxRg7w7pWVh",
+      "socials": {
+        "linkedin": "https://www.linkedin.com/in/inshirah-shaikh",
+        "github": "https://github.com/inshirah-01"
       }
     }
   ]
