@@ -29,18 +29,20 @@ const getSocialIcon = (key: string) => {
   return <LinkIcon className="h-3.5 w-3.5" />;
 };
 
-const getAvatarUrl = (url: string | undefined) => {
-  if (!url) return '';
-  const driveMatch = url.match(/drive\.google\.com\/(?:file\/d\/|drive\/folders\/|open\?id=)([a-zA-Z0-9_-]+)/);
-  if (driveMatch && driveMatch[1]) {
-    return `https://drive.google.com/thumbnail?id=${driveMatch[1]}&sz=w500-h500`;
-  }
-  return url;
-};
-
 function CoreLeaderCard({ member }: { member: TeamMember }) {
+  const githubUrl = member.socials?.github;
+  const initialAvatar = member.avatar || (githubUrl ? `https://github.com/${githubUrl.replace(/https?:\/\/github\.com\//, '').replace(/\/$/, '')}.png` : '');
+  const [src, setSrc] = useState(initialAvatar);
   const [imgError, setImgError] = useState(false);
-  const avatarSrc = getAvatarUrl(member.avatar);
+
+  const handleError = () => {
+    if (githubUrl && !src.includes('github.com')) {
+      const user = githubUrl.replace(/https?:\/\/github\.com\//, '').replace(/\/$/, '');
+      setSrc(`https://github.com/${user}.png`);
+    } else {
+      setImgError(true);
+    }
+  };
 
   return (
     <div className="group relative flex flex-col items-center justify-between rounded-3xl border border-zinc-800/80 bg-zinc-900/40 p-6 sm:p-7 backdrop-blur-md transition-all duration-300 hover:border-orange-500/40 hover:bg-zinc-900/80 hover:-translate-y-1 hover:shadow-2xl hover:shadow-orange-500/10">
@@ -48,12 +50,12 @@ function CoreLeaderCard({ member }: { member: TeamMember }) {
         {/* Avatar with Glow Ring */}
         <div className="relative mb-4 h-24 w-24 sm:h-28 sm:w-28 rounded-full p-1 bg-gradient-to-br from-zinc-800 to-zinc-900 group-hover:from-orange-500/50 group-hover:to-yellow-500/50 transition-colors duration-500 shadow-xl">
           <div className="relative h-full w-full overflow-hidden rounded-full border-2 border-zinc-950 bg-zinc-800 flex items-center justify-center">
-            {avatarSrc && !imgError ? (
+            {src && !imgError ? (
               // eslint-disable-next-line @next/next/no-img-element
               <img
-                src={avatarSrc}
+                src={src}
                 alt={member.name}
-                onError={() => setImgError(true)}
+                onError={handleError}
                 className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                 referrerPolicy="no-referrer"
                 loading="lazy"
@@ -102,20 +104,31 @@ function CoreLeaderCard({ member }: { member: TeamMember }) {
 }
 
 function VolunteerCard({ member }: { member: TeamMember }) {
+  const githubUrl = member.socials?.github;
+  const initialAvatar = member.avatar || (githubUrl ? `https://github.com/${githubUrl.replace(/https?:\/\/github\.com\//, '').replace(/\/$/, '')}.png` : '');
+  const [src, setSrc] = useState(initialAvatar);
   const [imgError, setImgError] = useState(false);
-  const avatarSrc = getAvatarUrl(member.avatar);
+
+  const handleError = () => {
+    if (githubUrl && !src.includes('github.com')) {
+      const user = githubUrl.replace(/https?:\/\/github\.com\//, '').replace(/\/$/, '');
+      setSrc(`https://github.com/${user}.png`);
+    } else {
+      setImgError(true);
+    }
+  };
 
   return (
     <div className="group relative flex items-center justify-between gap-4 p-4 sm:p-5 rounded-2xl bg-zinc-900/40 border border-zinc-800/70 hover:border-orange-500/40 hover:bg-zinc-900/80 transition-all duration-300 shadow-md hover:-translate-y-0.5 hover:shadow-xl hover:shadow-orange-500/5">
       <div className="flex items-center gap-3.5 min-w-0">
         {/* Compact Avatar */}
         <div className="relative h-12 w-12 sm:h-14 sm:w-14 shrink-0 rounded-2xl overflow-hidden border border-zinc-800 bg-zinc-950 shadow-inner">
-          {avatarSrc && !imgError ? (
+          {src && !imgError ? (
             // eslint-disable-next-line @next/next/no-img-element
             <img
-              src={avatarSrc}
+              src={src}
               alt={member.name}
-              onError={() => setImgError(true)}
+              onError={handleError}
               className="h-full w-full object-cover"
               referrerPolicy="no-referrer"
               loading="lazy"
