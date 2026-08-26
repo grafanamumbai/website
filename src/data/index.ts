@@ -37,6 +37,7 @@ export interface EcosystemItem {
   description: string;
   url: string;
   icon: string;
+  svgUrl?: string;
 }
 
 export interface MascotTip {
