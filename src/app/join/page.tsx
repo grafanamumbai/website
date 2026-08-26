@@ -18,6 +18,7 @@ import {
   Mail,
 } from 'lucide-react';
 import Image from 'next/image';
+import { MeetupLogo } from '@/components/icons/meetup-logo';
 import communityData from '@/data';
 
 export default function JoinPage() {
@@ -27,7 +28,7 @@ export default function JoinPage() {
     {
       name: 'Meetup Community Group',
       subtitle: 'Join to RSVP for all upcoming in-person & virtual meetups',
-      icon: <Calendar className="h-5 w-5 text-white" />,
+      icon: <MeetupLogo className="h-5 w-5 text-white" />,
       href: socials.meetup,
       badge: 'Main RSVP Hub',
     },

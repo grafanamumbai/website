@@ -28,6 +28,7 @@ import {
   ExternalLink,
   MessageSquare,
 } from 'lucide-react';
+import { MeetupLogo } from '@/components/icons/meetup-logo';
 import communityData from '@/data';
 
 const navLinks = [
@@ -198,6 +199,7 @@ export default function Header() {
                   onClick={() => setIsOpen(false)}
                 >
                   <a href={currentEvent.registration.rsvpUrl} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-2">
+                    <MeetupLogo className="h-4 w-4" />
                     <span>RSVP for Meetup</span>
                     <ArrowRight className="h-4 w-4" />
                   </a>
