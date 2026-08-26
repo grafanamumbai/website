@@ -37,22 +37,34 @@ const getSocialIcon = (key: string) => {
   return <LinkIcon className="h-3.5 w-3.5" />;
 };
 
+const getAvatarUrl = (url: string | undefined) => {
+  if (!url) return '';
+  const driveMatch = url.match(/drive\.google\.com\/(?:file\/d\/|drive\/folders\/|open\?id=)([a-zA-Z0-9_-]+)/);
+  if (driveMatch && driveMatch[1]) {
+    return `https://drive.google.com/thumbnail?id=${driveMatch[1]}&sz=w500-h500`;
+  }
+  return url;
+};
+
 function PartnerCard({ partner }: { partner: PartnerItem }) {
   const [imgError, setImgError] = useState(false);
+  const logoSrc = getAvatarUrl(partner.logo);
 
   return (
     <div className="group relative flex flex-col justify-between p-6 sm:p-7 rounded-2xl bg-zinc-900/60 border border-zinc-800/80 hover:border-orange-500/50 hover:bg-zinc-900/90 transition-all duration-300 shadow-xl hover:-translate-y-1 hover:shadow-2xl hover:shadow-orange-500/5">
       <div>
         {/* Header with Logo / Avatar and Badge */}
         <div className="flex items-start justify-between gap-4 mb-4">
-          <div className="relative h-12 w-12 sm:h-14 sm:w-14 shrink-0 rounded-2xl bg-zinc-950/80 border border-zinc-800 p-1 flex items-center justify-center overflow-hidden">
-            {partner.logo && !imgError ? (
-              <Image
-                src={partner.logo}
+          <div className="relative h-12 w-12 sm:h-14 sm:w-14 shrink-0 rounded-2xl bg-zinc-950/80 border border-zinc-800 p-1 flex items-center justify-center overflow-hidden shadow-inner">
+            {logoSrc && !imgError ? (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img
+                src={logoSrc}
                 alt={partner.name}
-                fill
                 onError={() => setImgError(true)}
-                className="object-contain p-1.5"
+                className="h-full w-full object-contain p-0.5"
+                referrerPolicy="no-referrer"
+                loading="lazy"
               />
             ) : (
               <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-zinc-800 to-zinc-900 text-orange-400 font-bold font-mono text-base">
@@ -157,62 +169,69 @@ export default function SponsorsSection() {
 
         {/* Primary Sponsor Card */}
         <div className="mt-12 sm:mt-16 max-w-3xl 2xl:max-w-4xl mx-auto">
-          {sponsors.map((sponsor) => (
-            <div
-              key={sponsor.id}
-              className="flex flex-col sm:flex-row items-center gap-6 p-6 sm:p-8 rounded-2xl bg-zinc-900/60 border border-zinc-800/80 shadow-xl hover:border-orange-500/50 transition-all duration-300"
-            >
-              <div className="relative h-20 w-44 sm:h-24 sm:w-48 shrink-0 bg-white/5 rounded-2xl p-3.5 flex items-center justify-center border border-zinc-800">
-                <Image
-                  src={sponsor.logo}
-                  alt={sponsor.name}
-                  width={180}
-                  height={70}
-                  className="object-contain max-h-14 sm:max-h-16 w-auto"
-                />
-              </div>
-              <div className="space-y-2.5 text-center sm:text-left flex-1">
-                <div className="inline-block rounded-full bg-orange-500/20 px-3 py-0.5 text-xs font-semibold text-orange-400 border border-orange-500/30">
-                  {sponsor.tier}
-                </div>
-                <h3 className="text-lg sm:text-xl font-bold text-white">{sponsor.name}</h3>
-                <p className="text-xs sm:text-sm text-zinc-400 leading-relaxed font-normal">
-                  {sponsor.description}
-                </p>
-
-                {/* Sponsor Links & Socials */}
-                <div className="pt-2 flex flex-wrap items-center justify-center sm:justify-start gap-2">
-                  <a
-                    href={sponsor.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-orange-500/20 hover:bg-orange-500 hover:text-white text-xs font-semibold text-orange-400 border border-orange-500/30 transition-colors"
-                  >
-                    <Globe className="h-3.5 w-3.5" />
-                    <span>Official Website</span>
-                    <ExternalLink className="h-3 w-3" />
-                  </a>
-
-                  {sponsor.socials && (
-                    <div className="flex items-center gap-1.5 pl-1">
-                      {Object.entries(sponsor.socials).map(([key, url]) => (
-                        <a
-                          key={key}
-                          href={url as string}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          aria-label={`${sponsor.name} ${key}`}
-                          className="flex h-7 w-7 items-center justify-center rounded-lg bg-zinc-950 text-zinc-400 hover:bg-orange-500 hover:text-white border border-zinc-800 transition-colors"
-                        >
-                          {getSocialIcon(key)}
-                        </a>
-                      ))}
-                    </div>
+          {sponsors.map((sponsor) => {
+            const logoSrc = getAvatarUrl(sponsor.logo);
+            return (
+              <div
+                key={sponsor.id}
+                className="flex flex-col sm:flex-row items-center gap-6 p-6 sm:p-8 rounded-2xl bg-zinc-900/60 border border-zinc-800/80 shadow-xl hover:border-orange-500/50 transition-all duration-300"
+              >
+                <div className="relative h-20 w-44 sm:h-24 sm:w-48 shrink-0 bg-white/5 rounded-2xl p-3.5 flex items-center justify-center border border-zinc-800">
+                  {logoSrc ? (
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img
+                      src={logoSrc}
+                      alt={sponsor.name}
+                      className="object-contain max-h-14 sm:max-h-16 w-auto"
+                      referrerPolicy="no-referrer"
+                    />
+                  ) : (
+                    <span className="font-bold text-white text-lg">{sponsor.name}</span>
                   )}
                 </div>
+                <div className="space-y-2.5 text-center sm:text-left flex-1">
+                  <div className="inline-block rounded-full bg-orange-500/20 px-3 py-0.5 text-xs font-semibold text-orange-400 border border-orange-500/30">
+                    {sponsor.tier}
+                  </div>
+                  <h3 className="text-lg sm:text-xl font-bold text-white">{sponsor.name}</h3>
+                  <p className="text-xs sm:text-sm text-zinc-400 leading-relaxed font-normal">
+                    {sponsor.description}
+                  </p>
+
+                  {/* Sponsor Links & Socials */}
+                  <div className="pt-2 flex flex-wrap items-center justify-center sm:justify-start gap-2">
+                    <a
+                      href={sponsor.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-orange-500/20 hover:bg-orange-500 hover:text-white text-xs font-semibold text-orange-400 border border-orange-500/30 transition-colors"
+                    >
+                      <Globe className="h-3.5 w-3.5" />
+                      <span>Official Website</span>
+                      <ExternalLink className="h-3 w-3" />
+                    </a>
+
+                    {sponsor.socials && (
+                      <div className="flex items-center gap-1.5 pl-1">
+                        {Object.entries(sponsor.socials).map(([key, url]) => (
+                          <a
+                            key={key}
+                            href={url as string}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            aria-label={`${sponsor.name} ${key}`}
+                            className="flex h-7 w-7 items-center justify-center rounded-lg bg-zinc-950 text-zinc-400 hover:bg-orange-500 hover:text-white border border-zinc-800 transition-colors"
+                          >
+                            {getSocialIcon(key)}
+                          </a>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
 
         {/* Community & Collaboration Partners Bento Grid */}
