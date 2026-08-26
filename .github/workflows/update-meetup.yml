@@ -1,4 +1,4 @@
-name: Update Meetup Data
+name: Update Meetup & Speakers Data
 
 on:
   schedule:
@@ -19,18 +19,21 @@ jobs:
     - name: Setup Node.js
       uses: actions/setup-node@v4
       with:
-        node-version: '18'
+        node-version: '20'
         
     - name: Run Meetup Sync Script
       run: node scripts/sync-meetup.mjs
+      
+    - name: Run Google Sheet Speakers Sync Script
+      run: node scripts/sync-speakers.mjs
       
     - name: Commit and Push changes
       run: |
         git config --global user.name "Grafana & Friends Mumbai"
         git config --global user.email "grafanamumbai@gmail.com"
-        git add src/data/community-data.json
+        git add src/data/community-data.json src/data/speakers.json
         if ! git diff --staged --quiet; then
-          git commit -m "chore: sync Meetup event data"
+          git commit -m "chore: auto-sync Meetup event and confirmed speakers data"
           git push
         else
           echo "No changes to commit."
