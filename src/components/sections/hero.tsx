@@ -15,15 +15,16 @@ import {
   Trophy,
   ShieldCheck,
   Radio,
+  Cpu,
+  Layers,
+  Terminal,
   Flame,
-  ChevronRight,
-  ExternalLink,
 } from 'lucide-react';
 import communityData from '@/data';
-import { MeetupLogo } from '@/components/icons/meetup-logo';
+import { MeetupLogo, GrafanaLogo, GrotMascot, CncfIcon } from '@/components/icons';
 
 export default function HeroSection() {
-  const { chapter, currentEvent, socials } = communityData;
+  const { chapter, currentEvent, socials, mascot } = communityData;
   const { hasUpcomingEvent } = currentEvent;
 
   const [timeLeft, setTimeLeft] = useState({
@@ -34,7 +35,7 @@ export default function HeroSection() {
   });
 
   useEffect(() => {
-    if (!hasUpcomingEvent) return;
+    if (!hasUpcomingEvent || !currentEvent.targetDateISO) return;
     
     const target = new Date(currentEvent.targetDateISO).getTime();
 
@@ -50,7 +51,6 @@ export default function HeroSection() {
           seconds: Math.floor((difference / 1000) % 60),
         });
       } else {
-        // If countdown hits zero, just zero it out
         setTimeLeft({ days: 0, hours: 0, minutes: 0, seconds: 0 });
       }
     };
@@ -61,32 +61,44 @@ export default function HeroSection() {
   }, [currentEvent.targetDateISO, hasUpcomingEvent]);
 
   return (
-    <section className="relative min-h-[90vh] flex flex-col justify-center overflow-hidden bg-[#0c0e14] py-12 sm:py-20 md:py-28 2xl:py-36 text-white">
-      {/* Background Decorative Mesh & Grids */}
+    <section className="relative min-h-[92vh] flex flex-col justify-center overflow-hidden bg-[#090b0e] py-12 sm:py-20 md:py-28 2xl:py-36 text-white">
+      {/* Background Decorative Mesh & Obsidian Grids */}
       <div 
-        className="absolute inset-0 pointer-events-none opacity-25"
+        className="absolute inset-0 pointer-events-none opacity-30"
         style={{
-          backgroundImage: 'radial-gradient(circle at 50% 15%, rgba(244, 122, 32, 0.3) 0%, transparent 60%), radial-gradient(circle at 85% 85%, rgba(50, 116, 217, 0.2) 0%, transparent 50%)',
+          backgroundImage: 'radial-gradient(circle at 50% 10%, rgba(244, 104, 0, 0.25) 0%, transparent 60%), radial-gradient(circle at 85% 85%, rgba(66, 92, 199, 0.18) 0%, transparent 50%)',
         }}
       />
       <div 
         className="absolute inset-0 pointer-events-none opacity-10" 
         style={{ 
-          backgroundImage: 'radial-gradient(rgba(255, 255, 255, 0.25) 1px, transparent 1px)', 
-          backgroundSize: '28px 28px' 
+          backgroundImage: 'radial-gradient(rgba(255, 255, 255, 0.2) 1px, transparent 1px)', 
+          backgroundSize: '32px 32px' 
         }} 
       />
 
       <div className="container relative z-10 mx-auto px-4 sm:px-6 md:px-8 lg:px-12 max-w-7xl 2xl:max-w-[1600px] 3xl:max-w-[1800px]">
         <div className="mx-auto max-w-4xl 2xl:max-w-5xl text-center">
           
-          {/* Chapter Status Badge */}
-          <div className="inline-flex items-center gap-2 rounded-full border border-orange-500/30 bg-orange-500/10 px-3.5 py-1.5 sm:px-5 sm:py-2 text-xs sm:text-sm font-semibold text-orange-400 backdrop-blur-md mb-6 sm:mb-8 shadow-sm">
-            <span className="relative flex h-2.5 w-2.5">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-orange-400 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-orange-500"></span>
-            </span>
-            <span className="truncate">Official Community Chapter • Powered by Grafana Labs</span>
+          {/* Telemetry Status Pill & Grot Greeting */}
+          <div className="flex flex-wrap items-center justify-center gap-2.5 mb-6 sm:mb-8">
+            <div className="inline-flex items-center gap-2 rounded-full border border-orange-500/30 bg-orange-500/10 px-3.5 py-1.5 text-xs sm:text-sm font-semibold text-orange-400 backdrop-blur-md shadow-sm">
+              <span className="relative flex h-2.5 w-2.5">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-orange-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-orange-500"></span>
+              </span>
+              <span className="truncate">Official Community Chapter • Powered by Grafana Labs</span>
+            </div>
+
+            <Link
+              href="#mascot"
+              className="inline-flex items-center gap-1.5 rounded-full border border-zinc-800 bg-zinc-900/90 px-3 py-1.5 text-xs text-zinc-300 hover:text-white hover:border-orange-500/40 transition-colors shadow-sm"
+            >
+              <div className="h-4 w-4">
+                <GrotMascot className="h-full w-full" animate={false} />
+              </div>
+              <span>Meet Grot Mascot</span>
+            </Link>
           </div>
 
           {/* Main Headline */}
@@ -99,15 +111,43 @@ export default function HeroSection() {
               <>
                 Grafana & Friends <br className="hidden sm:block" />
                 <span className="bg-gradient-to-r from-orange-400 via-amber-300 to-yellow-500 bg-clip-text text-transparent block sm:inline mt-1 sm:mt-0">
-                  Mumbai
+                  Mumbai Chapter
                 </span>
               </>
             )}
           </h1>
 
           <p className="mt-4 sm:mt-6 text-sm xs:text-base sm:text-lg md:text-xl 2xl:text-2xl text-zinc-300 max-w-2xl 2xl:max-w-3xl mx-auto leading-relaxed font-normal">
-            {hasUpcomingEvent ? chapter.description : "Next meetup coming soon. Details to be announced."}
+            {hasUpcomingEvent ? chapter.description : "The premier hub for developers, SREs, and DevOps professionals in Mumbai exploring metrics, logs, traces, continuous profiling, and cloud-native observability."}
           </p>
+
+          {/* Observability Stack Quick Badges Strip */}
+          <div className="mt-6 flex flex-wrap items-center justify-center gap-2 text-xs font-mono text-zinc-400">
+            <span className="px-2.5 py-1 rounded-lg bg-zinc-900/80 border border-zinc-800 flex items-center gap-1.5">
+              <span className="h-2 w-2 rounded-full bg-orange-500"></span>
+              Grafana
+            </span>
+            <span className="px-2.5 py-1 rounded-lg bg-zinc-900/80 border border-zinc-800 flex items-center gap-1.5">
+              <span className="h-2 w-2 rounded-full bg-red-500"></span>
+              Prometheus
+            </span>
+            <span className="px-2.5 py-1 rounded-lg bg-zinc-900/80 border border-zinc-800 flex items-center gap-1.5">
+              <span className="h-2 w-2 rounded-full bg-blue-500"></span>
+              OpenTelemetry
+            </span>
+            <span className="px-2.5 py-1 rounded-lg bg-zinc-900/80 border border-zinc-800 flex items-center gap-1.5">
+              <span className="h-2 w-2 rounded-full bg-cyan-400"></span>
+              Loki
+            </span>
+            <span className="px-2.5 py-1 rounded-lg bg-zinc-900/80 border border-zinc-800 flex items-center gap-1.5">
+              <span className="h-2 w-2 rounded-full bg-purple-500"></span>
+              Tempo
+            </span>
+            <span className="px-2.5 py-1 rounded-lg bg-zinc-900/80 border border-zinc-800 flex items-center gap-1.5">
+              <span className="h-2 w-2 rounded-full bg-emerald-400"></span>
+              Pyroscope
+            </span>
+          </div>
 
           {hasUpcomingEvent && (
             <>
@@ -149,7 +189,7 @@ export default function HeroSection() {
               </div>
 
               {/* Live Countdown Timer */}
-              {new Date(currentEvent.targetDateISO).getTime() > new Date().getTime() && (
+              {currentEvent.targetDateISO && new Date(currentEvent.targetDateISO).getTime() > new Date().getTime() && (
                 <div className="mt-8 sm:mt-10 flex items-center justify-center gap-2.5 xs:gap-3 sm:gap-4 md:gap-6">
                   {[
                     { label: 'Days', value: timeLeft.days },
@@ -174,7 +214,7 @@ export default function HeroSection() {
             </>
           )}
 
-          {/* Action Buttons (Mobile-first stacked, desktop inline) */}
+          {/* Action Buttons */}
           <div className="mt-8 sm:mt-12 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 max-w-md sm:max-w-none mx-auto w-full">
             <Button
               asChild
@@ -193,24 +233,22 @@ export default function HeroSection() {
               </a>
             </Button>
 
-            {hasUpcomingEvent && (
-              <Button
-                asChild
-                size="lg"
-                variant="outline"
-                className="w-full sm:w-auto border-zinc-700 bg-zinc-900/90 hover:bg-zinc-800 text-zinc-200 hover:text-white text-base h-12 sm:h-13 px-7 rounded-full transition-all hover:border-zinc-500"
+            <Button
+              asChild
+              size="lg"
+              variant="outline"
+              className="w-full sm:w-auto border-zinc-700 bg-zinc-900/90 hover:bg-zinc-800 text-zinc-200 hover:text-white text-base h-12 sm:h-13 px-7 rounded-full transition-all hover:border-zinc-500"
+            >
+              <a
+                href={socials.cfp}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-center gap-2.5"
               >
-                <a
-                  href={currentEvent.registration.cfpUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center justify-center gap-2.5"
-                >
-                  <Mic2 className="h-4 w-4 text-orange-400" />
-                  <span>Submit a Talk (CFP)</span>
-                </a>
-              </Button>
-            )}
+                <Mic2 className="h-4 w-4 text-orange-400" />
+                <span>Submit a Talk (CFP)</span>
+              </a>
+            </Button>
           </div>
 
           {/* Community Stats Grid */}

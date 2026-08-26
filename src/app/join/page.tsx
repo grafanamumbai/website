@@ -2,6 +2,7 @@
 
 import Header from '@/components/layout/header';
 import Footer from '@/components/layout/footer';
+import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import {
   Twitter,
@@ -17,8 +18,8 @@ import {
   Users2,
   Mail,
 } from 'lucide-react';
-import Image from 'next/image';
 import communityData from '@/data';
+import { MeetupLogo } from '@/components/icons';
 
 export default function JoinPage() {
   const { chapter, socials } = communityData;
@@ -27,7 +28,7 @@ export default function JoinPage() {
     {
       name: 'Meetup Community Group',
       subtitle: 'Join to RSVP for all upcoming in-person & virtual meetups',
-      icon: <Calendar className="h-5 w-5 text-white" />,
+      icon: <MeetupLogo className="h-5 w-5 text-white" />,
       href: socials.meetup,
       badge: 'Main RSVP Hub',
     },
@@ -76,7 +77,7 @@ export default function JoinPage() {
   ];
 
   return (
-    <div className="flex flex-col min-h-screen bg-[#0c0e14] text-white">
+    <div className="flex flex-col min-h-screen bg-[#090b0e] text-white">
       <Header />
       <main className="flex-1 flex flex-col items-center justify-center py-12 sm:py-20 md:py-28 px-4 sm:px-6 relative overflow-hidden">
         
@@ -84,7 +85,7 @@ export default function JoinPage() {
         <div 
           className="absolute inset-0 pointer-events-none opacity-20"
           style={{
-            backgroundImage: 'radial-gradient(circle at 50% 20%, rgba(244, 122, 32, 0.3) 0%, transparent 60%)',
+            backgroundImage: 'radial-gradient(circle at 50% 20%, rgba(244, 104, 0, 0.3) 0%, transparent 60%)',
           }}
         />
 

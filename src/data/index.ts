@@ -28,6 +28,43 @@ export interface SocialLinks {
   cfp: string;
 }
 
+export interface EcosystemItem {
+  id: string;
+  name: string;
+  category: string;
+  status: string;
+  badge: string;
+  description: string;
+  url: string;
+  icon: string;
+}
+
+export interface MascotTip {
+  id: string;
+  topic: string;
+  tip: string;
+}
+
+export interface MascotInfo {
+  name: string;
+  title: string;
+  bio: string;
+  quote: string;
+  tips: MascotTip[];
+}
+
+export interface PartnerItem {
+  id: string;
+  name: string;
+  type: string;
+  tier?: string;
+  logo?: string;
+  url?: string;
+  linktree?: string;
+  description?: string;
+  socials?: Record<string, string | undefined>;
+}
+
 export interface CurrentEvent {
   hasUpcomingEvent: boolean;
   title: string;
@@ -37,8 +74,8 @@ export interface CurrentEvent {
   time: string;
   targetDateISO: string;
   eventType?: string;
-  communityPartners?: { id: string; name: string; type: string; }[];
-  collaborationPartners?: { id: string; name: string; type: string; }[];
+  communityPartners?: PartnerItem[];
+  collaborationPartners?: PartnerItem[];
   venue: {
     name: string;
     address: string;
@@ -64,11 +101,11 @@ export interface Speaker {
   id: string;
   name: string;
   role: string;
-  company: string;
-  topic: string;
-  bio: string;
-  avatar: string;
-  socials: Record<string, string>;
+  company?: string;
+  topic?: string;
+  bio?: string;
+  avatar?: string;
+  socials?: Record<string, string | undefined>;
   featured?: boolean;
 }
 
@@ -76,9 +113,9 @@ export interface TeamMember {
   id: string;
   name: string;
   role: string;
-  company: string;
-  avatar: string;
-  socials: Record<string, string>;
+  company?: string;
+  avatar?: string;
+  socials?: Record<string, string | undefined>;
 }
 
 export interface Sponsor {
@@ -87,7 +124,9 @@ export interface Sponsor {
   tier: string;
   logo: string;
   url: string;
+  linktree?: string;
   description: string;
+  socials?: Record<string, string | undefined>;
 }
 
 export interface SwagItem {
@@ -122,6 +161,8 @@ export interface FaqItem {
 export interface CommunityData {
   chapter: ChapterInfo;
   socials: SocialLinks;
+  mascot: MascotInfo;
+  ecosystem: EcosystemItem[];
   currentEvent: CurrentEvent;
   schedule: ScheduleItem[];
   speakers: Speaker[];
@@ -136,9 +177,9 @@ export interface CommunityData {
 
 export const communityData: CommunityData = {
   ...rawData,
-  speakers: speakersData,
-  coreTeam: teamData.coreTeam,
-  volunteers: teamData.volunteers
+  speakers: speakersData as unknown as Speaker[],
+  coreTeam: (teamData.coreTeam || []) as unknown as TeamMember[],
+  volunteers: (teamData.volunteers || []) as unknown as TeamMember[]
 } as CommunityData;
 
 export default communityData;

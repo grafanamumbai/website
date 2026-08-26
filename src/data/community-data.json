@@ -3,7 +3,7 @@
     "name": "Grafana & Friends Mumbai",
     "shortName": "G&F Mumbai",
     "tagline": "The Official Observability & Open-Source Community in Mumbai",
-    "description": "A vibrant community of developers, SREs, DevOps engineers, and cloud-native enthusiasts in Mumbai, powered by Grafana Labs. We meet to explore metrics, logs, traces, dashboards, and modern observability practices.",
+    "description": "A vibrant community of developers, SREs, DevOps engineers, and cloud-native enthusiasts in Mumbai, powered by Grafana Labs. We meet to explore metrics, logs, traces, continuous profiling, and modern cloud-native observability practices.",
     "location": "Mumbai, Maharashtra, India",
     "email": "grafanamumbai@gmail.com",
     "stats": {
@@ -23,13 +23,148 @@
     "github": "https://github.com/grafanamumbai/website",
     "cfp": "https://grafana.qualtrics.com/jfe/form/SV_4OQ9dzUAbSHfrAG"
   },
+  "mascot": {
+    "name": "Grot",
+    "title": "Official Grafana & Community Mascot",
+    "bio": "Grot is Grafana's beloved explorer mascot. With a glowing visor and curiosity for metrics, logs, traces, and profiles, Grot guides observability adventurers through complex distributed architectures.",
+    "quote": "\"May your queries be fast, your dashboards clear, and your latency low!\"",
+    "tips": [
+      {
+        "id": "tip-1",
+        "topic": "PromQL / Metrics",
+        "tip": "Use rate() on counters with a time window at least 4x your scrape interval to avoid noisy spikes caused by missed scrapes."
+      },
+      {
+        "id": "tip-2",
+        "topic": "LogQL / Loki",
+        "tip": "Filter high-volume logs with stream selectors first (e.g. {env='prod', app='gateway'}) before running heavy regex or line extraction."
+      },
+      {
+        "id": "tip-3",
+        "topic": "TraceQL / Tempo",
+        "tip": "Pinpoint latency bottlenecks by querying traces with { duration > 500ms && status = error } for immediate root cause discovery."
+      },
+      {
+        "id": "tip-4",
+        "topic": "Pyroscope / Profiling",
+        "tip": "Continuous profiling with Pyroscope reveals CPU flame graphs across production without degrading system throughput."
+      },
+      {
+        "id": "tip-5",
+        "topic": "Golden Signals",
+        "tip": "Anchor your primary SRE dashboards on the 4 Golden Signals: Latency, Traffic, Errors, and Saturation."
+      }
+    ]
+  },
+  "ecosystem": [
+    {
+      "id": "grafana",
+      "name": "Grafana",
+      "category": "Visualization & Alerts",
+      "status": "Grafana Core",
+      "badge": "Core Stack",
+      "description": "The open-source analytics & interactive visualization platform for metrics, logs, and traces.",
+      "url": "https://grafana.com/oss/grafana/",
+      "icon": "grafana"
+    },
+    {
+      "id": "prometheus",
+      "name": "Prometheus",
+      "category": "Metrics & Alerting",
+      "status": "CNCF Graduated",
+      "badge": "CNCF Graduated",
+      "description": "Systems monitoring and alerting toolkit with a dimensional data model and powerful PromQL.",
+      "url": "https://prometheus.io/",
+      "icon": "prometheus"
+    },
+    {
+      "id": "opentelemetry",
+      "name": "OpenTelemetry",
+      "category": "Telemetry Standard",
+      "status": "CNCF Graduated",
+      "badge": "CNCF Standard",
+      "description": "Vendor-neutral open standard and SDKs for generating, collecting, and exporting telemetry data.",
+      "url": "https://opentelemetry.io/",
+      "icon": "opentelemetry"
+    },
+    {
+      "id": "loki",
+      "name": "Grafana Loki",
+      "category": "Log Aggregation",
+      "status": "Grafana Core",
+      "badge": "LGTM Stack",
+      "description": "Horizontally-scalable, highly-available, multi-tenant log aggregation system inspired by Prometheus.",
+      "url": "https://grafana.com/oss/loki/",
+      "icon": "loki"
+    },
+    {
+      "id": "tempo",
+      "name": "Grafana Tempo",
+      "category": "Distributed Tracing",
+      "status": "Grafana Core",
+      "badge": "LGTM Stack",
+      "description": "Massively scalable distributed tracing backend requiring only object storage to operate.",
+      "url": "https://grafana.com/oss/tempo/",
+      "icon": "tempo"
+    },
+    {
+      "id": "mimir",
+      "name": "Grafana Mimir",
+      "category": "Long-term Metrics",
+      "status": "Grafana Core",
+      "badge": "LGTM Stack",
+      "description": "Horizontally scalable, highly available multi-tenant long-term storage for Prometheus.",
+      "url": "https://grafana.com/oss/mimir/",
+      "icon": "mimir"
+    },
+    {
+      "id": "pyroscope",
+      "name": "Grafana Pyroscope",
+      "category": "Continuous Profiling",
+      "status": "Grafana Core",
+      "badge": "Profiling",
+      "description": "Open-source continuous profiling platform to optimize CPU, memory, and runtime efficiency.",
+      "url": "https://grafana.com/oss/pyroscope/",
+      "icon": "pyroscope"
+    },
+    {
+      "id": "kubernetes",
+      "name": "Kubernetes",
+      "category": "Cloud Orchestration",
+      "status": "CNCF Graduated",
+      "badge": "CNCF Graduated",
+      "description": "Production-grade container orchestration system for automating deployment and scaling.",
+      "url": "https://kubernetes.io/",
+      "icon": "kubernetes"
+    },
+    {
+      "id": "cilium",
+      "name": "Cilium & eBPF",
+      "category": "eBPF Networking",
+      "status": "CNCF Graduated",
+      "badge": "CNCF Graduated",
+      "description": "eBPF-powered networking, observability, and security for cloud native infrastructure.",
+      "url": "https://cilium.io/",
+      "icon": "cilium"
+    },
+    {
+      "id": "jaeger",
+      "name": "Jaeger",
+      "category": "Tracing",
+      "status": "CNCF Graduated",
+      "badge": "CNCF Graduated",
+      "description": "Open-source, end-to-end distributed tracing for complex cloud-native architectures.",
+      "url": "https://www.jaegertracing.io/",
+      "icon": "jaeger"
+    }
+  ],
   "currentEvent": {
     "title": "Cloud Native Mumbai",
     "edition": "September 2026",
     "theme": "Cloud Native & Open Source",
     "date": "Saturday, 12th September 2026",
-    "time": "",
-    "targetDateISO": "",
+    "time": "10:00 AM - 5:00 PM IST",
+    "targetDateISO": "2026-09-12T10:00:00+05:30",
     "venue": {
       "name": "DevX",
       "address": "Marol, Mumbai, Maharashtra, India",
@@ -37,9 +172,9 @@
     },
     "registration": {
       "isOpen": false,
-      "statusText": "",
-      "rsvpUrl": "",
-      "cfpUrl": ""
+      "statusText": "Coming Soon",
+      "rsvpUrl": "https://www.meetup.com/grafana-and-friends-mumbai/",
+      "cfpUrl": "https://grafana.qualtrics.com/jfe/form/SV_4OQ9dzUAbSHfrAG"
     },
     "hasUpcomingEvent": false,
     "eventType": "Cloud Native Mumbai Community Event",
@@ -47,29 +182,81 @@
       {
         "id": "grafana-friends-mumbai",
         "name": "Grafana & Friends Mumbai",
-        "type": "Community Partner"
+        "type": "Community Host & Partner",
+        "logo": "/grafana-logo.png",
+        "url": "https://www.grafanafriendsmumbai.in/",
+        "linktree": "https://linktr.ee/grafanamumbai",
+        "description": "The official open-source observability and cloud engineering chapter in Mumbai.",
+        "socials": {
+          "website": "https://www.grafanafriendsmumbai.in/",
+          "meetup": "https://www.meetup.com/grafana-and-friends-mumbai/",
+          "linkedin": "https://www.linkedin.com/in/grafana-user-group-mumbai-50149b386/",
+          "twitter": "https://twitter.com/grafanamumbai",
+          "instagram": "https://www.instagram.com/grafanamumbai?igsh=Mmhqcnh3Zmd2bmU5",
+          "slack": "https://grafana.slack.com/archives/C01FMSQ6A8L",
+          "github": "https://github.com/grafanamumbai"
+        }
       },
       {
         "id": "merge-rise",
         "name": "Merge & Rise",
-        "type": "Community Partner"
+        "type": "Community Partner",
+        "logo": "",
+        "url": "https://linktr.ee/mergenrise",
+        "linktree": "https://linktr.ee/mergenrise",
+        "description": "A developer community fostering open-source collaboration, hands-on learning, and career mentorship.",
+        "socials": {
+          "linktree": "https://linktr.ee/mergenrise",
+          "linkedin": "https://www.linkedin.com/company/merge-rise/",
+          "twitter": "https://twitter.com/mergenrise",
+          "website": "https://linktr.ee/mergenrise"
+        }
       },
       {
         "id": "women-in-cloud-native",
         "name": "Women in Cloud Native",
-        "type": "Community Partner"
+        "type": "Community Partner",
+        "logo": "",
+        "url": "https://linktr.ee/womenincloudnative",
+        "linktree": "https://linktr.ee/womenincloudnative",
+        "description": "Empowering women and underrepresented engineers to learn, lead, and contribute to cloud-native technologies.",
+        "socials": {
+          "linktree": "https://linktr.ee/womenincloudnative",
+          "linkedin": "https://www.linkedin.com/company/womenincloudnative/",
+          "twitter": "https://twitter.com/wicn_community",
+          "website": "https://linktr.ee/womenincloudnative"
+        }
       }
     ],
     "collaborationPartners": [
       {
         "id": "devx",
         "name": "DevX",
-        "type": "Collaboration Partner"
+        "type": "Venue & Coworking Partner",
+        "logo": "",
+        "url": "https://devx.work/",
+        "linktree": "https://devx.work/",
+        "description": "Premium managed coworking spaces, enterprise offices, and community event venue in Mumbai.",
+        "socials": {
+          "website": "https://devx.work/",
+          "linkedin": "https://www.linkedin.com/company/devx-work/",
+          "twitter": "https://twitter.com/devx_work",
+          "instagram": "https://www.instagram.com/devx.work/"
+        }
       },
       {
         "id": "indierepair",
         "name": "IndieRepair",
-        "type": "Collaboration Partner"
+        "type": "Collaboration Partner",
+        "logo": "",
+        "url": "https://indierepair.com/",
+        "linktree": "https://indierepair.com/",
+        "description": "Promoting right-to-repair, hardware open-source initiatives, and developer repair ecosystems.",
+        "socials": {
+          "website": "https://indierepair.com/",
+          "linkedin": "https://www.linkedin.com/company/indierepair/",
+          "twitter": "https://twitter.com/indierepair"
+        }
       }
     ]
   },
@@ -145,7 +332,15 @@
       "tier": "Powered By",
       "logo": "/grafanalogo.png",
       "url": "https://grafana.com/",
-      "description": "Grafana Labs provides the open and composable observability stack built around Grafana, Prometheus, Loki, Tempo, and Mimir."
+      "linktree": "https://linktr.ee/grafanalabs",
+      "description": "Grafana Labs provides the open and composable observability stack built around Grafana, Prometheus, Loki, Tempo, and Mimir.",
+      "socials": {
+        "website": "https://grafana.com/",
+        "twitter": "https://twitter.com/grafana",
+        "linkedin": "https://www.linkedin.com/company/grafana-labs/",
+        "github": "https://github.com/grafana",
+        "slack": "https://grafana.slack.com/"
+      }
     }
   ],
   "swags": [
@@ -163,8 +358,8 @@
     },
     {
       "id": "swag-plushie",
-      "name": "Grot Plushie / Goodies",
-      "description": "Official Grafana mascot collectibles and special speaker tokens.",
+      "name": "Official Grot Mascot Swag & Plushies",
+      "description": "Exclusive Grot mascot collectibles, badges, and special speaker appreciation tokens.",
       "image": "/logo-header.png"
     }
   ],

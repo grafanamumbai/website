@@ -21,7 +21,7 @@ import {
 } from 'lucide-react';
 import Link from 'next/link';
 import communityData from '@/data';
-import { MeetupLogo } from '@/components/icons/meetup-logo';
+import { MeetupLogo } from '@/components/icons';
 
 export default function RegisterPage() {
   const { currentEvent, chapter } = communityData;
@@ -34,6 +34,7 @@ export default function RegisterPage() {
   });
 
   useEffect(() => {
+    if (!currentEvent.targetDateISO) return;
     const target = new Date(currentEvent.targetDateISO).getTime();
 
     const updateCountdown = () => {
@@ -59,11 +60,11 @@ export default function RegisterPage() {
     {
       icon: <CheckCircle2 className="h-5 w-5 text-emerald-400" />,
       title: 'Free Entry & Refreshments',
-      description: '100% free community event with complimentary lunch, coffee, and high-tea.',
+      description: '100% free community event with complimentary refreshments, coffee, and high-tea.',
     },
     {
       icon: <Gift className="h-5 w-5 text-orange-400" />,
-      title: 'Exclusive Grafana Swag Pack',
+      title: 'Exclusive Grafana & Grot Swag Pack',
       description: 'Limited edition stickers, community t-shirts, and collectibles for active participants.',
     },
     {
@@ -79,7 +80,7 @@ export default function RegisterPage() {
   ];
 
   return (
-    <div className="flex flex-col min-h-screen bg-[#0c0e14] text-white">
+    <div className="flex flex-col min-h-screen bg-[#090b0e] text-white">
       <Header />
       
       <main className="flex-1 w-full relative overflow-hidden">
@@ -87,7 +88,7 @@ export default function RegisterPage() {
         <div 
           className="absolute inset-0 pointer-events-none opacity-20"
           style={{
-            backgroundImage: 'radial-gradient(circle at 50% 15%, rgba(244, 122, 32, 0.3) 0%, transparent 60%)',
+            backgroundImage: 'radial-gradient(circle at 50% 15%, rgba(244, 104, 0, 0.3) 0%, transparent 60%)',
           }}
         />
 
@@ -96,7 +97,7 @@ export default function RegisterPage() {
           
           <div className="inline-flex items-center gap-2 rounded-full border border-orange-500/30 bg-orange-500/10 px-3.5 py-1.5 text-xs sm:text-sm font-semibold text-orange-400 mb-6">
             <span className="h-2 w-2 rounded-full bg-emerald-400 animate-pulse" />
-            <span>{currentEvent.registration.statusText} • 100% Free</span>
+            <span>{currentEvent.registration.statusText || "Registration"} • 100% Free</span>
           </div>
 
           <h1 className="text-3xl xs:text-4xl sm:text-6xl 2xl:text-7xl font-black tracking-tight text-white leading-tight">

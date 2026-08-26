@@ -1,3 +1,6 @@
+'use client';
+
+import { useState } from 'react';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import {
@@ -20,7 +23,8 @@ import {
   Instagram,
   Facebook,
   MessageSquare,
-  Link as LinkIcon
+  User,
+  Link as LinkIcon,
 } from 'lucide-react';
 import communityData from '@/data';
 
@@ -38,10 +42,10 @@ const getSocialIcon = (key: string) => {
 };
 
 const getAvatarUrl = (url: string | undefined) => {
-  if (!url) return '/placeholder-avatar.png';
+  if (!url) return '';
   const driveMatch = url.match(/drive\.google\.com\/(?:file\/d\/|drive\/folders\/|open\?id=)([a-zA-Z0-9_-]+)/);
   if (driveMatch && driveMatch[1]) {
-    return `https://drive.google.com/thumbnail?id=\${driveMatch[1]}&sz=w500-h500`;
+    return `https://drive.google.com/thumbnail?id=${driveMatch[1]}&sz=w500-h500`;
   }
   return url;
 };
@@ -49,73 +53,85 @@ const getAvatarUrl = (url: string | undefined) => {
 export default function SpeakersSection() {
   const { speakers, socials } = communityData;
 
-  const SpeakerCard = ({ speaker }: { speaker: any }) => (
-    <div
-      className={`group flex h-full flex-col rounded-3xl border \${
-        speaker.featured ? 'border-orange-500/50 bg-orange-500/5' : 'border-zinc-800/80 bg-zinc-900/40'
-      } p-6 sm:p-8 backdrop-blur-md transition-all duration-300 hover:border-orange-500/30 hover:bg-zinc-900 hover:-translate-y-1 hover:shadow-2xl hover:shadow-orange-500/10`}
-    >
-      <div className="flex items-start gap-4 sm:gap-6">
-        {/* Avatar */}
-        <div className="relative h-16 w-16 sm:h-20 sm:w-20 shrink-0 rounded-2xl overflow-hidden border border-zinc-800 bg-zinc-800">
-          <img
-            src={getAvatarUrl(speaker.avatar)}
-            alt={speaker.name}
-            className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
-            referrerPolicy="no-referrer"
-          />
+  const SpeakerCard = ({ speaker }: { speaker: any }) => {
+    const [imgError, setImgError] = useState(false);
+    const avatarSrc = getAvatarUrl(speaker.avatar);
+
+    return (
+      <div
+        className={`group flex h-full flex-col rounded-3xl border ${
+          speaker.featured ? 'border-orange-500/50 bg-orange-500/5' : 'border-zinc-800/80 bg-zinc-900/40'
+        } p-6 sm:p-8 backdrop-blur-md transition-all duration-300 hover:border-orange-500/30 hover:bg-zinc-900 hover:-translate-y-1 hover:shadow-2xl hover:shadow-orange-500/10`}
+      >
+        <div className="flex items-start gap-4 sm:gap-6">
+          {/* Avatar with safe fallback */}
+          <div className="relative h-16 w-16 sm:h-20 sm:w-20 shrink-0 rounded-2xl overflow-hidden border border-zinc-800 bg-zinc-800 flex items-center justify-center">
+            {avatarSrc && !imgError ? (
+              <img
+                src={avatarSrc}
+                alt={speaker.name}
+                onError={() => setImgError(true)}
+                className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
+                referrerPolicy="no-referrer"
+              />
+            ) : (
+              <div className="flex h-full w-full items-center justify-center bg-zinc-800 text-orange-400 font-bold text-lg font-mono">
+                {speaker.name ? speaker.name.charAt(0) : <User className="h-6 w-6" />}
+              </div>
+            )}
+          </div>
+          
+          {/* Info */}
+          <div className="flex-1 min-w-0">
+            <h3 className="text-lg sm:text-xl font-bold text-white group-hover:text-orange-400 transition-colors truncate">
+              {speaker.name}
+            </h3>
+            <p className="text-sm font-semibold text-zinc-400 mt-0.5">{speaker.role}</p>
+            {speaker.company && (
+              <div className="flex items-center gap-1.5 mt-1.5 text-xs text-zinc-500">
+                <Building2 className="h-3.5 w-3.5 shrink-0" />
+                <span className="truncate">{speaker.company}</span>
+              </div>
+            )}
+          </div>
         </div>
-        
-        {/* Info */}
-        <div className="flex-1">
-          <h3 className="text-lg sm:text-xl font-bold text-white group-hover:text-orange-400 transition-colors">
-            {speaker.name}
-          </h3>
-          <p className="text-sm font-semibold text-zinc-400 mt-0.5">{speaker.role}</p>
-          {speaker.company && (
-            <div className="flex items-center gap-1.5 mt-1.5 text-xs text-zinc-500">
-              <Building2 className="h-3.5 w-3.5" />
-              <span>{speaker.company}</span>
-            </div>
+
+        {/* Talk Topic */}
+        <div className="mt-6 flex-1">
+          <div className="inline-block rounded-lg bg-zinc-800/80 px-3 py-1.5 text-xs font-semibold text-zinc-300 mb-3 border border-zinc-700/50">
+            Talk Topic
+          </div>
+          <h4 className="text-base sm:text-lg font-bold text-zinc-100 leading-snug">
+            {speaker.topic}
+          </h4>
+          {speaker.bio && (
+            <p className="mt-3 text-sm text-zinc-400 line-clamp-3 leading-relaxed">
+              {speaker.bio}
+            </p>
           )}
         </div>
-      </div>
 
-      {/* Talk Topic */}
-      <div className="mt-6 flex-1">
-        <div className="inline-block rounded-lg bg-zinc-800/80 px-3 py-1.5 text-xs font-semibold text-zinc-300 mb-3 border border-zinc-700/50">
-          Talk Topic
+        {/* Social Links */}
+        <div className="mt-6 flex items-center gap-2 pt-4 border-t border-zinc-800/60 flex-wrap">
+          {speaker.socials && Object.entries(speaker.socials).map(([key, url]) => (
+            <a
+              key={key}
+              href={url as string}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`${speaker.name}'s ${key}`}
+              className="flex h-9 w-9 items-center justify-center rounded-xl bg-zinc-800/80 text-zinc-300 hover:bg-orange-500 hover:text-white transition-all active:scale-95"
+            >
+              {getSocialIcon(key)}
+            </a>
+          ))}
         </div>
-        <h4 className="text-base sm:text-lg font-bold text-zinc-100 leading-snug">
-          {speaker.topic}
-        </h4>
-        {speaker.bio && (
-          <p className="mt-3 text-sm text-zinc-400 line-clamp-3 leading-relaxed">
-            {speaker.bio}
-          </p>
-        )}
       </div>
-
-      {/* Social Links */}
-      <div className="mt-6 flex items-center gap-2 pt-4 border-t border-zinc-800/60">
-        {speaker.socials && Object.entries(speaker.socials).map(([key, url]) => (
-          <a
-            key={key}
-            href={url as string}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label={`\${speaker.name}'s \${key}`}
-            className="flex h-9 w-9 items-center justify-center rounded-xl bg-zinc-800/80 text-zinc-300 hover:bg-orange-500 hover:text-white transition-all active:scale-95"
-          >
-            {getSocialIcon(key)}
-          </a>
-        ))}
-      </div>
-    </div>
-  );
+    );
+  };
 
   return (
-    <section id="speakers" className="py-16 sm:py-24 md:py-28 2xl:py-36 bg-[#0a0c10] text-white border-t border-zinc-800/80">
+    <section id="speakers" className="py-16 sm:py-24 md:py-28 2xl:py-36 bg-[#090b0e] text-white border-t border-zinc-800/80">
       <div className="container mx-auto px-4 sm:px-6 md:px-8 lg:px-12 max-w-7xl 2xl:max-w-[1600px] 3xl:max-w-[1800px]">
         
         {/* Section Header */}
@@ -172,7 +188,7 @@ export default function SpeakersSection() {
             Have an Observability Story or Tool to Share?
           </h3>
           <p className="mt-3 text-sm sm:text-base text-zinc-400 max-w-2xl mx-auto">
-            We are always looking for passionate speakers to share their experiences, case studies, or deep dives into the Grafana ecosystem.
+            We are always looking for passionate speakers to share their experiences, case studies, or deep dives into the Grafana and CNCF ecosystem.
           </p>
           <div className="mt-6 sm:mt-8 flex justify-center">
             <Button

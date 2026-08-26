@@ -1,23 +1,26 @@
 import {
-  LineChart,
-  Users2,
-  Zap,
-  BookOpen,
   Activity,
+  Users2,
   Layers,
-  Sparkles,
+  BookOpen,
   ArrowUpRight,
+  Sparkles,
+  Cpu,
+  BarChart3,
+  Network,
 } from 'lucide-react';
 import communityData from '@/data';
+import { CncfIcon } from '@/components/icons';
 
 export default function AboutSection() {
   const { chapter } = communityData;
 
   const pillars = [
     {
-      icon: <Activity className="h-6 w-6 text-orange-400" />,
+      icon: <BarChart3 className="h-6 w-6 text-orange-400" />,
       title: 'Learn & Explore',
       badge: 'Workshops & Talks',
+      tags: ['LGTM Stack', 'Prometheus', 'OpenTelemetry'],
       description:
         'Master the open-source LGTM stack (Loki, Grafana, Tempo, Mimir), Prometheus telemetry, and OpenTelemetry standards with deep-dive technical talks and hands-on demonstrations.',
     },
@@ -25,20 +28,22 @@ export default function AboutSection() {
       icon: <Users2 className="h-6 w-6 text-orange-400" />,
       title: 'Connect & Network',
       badge: 'Hallway Track',
+      tags: ['SREs', 'DevOps Leads', 'Platform Eng'],
       description:
-        'Engage with leading SREs, platform engineers, DevOps leads, and cloud-native developers across Mumbai. Build connections and exchange real-world architecture insights.',
+        'Engage with leading SREs, platform engineers, DevOps architects, and cloud-native developers across Mumbai. Build lasting connections and exchange real-world architecture insights.',
     },
     {
-      icon: <Layers className="h-6 w-6 text-orange-400" />,
+      icon: <Cpu className="h-6 w-6 text-orange-400" />,
       title: 'Innovate & Showcase',
       badge: 'Community Demos',
+      tags: ['eBPF', 'Pyroscope', 'AI Telemetry'],
       description:
-        'Demonstrate custom Grafana dashboards, infinity plugins, eBPF telemetry, and AI-assisted observability workflows to the broader community.',
+        'Demonstrate custom Grafana dashboards, infinity plugins, eBPF telemetry, continuous profiling with Pyroscope, and AI-assisted observability workflows to the broader community.',
     },
   ];
 
   return (
-    <section id="about" className="py-16 sm:py-24 md:py-28 2xl:py-36 bg-[#0e1117] text-white border-t border-zinc-800/80">
+    <section id="about" className="py-16 sm:py-24 md:py-28 2xl:py-36 bg-[#0c0e14] text-white border-t border-zinc-800/80">
       <div className="container mx-auto px-4 sm:px-6 md:px-8 lg:px-12 max-w-7xl 2xl:max-w-[1600px] 3xl:max-w-[1800px]">
         
         {/* Section Header */}
@@ -48,8 +53,8 @@ export default function AboutSection() {
             <span>About The Chapter</span>
           </div>
           <h2 className="text-2xl xs:text-3xl sm:text-4xl md:text-5xl 2xl:text-6xl font-black tracking-tight leading-tight">
-            Building Mumbai's Premier{' '}
-            <span className="bg-gradient-to-r from-orange-400 to-amber-300 bg-clip-text text-transparent">
+            Building Mumbai&apos;s Premier{' '}
+            <span className="bg-gradient-to-r from-orange-400 via-amber-300 to-yellow-500 bg-clip-text text-transparent">
               Observability Community
             </span>
           </h2>
@@ -74,10 +79,24 @@ export default function AboutSection() {
                     {pillar.badge}
                   </span>
                 </div>
+
                 <h3 className="text-lg sm:text-xl font-bold text-white group-hover:text-orange-400 transition-colors">
                   {pillar.title}
                 </h3>
-                <p className="mt-3 text-xs sm:text-sm text-zinc-400 leading-relaxed">
+
+                {/* Tech Tags */}
+                <div className="flex flex-wrap gap-1.5 mt-2.5 mb-3">
+                  {pillar.tags.map((tag) => (
+                    <span
+                      key={tag}
+                      className="text-[10px] font-mono px-2 py-0.5 rounded bg-zinc-800/70 text-zinc-300 border border-zinc-700/50"
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+
+                <p className="text-xs sm:text-sm text-zinc-400 leading-relaxed">
                   {pillar.description}
                 </p>
               </div>
