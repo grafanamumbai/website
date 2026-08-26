@@ -29,16 +29,15 @@ export interface SocialLinks {
   cfp: string;
 }
 
-export interface EcosystemItem {
+export interface LearningTrack {
   id: string;
-  name: string;
-  category: string;
-  status: string;
+  title: string;
+  tagline: string;
   badge: string;
   description: string;
-  url: string;
+  technologies: string[];
   icon: string;
-  svgUrl?: string;
+  highlights: string[];
 }
 
 export interface MascotTip {
@@ -164,7 +163,7 @@ export interface CommunityData {
   chapter: ChapterInfo;
   socials: SocialLinks;
   mascot: MascotInfo;
-  ecosystem: EcosystemItem[];
+  tracks: LearningTrack[];
   currentEvent: CurrentEvent;
   schedule: ScheduleItem[];
   speakers: Speaker[];
