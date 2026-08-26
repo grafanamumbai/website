@@ -1,0 +1,41 @@
+{
+  "coreTeam": [
+    {
+      "id": "nikita",
+      "name": "Nikita Shinde",
+      "role": "Lead Organizer",
+      "company": "Grafana & Friends Mumbai",
+      "avatar": "/nikita.png",
+      "socials": {
+        "linkedin": "https://www.linkedin.com/in/shinde-nikita/"
+      }
+    },
+    {
+      "id": "afzal",
+      "name": "Afzal Hassan",
+      "role": "Co-Organizer",
+      "company": "",
+      "avatar": "",
+      "socials": {}
+    },
+    {
+      "id": "om",
+      "name": "Om Songire",
+      "role": "Co-Organizer",
+      "company": "",
+      "avatar": "",
+      "socials": {}
+    }
+  ],
+  "volunteers": [
+    {
+      "id": "vol-1",
+      "name": "Community Volunteers",
+      "role": "Event Logistics & Attendee Support",
+      "avatar": "/logo-header.png",
+      "socials": {
+        "meetup": "https://www.meetup.com/grafana-and-friends-mumbai/"
+      }
+    }
+  ]
+}
