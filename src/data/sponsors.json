@@ -1,0 +1,101 @@
+{
+  "sponsors": [
+    {
+      "id": "grafana-labs",
+      "name": "Grafana Labs",
+      "tier": "Powered By",
+      "logo": "/grafanalogo.png",
+      "url": "https://grafana.com/",
+      "linktree": "https://linktr.ee/grafanalabs",
+      "description": "Grafana Labs provides the open and composable observability stack built around Grafana, Prometheus, Loki, Tempo, and Mimir.",
+      "socials": {
+        "website": "https://grafana.com/",
+        "twitter": "https://twitter.com/grafana",
+        "linkedin": "https://www.linkedin.com/company/grafana-labs/",
+        "github": "https://github.com/grafana",
+        "slack": "https://grafana.slack.com/"
+      }
+    }
+  ],
+  "communityPartners": [
+    {
+      "id": "grafana-friends-mumbai",
+      "name": "Grafana & Friends Mumbai",
+      "type": "Community Host & Partner",
+      "logo": "/grafana-logo.png",
+      "url": "https://www.grafanafriendsmumbai.in/",
+      "linktree": "https://linktr.ee/grafanamumbai",
+      "description": "The official open-source observability and cloud engineering chapter in Mumbai.",
+      "socials": {
+        "website": "https://www.grafanafriendsmumbai.in/",
+        "meetup": "https://www.meetup.com/grafana-and-friends-mumbai/",
+        "linkedin": "https://www.linkedin.com/in/grafana-user-group-mumbai-50149b386/",
+        "twitter": "https://twitter.com/grafanamumbai",
+        "instagram": "https://www.instagram.com/grafanamumbai?igsh=Mmhqcnh3Zmd2bmU5",
+        "slack": "https://grafana.slack.com/archives/C01FMSQ6A8L",
+        "github": "https://github.com/grafanamumbai"
+      }
+    },
+    {
+      "id": "merge-rise",
+      "name": "Merge & Rise",
+      "type": "Community Partner",
+      "logo": "",
+      "url": "https://linktr.ee/mergenrise",
+      "linktree": "https://linktr.ee/mergenrise",
+      "description": "A developer community fostering open-source collaboration, hands-on learning, and career mentorship.",
+      "socials": {
+        "linktree": "https://linktr.ee/mergenrise",
+        "linkedin": "https://www.linkedin.com/company/merge-rise/",
+        "twitter": "https://twitter.com/mergenrise",
+        "website": "https://linktr.ee/mergenrise"
+      }
+    },
+    {
+      "id": "women-in-cloud-native",
+      "name": "Women in Cloud Native",
+      "type": "Community Partner",
+      "logo": "",
+      "url": "https://linktr.ee/womenincloudnative",
+      "linktree": "https://linktr.ee/womenincloudnative",
+      "description": "Empowering women and underrepresented engineers to learn, lead, and contribute to cloud-native technologies.",
+      "socials": {
+        "linktree": "https://linktr.ee/womenincloudnative",
+        "linkedin": "https://www.linkedin.com/company/womenincloudnative/",
+        "twitter": "https://twitter.com/wicn_community",
+        "website": "https://linktr.ee/womenincloudnative"
+      }
+    }
+  ],
+  "collaborationPartners": [
+    {
+      "id": "devx",
+      "name": "DevX",
+      "type": "Venue & Coworking Partner",
+      "logo": "",
+      "url": "https://devx.work/",
+      "linktree": "https://devx.work/",
+      "description": "Premium managed coworking spaces, enterprise offices, and community event venue in Mumbai.",
+      "socials": {
+        "website": "https://devx.work/",
+        "linkedin": "https://www.linkedin.com/company/devx-work/",
+        "twitter": "https://twitter.com/devx_work",
+        "instagram": "https://www.instagram.com/devx.work/"
+      }
+    },
+    {
+      "id": "indierepair",
+      "name": "IndieRepair",
+      "type": "Collaboration Partner",
+      "logo": "",
+      "url": "https://indierepair.com/",
+      "linktree": "https://indierepair.com/",
+      "description": "Promoting right-to-repair, hardware open-source initiatives, and developer repair ecosystems.",
+      "socials": {
+        "website": "https://indierepair.com/",
+        "linkedin": "https://www.linkedin.com/company/indierepair/",
+        "twitter": "https://twitter.com/indierepair"
+      }
+    }
+  ]
+}
