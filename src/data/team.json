@@ -40,11 +40,13 @@
   "volunteers": [
     {
       "id": "vol-1",
-      "name": "Community Volunteers",
-      "role": "Event Logistics & Attendee Support",
-      "avatar": "/logo-header.png",
+      "name": "Yash Pawar",
+      "role": "DevOps Engineer @deboistech",
+      "avatar": "https://drive.google.com/file/d/1qxvA6rDa4QcSHS7b5PhVRnNp2_zdWtU5/view?usp=sharing",
       "socials": {
-        "meetup": "https://www.meetup.com/grafana-and-friends-mumbai/"
+        "github": "https://github.com/yashpawar6849",
+        "X": "https://x.com/yashpawar6849",
+        "Linkedin": "https://www.linkedin.com/in/yash-sanjivkumar-pawar-862702287"
       }
     }
   ]
