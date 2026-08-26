@@ -15,6 +15,7 @@ import {
   MapPin,
 } from 'lucide-react';
 import communityData from '@/data';
+import { MeetupLogo } from '@/components/icons/meetup-logo';
 
 export default function Footer() {
   const { chapter, socials, currentEvent } = communityData;
@@ -81,7 +82,7 @@ export default function Footer() {
                 aria-label="Meetup"
                 className="flex h-9 w-9 items-center justify-center rounded-xl bg-zinc-900 border border-zinc-800 text-zinc-300 hover:text-white hover:border-orange-500/50 hover:bg-orange-500/10 transition-colors active:scale-95"
               >
-                <Calendar className="h-4 w-4" />
+                <MeetupLogo className="h-4 w-4" />
               </a>
               <a
                 href={socials.linkedin}
