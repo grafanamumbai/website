@@ -1,5 +1,6 @@
 'use client';
 
+import { useState } from 'react';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import {
@@ -8,16 +9,133 @@ import {
   Mail,
   Sparkles,
   ExternalLink,
-  Shirt,
-  Smile,
-  CheckCircle2,
-  HeartHandshake,
+  Users2,
+  Building2,
+  Share2,
+  Globe,
+  Linkedin,
+  Twitter,
+  Instagram,
+  Github,
+  Slack,
+  Link as LinkIcon,
+  MessageSquare,
 } from 'lucide-react';
-import communityData from '@/data';
-import { GrotMascot, GrafanaLogo, CncfLogo } from '@/components/icons';
+import communityData, { PartnerItem, Sponsor } from '@/data';
+import { GrotMascot, MeetupLogo } from '@/components/icons';
+
+const getSocialIcon = (key: string) => {
+  const k = key.toLowerCase();
+  if (k === 'linkedin') return <Linkedin className="h-3.5 w-3.5" />;
+  if (k === 'twitter' || k === 'x') return <Twitter className="h-3.5 w-3.5" />;
+  if (k === 'github') return <Github className="h-3.5 w-3.5" />;
+  if (k === 'website' || k === 'web') return <Globe className="h-3.5 w-3.5" />;
+  if (k === 'instagram' || k === 'insta') return <Instagram className="h-3.5 w-3.5" />;
+  if (k === 'meetup') return <MeetupLogo className="h-3.5 w-3.5" />;
+  if (k === 'slack' || k === 'discord') return <MessageSquare className="h-3.5 w-3.5" />;
+  if (k === 'linktree') return <Share2 className="h-3.5 w-3.5" />;
+  return <LinkIcon className="h-3.5 w-3.5" />;
+};
+
+function PartnerCard({ partner }: { partner: PartnerItem }) {
+  const [imgError, setImgError] = useState(false);
+
+  return (
+    <div className="group relative flex flex-col justify-between p-6 sm:p-7 rounded-2xl bg-zinc-900/60 border border-zinc-800/80 hover:border-orange-500/50 hover:bg-zinc-900/90 transition-all duration-300 shadow-xl hover:-translate-y-1 hover:shadow-2xl hover:shadow-orange-500/5">
+      <div>
+        {/* Header with Logo / Avatar and Badge */}
+        <div className="flex items-start justify-between gap-4 mb-4">
+          <div className="relative h-12 w-12 sm:h-14 sm:w-14 shrink-0 rounded-2xl bg-zinc-950/80 border border-zinc-800 p-1 flex items-center justify-center overflow-hidden">
+            {partner.logo && !imgError ? (
+              <Image
+                src={partner.logo}
+                alt={partner.name}
+                fill
+                onError={() => setImgError(true)}
+                className="object-contain p-1.5"
+              />
+            ) : (
+              <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-zinc-800 to-zinc-900 text-orange-400 font-bold font-mono text-base">
+                {partner.name.charAt(0)}
+              </div>
+            )}
+          </div>
+
+          <span className="text-[10px] sm:text-xs font-semibold px-2.5 py-1 rounded-full bg-orange-500/10 text-orange-400 border border-orange-500/30">
+            {partner.type}
+          </span>
+        </div>
+
+        {/* Partner Name & Description */}
+        <h3 className="text-base sm:text-lg font-bold text-white group-hover:text-orange-400 transition-colors">
+          {partner.name}
+        </h3>
+
+        {partner.description && (
+          <p className="mt-2 text-xs sm:text-sm text-zinc-400 leading-relaxed font-normal">
+            {partner.description}
+          </p>
+        )}
+      </div>
+
+      {/* Action Links & Socials */}
+      <div className="mt-6 pt-4 border-t border-zinc-800/80 space-y-3">
+        <div className="flex items-center gap-2 flex-wrap">
+          {partner.url && (
+            <a
+              href={partner.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-zinc-800 hover:bg-orange-500 hover:text-white text-xs font-semibold text-zinc-300 transition-colors"
+            >
+              <Globe className="h-3.5 w-3.5" />
+              <span>Website</span>
+              <ExternalLink className="h-3 w-3" />
+            </a>
+          )}
+
+          {partner.linktree && (
+            <a
+              href={partner.linktree}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-emerald-500/10 hover:bg-emerald-500 hover:text-white text-xs font-semibold text-emerald-400 border border-emerald-500/20 transition-colors"
+            >
+              <Share2 className="h-3.5 w-3.5" />
+              <span>Linktree</span>
+              <ExternalLink className="h-3 w-3" />
+            </a>
+          )}
+        </div>
+
+        {/* Social Icons Strip */}
+        {partner.socials && Object.keys(partner.socials).length > 0 && (
+          <div className="flex items-center gap-1.5 pt-1 flex-wrap">
+            {Object.entries(partner.socials).map(([key, url]) => (
+              <a
+                key={key}
+                href={url as string}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`${partner.name} ${key}`}
+                className="flex h-7 w-7 items-center justify-center rounded-lg bg-zinc-950/80 text-zinc-400 hover:bg-orange-500 hover:text-white border border-zinc-800/80 transition-colors active:scale-95"
+              >
+                {getSocialIcon(key)}
+              </a>
+            ))}
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
 
 export default function SponsorsSection() {
   const { sponsors, swags, chapter, currentEvent } = communityData;
+  const allPartners = [
+    ...(currentEvent.communityPartners || []),
+    ...(currentEvent.collaborationPartners || []),
+  ];
 
   return (
     <section id="sponsors" className="py-16 sm:py-24 md:py-28 2xl:py-36 bg-[#090b0e] text-white border-t border-zinc-800/80">
@@ -27,13 +145,13 @@ export default function SponsorsSection() {
         <div className="mx-auto max-w-3xl 2xl:max-w-4xl text-center">
           <div className="inline-flex items-center gap-2 rounded-full border border-orange-500/30 bg-orange-500/10 px-3.5 py-1 text-xs font-semibold text-orange-400 mb-4">
             <ShieldCheck className="h-3.5 w-3.5" />
-            <span>Community Partners & Sponsors</span>
+            <span>Sponsors & Community Ecosystem</span>
           </div>
           <h2 className="text-2xl xs:text-3xl sm:text-4xl md:text-5xl 2xl:text-6xl font-black tracking-tight leading-tight">
-            Supported By Industry Leaders
+            Supported By Our Partners & Sponsors
           </h2>
           <p className="mt-4 text-sm sm:text-base md:text-lg 2xl:text-xl text-zinc-300">
-            Our community meetups and open-source initiatives are powered by Grafana Labs and our local ecosystem partners.
+            Our community meetups, venue arrangements, and open-source initiatives are made possible by Grafana Labs and our valued partners.
           </p>
         </div>
 
@@ -53,7 +171,7 @@ export default function SponsorsSection() {
                   className="object-contain max-h-14 sm:max-h-16 w-auto"
                 />
               </div>
-              <div className="space-y-2 text-center sm:text-left flex-1">
+              <div className="space-y-2.5 text-center sm:text-left flex-1">
                 <div className="inline-block rounded-full bg-orange-500/20 px-3 py-0.5 text-xs font-semibold text-orange-400 border border-orange-500/30">
                   {sponsor.tier}
                 </div>
@@ -61,40 +179,54 @@ export default function SponsorsSection() {
                 <p className="text-xs sm:text-sm text-zinc-400 leading-relaxed font-normal">
                   {sponsor.description}
                 </p>
-                <div className="pt-1">
+
+                {/* Sponsor Links & Socials */}
+                <div className="pt-2 flex flex-wrap items-center justify-center sm:justify-start gap-2">
                   <a
                     href={sponsor.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 text-xs font-semibold text-orange-400 hover:text-orange-300 transition-colors"
+                    className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-orange-500/20 hover:bg-orange-500 hover:text-white text-xs font-semibold text-orange-400 border border-orange-500/30 transition-colors"
                   >
-                    <span>Visit Official Website</span>
-                    <ExternalLink className="h-3.5 w-3.5" />
+                    <Globe className="h-3.5 w-3.5" />
+                    <span>Official Website</span>
+                    <ExternalLink className="h-3 w-3" />
                   </a>
+
+                  {sponsor.socials && (
+                    <div className="flex items-center gap-1.5 pl-1">
+                      {Object.entries(sponsor.socials).map(([key, url]) => (
+                        <a
+                          key={key}
+                          href={url as string}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          aria-label={`${sponsor.name} ${key}`}
+                          className="flex h-7 w-7 items-center justify-center rounded-lg bg-zinc-950 text-zinc-400 hover:bg-orange-500 hover:text-white border border-zinc-800 transition-colors"
+                        >
+                          {getSocialIcon(key)}
+                        </a>
+                      ))}
+                    </div>
+                  )}
                 </div>
               </div>
             </div>
           ))}
         </div>
 
-        {/* Community & Collaboration Partners Grid */}
-        {currentEvent.communityPartners && currentEvent.communityPartners.length > 0 && (
-          <div className="mt-12 max-w-3xl mx-auto">
-            <h4 className="text-xs font-bold text-zinc-400 uppercase tracking-wider text-center mb-4">
-              Community & Collaboration Partners
-            </h4>
-            <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
-              {[...(currentEvent.communityPartners || []), ...(currentEvent.collaborationPartners || [])].map(
-                (partner, idx) => (
-                  <div
-                    key={idx}
-                    className="p-3.5 rounded-xl bg-zinc-900/40 border border-zinc-800 text-center flex flex-col items-center justify-center"
-                  >
-                    <span className="text-xs sm:text-sm font-bold text-white">{partner.name}</span>
-                    <span className="text-[10px] text-zinc-500 mt-0.5">{partner.type}</span>
-                  </div>
-                )
-              )}
+        {/* Community & Collaboration Partners Bento Grid */}
+        {allPartners.length > 0 && (
+          <div className="mt-14 sm:mt-20">
+            <div className="text-center mb-8">
+              <h3 className="text-xl sm:text-2xl font-bold text-white">Community & Collaboration Partners</h3>
+              <p className="text-xs sm:text-sm text-zinc-400 mt-1">Connect with our ecosystem partners across their social channels and Linktree hubs.</p>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 max-w-6xl mx-auto">
+              {allPartners.map((partner) => (
+                <PartnerCard key={partner.id} partner={partner} />
+              ))}
             </div>
           </div>
         )}

@@ -53,6 +53,18 @@ export interface MascotInfo {
   tips: MascotTip[];
 }
 
+export interface PartnerItem {
+  id: string;
+  name: string;
+  type: string;
+  tier?: string;
+  logo?: string;
+  url?: string;
+  linktree?: string;
+  description?: string;
+  socials?: Record<string, string | undefined>;
+}
+
 export interface CurrentEvent {
   hasUpcomingEvent: boolean;
   title: string;
@@ -62,8 +74,8 @@ export interface CurrentEvent {
   time: string;
   targetDateISO: string;
   eventType?: string;
-  communityPartners?: { id: string; name: string; type: string; }[];
-  collaborationPartners?: { id: string; name: string; type: string; }[];
+  communityPartners?: PartnerItem[];
+  collaborationPartners?: PartnerItem[];
   venue: {
     name: string;
     address: string;
@@ -112,7 +124,9 @@ export interface Sponsor {
   tier: string;
   logo: string;
   url: string;
+  linktree?: string;
   description: string;
+  socials?: Record<string, string | undefined>;
 }
 
 export interface SwagItem {
