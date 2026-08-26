@@ -1,4 +1,6 @@
 import rawData from './community-data.json';
+import speakersData from './speakers.json';
+import teamData from './team.json';
 
 export interface ChapterInfo {
   name: string;
@@ -138,6 +140,11 @@ export interface CommunityData {
   faqs: FaqItem[];
 }
 
-export const communityData: CommunityData = rawData as CommunityData;
+export const communityData: CommunityData = {
+  ...rawData,
+  speakers: speakersData,
+  coreTeam: teamData.coreTeam,
+  volunteers: teamData.volunteers
+} as CommunityData;
 
 export default communityData;
