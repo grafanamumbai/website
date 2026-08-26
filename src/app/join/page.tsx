@@ -17,8 +17,8 @@ import {
   Users2,
   Mail,
 } from 'lucide-react';
-import Image from 'next/image';
 import communityData from '@/data';
+import { GrafanaLogo, MeetupLogo } from '@/components/icons';
 
 export default function JoinPage() {
   const { chapter, socials } = communityData;
@@ -76,7 +76,7 @@ export default function JoinPage() {
   ];
 
   return (
-    <div className="flex flex-col min-h-screen bg-[#0c0e14] text-white">
+    <div className="flex flex-col min-h-screen bg-[#090b0e] text-white">
       <Header />
       <main className="flex-1 flex flex-col items-center justify-center py-12 sm:py-20 md:py-28 px-4 sm:px-6 relative overflow-hidden">
         
@@ -84,7 +84,7 @@ export default function JoinPage() {
         <div 
           className="absolute inset-0 pointer-events-none opacity-20"
           style={{
-            backgroundImage: 'radial-gradient(circle at 50% 20%, rgba(244, 122, 32, 0.3) 0%, transparent 60%)',
+            backgroundImage: 'radial-gradient(circle at 50% 20%, rgba(244, 104, 0, 0.3) 0%, transparent 60%)',
           }}
         />
 
@@ -92,13 +92,8 @@ export default function JoinPage() {
           
           {/* Header Box */}
           <div className="mb-8 sm:mb-12 flex flex-col items-center text-center">
-            <div className="relative mb-4 h-16 w-16 sm:h-20 sm:w-20 rounded-full bg-orange-500/10 p-2 ring-1 ring-orange-500/30 shadow-xl overflow-hidden">
-              <Image 
-                src="/grafana-logo.png" 
-                alt="Grafana & Friends Mumbai" 
-                fill 
-                className="object-cover" 
-              />
+            <div className="flex mb-4 h-16 w-16 sm:h-20 sm:w-20 items-center justify-center rounded-2xl bg-zinc-900 border border-orange-500/30 p-3 shadow-xl shadow-orange-500/10">
+              <GrafanaLogo className="h-full w-full text-orange-500" />
             </div>
             <div className="inline-flex items-center gap-2 rounded-full border border-orange-500/30 bg-orange-500/10 px-3.5 py-1 text-xs font-semibold text-orange-400 mb-3">
               <Users2 className="h-3.5 w-3.5" />

@@ -144,7 +144,7 @@ export default function BadgePage() {
   };
 
   return (
-    <div className="flex flex-col min-h-screen bg-[#0c0e14] text-white">
+    <div className="flex flex-col min-h-screen bg-[#090b0e] text-white">
       <Header />
       <main className="flex-1 container mx-auto px-4 sm:px-6 md:px-8 py-12 sm:py-20 max-w-4xl 2xl:max-w-5xl relative">
         

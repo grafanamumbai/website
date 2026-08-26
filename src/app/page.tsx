@@ -2,6 +2,8 @@ import Header from '@/components/layout/header';
 import Footer from '@/components/layout/footer';
 import HeroSection from '@/components/sections/hero';
 import AboutSection from '@/components/sections/about';
+import EcosystemSection from '@/components/sections/ecosystem';
+import MascotGrotSection from '@/components/sections/mascot-grot';
 import SpeakersSection from '@/components/sections/speakers';
 import ScheduleSection from '@/components/sections/schedule';
 import CoreTeamSection from '@/components/sections/core-team';
@@ -16,11 +18,13 @@ export default function Home() {
   const hasSpeakers = communityData.speakers && communityData.speakers.length > 0;
 
   return (
-    <div className="flex flex-col min-h-screen bg-[#0c0e14]">
+    <div className="flex flex-col min-h-screen bg-[#090b0e]">
       <Header />
       <main className="flex-1">
         <HeroSection />
         <AboutSection />
+        <EcosystemSection />
+        <MascotGrotSection />
         {(hasUpcomingEvent || hasSpeakers) && <SpeakersSection />}
         {hasUpcomingEvent && <ScheduleSection />}
         <CoreTeamSection />

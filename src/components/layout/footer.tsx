@@ -15,27 +15,22 @@ import {
   MapPin,
 } from 'lucide-react';
 import communityData from '@/data';
-import { MeetupLogo } from '@/components/icons/meetup-logo';
+import { MeetupLogo, GrafanaLogo, CncfIcon, GrotMascot } from '@/components/icons';
 
 export default function Footer() {
   const { chapter, socials, currentEvent } = communityData;
 
   return (
-    <footer className="border-t border-zinc-800/80 bg-[#0a0c10] text-zinc-300">
+    <footer className="border-t border-zinc-800/80 bg-[#07080b] text-zinc-300">
       <div className="mx-auto max-w-7xl 2xl:max-w-[1600px] 3xl:max-w-[1800px] px-4 sm:px-6 md:px-8 lg:px-12 py-12 sm:py-16">
         
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 sm:gap-10 mb-12">
           
-          {/* Col 1: Chapter info */}
+          {/* Col 1: Chapter info & Grot */}
           <div className="md:col-span-2 space-y-4">
             <Link href="/" className="flex items-center gap-3">
-              <div className="relative h-10 w-10 rounded-full bg-orange-500/10 p-1 ring-1 ring-orange-500/30 overflow-hidden">
-                <Image 
-                  src="/grafana-logo.png" 
-                  alt={chapter.name} 
-                  fill 
-                  className="object-cover" 
-                />
+              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-zinc-900 border border-orange-500/30 p-1.5 shadow-md shadow-orange-500/10">
+                <GrafanaLogo className="h-full w-full text-orange-500" />
               </div>
               <span className="text-base sm:text-lg font-bold tracking-tight text-white">
                 {chapter.name}
@@ -44,9 +39,11 @@ export default function Footer() {
             <p className="text-xs sm:text-sm text-zinc-400 max-w-md leading-relaxed">
               {chapter.description}
             </p>
-            <div className="flex items-center gap-2.5 text-xs text-orange-400 font-semibold pt-1">
-              <span className="inline-block h-2 w-2 rounded-full bg-emerald-400 animate-pulse" />
-              <span>Next Meetup: {currentEvent.date} • {currentEvent.venue.name}</span>
+            <div className="flex items-center gap-2 text-xs text-zinc-400 pt-1">
+              <div className="h-4 w-4">
+                <GrotMascot className="h-full w-full" animate={false} />
+              </div>
+              <span>Grafana & Friends Mumbai is powered by Grafana Labs.</span>
             </div>
           </div>
 
@@ -57,10 +54,12 @@ export default function Footer() {
             </h4>
             <ul className="space-y-2 text-xs sm:text-sm text-zinc-400">
               <li><Link href="/#about" className="hover:text-orange-400 transition-colors">About Chapter</Link></li>
-              <li><Link href="/#speakers" className="hover:text-orange-400 transition-colors">Speakers</Link></li>
-              <li><Link href="/#schedule" className="hover:text-orange-400 transition-colors">Schedule</Link></li>
-              <li><Link href="/#contests" className="hover:text-orange-400 transition-colors">Contests & Swags</Link></li>
-              <li><Link href="/#team" className="hover:text-orange-400 transition-colors">Core Team</Link></li>
+              <li><Link href="/#ecosystem" className="hover:text-orange-400 transition-colors">CNCF & Observability Stack</Link></li>
+              <li><Link href="/#mascot" className="hover:text-orange-400 transition-colors">Meet Grot Mascot</Link></li>
+              <li><Link href="/#speakers" className="hover:text-orange-400 transition-colors">Speakers & Talks</Link></li>
+              <li><Link href="/#schedule" className="hover:text-orange-400 transition-colors">Schedule & Agenda</Link></li>
+              <li><Link href="/#contests" className="hover:text-orange-400 transition-colors">Contests & Swag</Link></li>
+              <li><Link href="/#team" className="hover:text-orange-400 transition-colors">Team & Volunteers</Link></li>
               <li><Link href="/#faq" className="hover:text-orange-400 transition-colors">FAQ</Link></li>
               <li><Link href="/badge" className="hover:text-orange-400 transition-colors">Badge Generator</Link></li>
             </ul>
@@ -69,7 +68,7 @@ export default function Footer() {
           {/* Col 3: Community & Socials */}
           <div className="space-y-3">
             <h4 className="text-xs sm:text-sm font-bold text-white tracking-wider uppercase">
-              Get Connected
+              Connect With Us
             </h4>
             <p className="text-xs text-zinc-400 leading-relaxed">
               Join discussions, stay updated on upcoming meetups, and share your observability journey.
@@ -134,16 +133,19 @@ export default function Footer() {
 
         </div>
 
-        {/* Bottom bar */}
-        <div className="pt-8 border-t border-zinc-800/60 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-zinc-500 text-center sm:text-left">
-          <div className="flex items-center justify-center sm:justify-start gap-1.5">
-            <span>Made with</span>
-            <Heart className="h-3.5 w-3.5 text-orange-500 fill-orange-500" />
-            <span>by Grafana & Friends Mumbai Community</span>
+        {/* Legal & Trademark Disclosure Bar */}
+        <div className="pt-6 border-t border-zinc-800/60 flex flex-col md:flex-row items-center justify-between gap-4 text-[11px] text-zinc-500 text-center md:text-left">
+          <div className="space-y-1">
+            <p>
+              Grafana is a registered trademark of Grafana Labs. CNCF and Prometheus are registered trademarks of The Linux Foundation.
+            </p>
+            <p>
+              Grafana & Friends Mumbai is an independent open-source community chapter.
+            </p>
           </div>
-          <div className="flex items-center justify-center gap-3 sm:gap-4 flex-wrap">
+          <div className="flex items-center justify-center gap-3 flex-wrap shrink-0">
             <a href={`mailto:${chapter.email}`} className="hover:text-zinc-400 transition-colors flex items-center gap-1">
-              <Mail className="h-3.5 w-3.5" />
+              <Mail className="h-3 w-3" />
               <span>{chapter.email}</span>
             </a>
             <span>•</span>

@@ -28,6 +28,31 @@ export interface SocialLinks {
   cfp: string;
 }
 
+export interface EcosystemItem {
+  id: string;
+  name: string;
+  category: string;
+  status: string;
+  badge: string;
+  description: string;
+  url: string;
+  icon: string;
+}
+
+export interface MascotTip {
+  id: string;
+  topic: string;
+  tip: string;
+}
+
+export interface MascotInfo {
+  name: string;
+  title: string;
+  bio: string;
+  quote: string;
+  tips: MascotTip[];
+}
+
 export interface CurrentEvent {
   hasUpcomingEvent: boolean;
   title: string;
@@ -122,6 +147,8 @@ export interface FaqItem {
 export interface CommunityData {
   chapter: ChapterInfo;
   socials: SocialLinks;
+  mascot: MascotInfo;
+  ecosystem: EcosystemItem[];
   currentEvent: CurrentEvent;
   schedule: ScheduleItem[];
   speakers: Speaker[];
