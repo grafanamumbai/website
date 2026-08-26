@@ -92,12 +92,12 @@ export default function JoinPage() {
           
           {/* Header Box */}
           <div className="mb-8 sm:mb-12 flex flex-col items-center text-center">
-            <div className="relative mb-4 h-16 w-16 sm:h-20 sm:w-20 rounded-2xl bg-orange-500/10 p-2.5 ring-1 ring-orange-500/30 shadow-xl">
+            <div className="relative mb-4 h-16 w-16 sm:h-20 sm:w-20 rounded-full bg-orange-500/10 p-2 ring-1 ring-orange-500/30 shadow-xl overflow-hidden">
               <Image 
-                src="/logo-header.png" 
+                src="/grafana-logo.png" 
                 alt="Grafana & Friends Mumbai" 
                 fill 
-                className="object-contain p-1.5" 
+                className="object-cover" 
               />
             </div>
             <div className="inline-flex items-center gap-2 rounded-full border border-orange-500/30 bg-orange-500/10 px-3.5 py-1 text-xs font-semibold text-orange-400 mb-3">
