@@ -1,7 +1,8 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import Image from 'next/image';
+import Autoplay from 'embla-carousel-autoplay';
 import { Button } from '@/components/ui/button';
 import {
   Carousel,
@@ -52,6 +53,14 @@ const getAvatarUrl = (url: string | undefined) => {
 
 export default function SpeakersSection() {
   const { speakers, socials } = communityData;
+  const autoplayPlugin = useRef(
+    Autoplay({ delay: 3500, stopOnInteraction: false, stopOnMouseEnter: true })
+  );
+
+  // If speakers list is short, duplicate to guarantee seamless infinite carousel scrolling on 3-col desktop
+  const displaySpeakers = speakers.length > 0 && speakers.length < 6
+    ? [...speakers, ...speakers]
+    : speakers;
 
   const SpeakerCard = ({ speaker }: { speaker: any }) => {
     const [imgError, setImgError] = useState(false);
@@ -59,56 +68,58 @@ export default function SpeakersSection() {
 
     return (
       <div
-        className={`group flex h-full flex-col rounded-3xl border ${
+        className={`group flex h-full flex-col justify-between rounded-3xl border ${
           speaker.featured ? 'border-orange-500/50 bg-orange-500/5' : 'border-zinc-800/80 bg-zinc-900/40'
-        } p-6 sm:p-8 backdrop-blur-md transition-all duration-300 hover:border-orange-500/30 hover:bg-zinc-900 hover:-translate-y-1 hover:shadow-2xl hover:shadow-orange-500/10`}
+        } p-6 sm:p-8 backdrop-blur-md transition-all duration-300 hover:border-orange-500/40 hover:bg-zinc-900/90 hover:-translate-y-1 hover:shadow-2xl hover:shadow-orange-500/10`}
       >
-        <div className="flex items-start gap-4 sm:gap-6">
-          {/* Avatar with safe fallback */}
-          <div className="relative h-16 w-16 sm:h-20 sm:w-20 shrink-0 rounded-2xl overflow-hidden border border-zinc-800 bg-zinc-800 flex items-center justify-center">
-            {avatarSrc && !imgError ? (
-              <img
-                src={avatarSrc}
-                alt={speaker.name}
-                onError={() => setImgError(true)}
-                className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
-                referrerPolicy="no-referrer"
-              />
-            ) : (
-              <div className="flex h-full w-full items-center justify-center bg-zinc-800 text-orange-400 font-bold text-lg font-mono">
-                {speaker.name ? speaker.name.charAt(0) : <User className="h-6 w-6" />}
-              </div>
-            )}
+        <div>
+          <div className="flex items-start gap-4 sm:gap-6">
+            {/* Avatar with safe fallback */}
+            <div className="relative h-16 w-16 sm:h-20 sm:w-20 shrink-0 rounded-2xl overflow-hidden border border-zinc-800 bg-zinc-800 flex items-center justify-center shadow-md">
+              {avatarSrc && !imgError ? (
+                <img
+                  src={avatarSrc}
+                  alt={speaker.name}
+                  onError={() => setImgError(true)}
+                  className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
+                  referrerPolicy="no-referrer"
+                />
+              ) : (
+                <div className="flex h-full w-full items-center justify-center bg-zinc-800 text-orange-400 font-bold text-lg font-mono">
+                  {speaker.name ? speaker.name.charAt(0) : <User className="h-6 w-6" />}
+                </div>
+              )}
+            </div>
+            
+            {/* Info */}
+            <div className="flex-1 min-w-0">
+              <h3 className="text-lg sm:text-xl font-bold text-white group-hover:text-orange-400 transition-colors truncate">
+                {speaker.name}
+              </h3>
+              <p className="text-sm font-semibold text-zinc-400 mt-0.5">{speaker.role}</p>
+              {speaker.company && (
+                <div className="flex items-center gap-1.5 mt-1.5 text-xs text-zinc-500">
+                  <Building2 className="h-3.5 w-3.5 shrink-0" />
+                  <span className="truncate">{speaker.company}</span>
+                </div>
+              )}
+            </div>
           </div>
-          
-          {/* Info */}
-          <div className="flex-1 min-w-0">
-            <h3 className="text-lg sm:text-xl font-bold text-white group-hover:text-orange-400 transition-colors truncate">
-              {speaker.name}
-            </h3>
-            <p className="text-sm font-semibold text-zinc-400 mt-0.5">{speaker.role}</p>
-            {speaker.company && (
-              <div className="flex items-center gap-1.5 mt-1.5 text-xs text-zinc-500">
-                <Building2 className="h-3.5 w-3.5 shrink-0" />
-                <span className="truncate">{speaker.company}</span>
-              </div>
-            )}
-          </div>
-        </div>
 
-        {/* Talk Topic */}
-        <div className="mt-6 flex-1">
-          <div className="inline-block rounded-lg bg-zinc-800/80 px-3 py-1.5 text-xs font-semibold text-zinc-300 mb-3 border border-zinc-700/50">
-            Talk Topic
+          {/* Talk Topic */}
+          <div className="mt-6">
+            <div className="inline-block rounded-lg bg-zinc-800/80 px-3 py-1.5 text-xs font-semibold text-zinc-300 mb-3 border border-zinc-700/50">
+              Talk Topic
+            </div>
+            <h4 className="text-base sm:text-lg font-bold text-zinc-100 leading-snug">
+              {speaker.topic}
+            </h4>
+            {speaker.bio && (
+              <p className="mt-3 text-sm text-zinc-400 line-clamp-3 leading-relaxed">
+                {speaker.bio}
+              </p>
+            )}
           </div>
-          <h4 className="text-base sm:text-lg font-bold text-zinc-100 leading-snug">
-            {speaker.topic}
-          </h4>
-          {speaker.bio && (
-            <p className="mt-3 text-sm text-zinc-400 line-clamp-3 leading-relaxed">
-              {speaker.bio}
-            </p>
-          )}
         </div>
 
         {/* Social Links */}
@@ -131,7 +142,7 @@ export default function SpeakersSection() {
   };
 
   return (
-    <section id="speakers" className="py-16 sm:py-24 md:py-28 2xl:py-36 bg-[#090b0e] text-white border-t border-zinc-800/80">
+    <section id="speakers" className="py-16 sm:py-24 md:py-28 2xl:py-36 bg-[#090b0e] text-white border-t border-zinc-800/80 overflow-hidden">
       <div className="container mx-auto px-4 sm:px-6 md:px-8 lg:px-12 max-w-7xl 2xl:max-w-[1600px] 3xl:max-w-[1800px]">
         
         {/* Section Header */}
@@ -148,35 +159,37 @@ export default function SpeakersSection() {
           </p>
         </div>
 
-        {/* Speakers Layout */}
+        {/* Auto-sliding Infinite Loop Carousel */}
         <div className="mt-12 sm:mt-16 md:mt-20">
-          {speakers.length <= 3 ? (
-            <div className="grid gap-6 sm:gap-8 md:gap-10 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-              {speakers.map((speaker) => (
-                <SpeakerCard key={speaker.id} speaker={speaker} />
+          <Carousel
+            plugins={[autoplayPlugin.current]}
+            opts={{
+              align: "start",
+              loop: true,
+            }}
+            className="w-full"
+          >
+            <CarouselContent className="-ml-4 sm:-ml-6 md:-ml-8">
+              {displaySpeakers.map((speaker, index) => (
+                <CarouselItem
+                  key={`${speaker.id}-${index}`}
+                  className="pl-4 sm:pl-6 md:pl-8 md:basis-1/2 lg:basis-1/3"
+                >
+                  <SpeakerCard speaker={speaker} />
+                </CarouselItem>
               ))}
-            </div>
-          ) : (
-            <Carousel
-              opts={{
-                align: "start",
-                loop: true,
-              }}
-              className="w-full"
-            >
-              <CarouselContent className="-ml-4 sm:-ml-6 md:-ml-8">
-                {speakers.map((speaker) => (
-                  <CarouselItem key={speaker.id} className="pl-4 sm:pl-6 md:pl-8 md:basis-1/2 lg:basis-1/3">
-                    <SpeakerCard speaker={speaker} />
-                  </CarouselItem>
-                ))}
-              </CarouselContent>
-              <div className="flex items-center justify-center gap-4 mt-12">
-                <CarouselPrevious className="position-static transform-none static h-12 w-12 border-zinc-800 bg-zinc-900/50 hover:bg-orange-500 hover:text-white" />
-                <CarouselNext className="position-static transform-none static h-12 w-12 border-zinc-800 bg-zinc-900/50 hover:bg-orange-500 hover:text-white" />
+            </CarouselContent>
+
+            {/* Carousel Controls with Autoplay indicator */}
+            <div className="flex items-center justify-center gap-4 mt-10">
+              <CarouselPrevious className="position-static transform-none static h-11 w-11 border-zinc-800 bg-zinc-900/70 hover:bg-orange-500 hover:text-white transition-colors" />
+              <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-zinc-900/80 border border-zinc-800 text-[11px] font-mono text-zinc-400">
+                <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
+                <span>Auto-sliding Loop</span>
               </div>
-            </Carousel>
-          )}
+              <CarouselNext className="position-static transform-none static h-11 w-11 border-zinc-800 bg-zinc-900/70 hover:bg-orange-500 hover:text-white transition-colors" />
+            </div>
+          </Carousel>
         </div>
 
         {/* CFP Banner Card */}
