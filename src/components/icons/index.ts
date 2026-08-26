@@ -6,3 +6,4 @@ export { PrometheusLogo } from './prometheus-logo';
 export { OpenTelemetryLogo } from './opentelemetry-logo';
 export { LokiLogo, TempoLogo, MimirLogo, PyroscopeLogo } from './loki-tempo-mimir';
 export { KubernetesLogo, CiliumLogo, JaegerLogo } from './kubernetes-cilium';
+export { AlloyLogo, BeylaLogo, K6Logo, OnCallLogo, FaroLogo } from './grafana-stack-icons';
