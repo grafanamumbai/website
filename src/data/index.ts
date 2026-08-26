@@ -36,6 +36,9 @@ export interface CurrentEvent {
   date: string;
   time: string;
   targetDateISO: string;
+  eventType?: string;
+  communityPartners?: { id: string; name: string; type: string; }[];
+  collaborationPartners?: { id: string; name: string; type: string; }[];
   venue: {
     name: string;
     address: string;
@@ -65,11 +68,7 @@ export interface Speaker {
   topic: string;
   bio: string;
   avatar: string;
-  socials: {
-    linkedin?: string;
-    twitter?: string;
-    github?: string;
-  };
+  socials: Record<string, string>;
   featured?: boolean;
 }
 
@@ -79,12 +78,7 @@ export interface TeamMember {
   role: string;
   company: string;
   avatar: string;
-  socials: {
-    linkedin?: string;
-    twitter?: string;
-    github?: string;
-    meetup?: string;
-  };
+  socials: Record<string, string>;
 }
 
 export interface Sponsor {

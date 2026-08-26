@@ -24,24 +24,54 @@
     "cfp": "https://grafana.qualtrics.com/jfe/form/SV_4OQ9dzUAbSHfrAG"
   },
   "currentEvent": {
-    "title": "GrafanaCon Local Mumbai 2026",
-    "edition": "2026 Edition",
-    "theme": "Modern Observability, OpenTelemetry & Intelligent Dashboards",
-    "date": "Saturday, 13th June 2026",
-    "time": "10:00 AM - 5:00 PM IST",
-    "targetDateISO": "2026-06-13T10:00:00+05:30",
+    "title": "Cloud Native Mumbai",
+    "edition": "September 2026",
+    "theme": "Cloud Native & Open Source",
+    "date": "Saturday, Yet to be Announced",
+    "time": "",
+    "targetDateISO": "",
     "venue": {
-      "name": "Mumbai",
-      "address": "Venue details to be announced soon",
-      "mapUrl": "https://maps.google.com/?q=Mumbai,+Maharashtra,+India"
+      "name": "Yet to be Announced",
+      "address": "Yet to be Announced",
+      "mapUrl": ""
     },
     "registration": {
-      "isOpen": true,
-      "statusText": "Limited Seats Available",
-      "rsvpUrl": "https://www.meetup.com/grafana-and-friends-mumbai/events/315746165/",
-      "cfpUrl": "https://grafana.qualtrics.com/jfe/form/SV_4OQ9dzUAbSHfrAG"
+      "isOpen": false,
+      "statusText": "",
+      "rsvpUrl": "",
+      "cfpUrl": ""
     },
-    "hasUpcomingEvent": false
+    "hasUpcomingEvent": true,
+    "eventType": "Cloud Native Mumbai Community Event",
+    "communityPartners": [
+      {
+        "id": "grafana-friends-mumbai",
+        "name": "Grafana & Friends Mumbai",
+        "type": "Community Partner"
+      },
+      {
+        "id": "merge-rise",
+        "name": "Merge & Rise",
+        "type": "Community Partner"
+      },
+      {
+        "id": "women-in-cloud-native",
+        "name": "Women in Cloud Native",
+        "type": "Community Partner"
+      }
+    ],
+    "collaborationPartners": [
+      {
+        "id": "devx",
+        "name": "Yet to be Announced",
+        "type": "Collaboration Partner"
+      },
+      {
+        "id": "indierepair",
+        "name": "Yet to be Announced",
+        "type": "Collaboration Partner"
+      }
+    ]
   },
   "schedule": [
     {

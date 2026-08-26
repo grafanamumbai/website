@@ -1,19 +1,34 @@
-'use client';
-
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import {
   Mic2,
+  Building2,
   Sparkles,
+  Send,
   Linkedin,
   Twitter,
   Github,
-  Briefcase,
-  ExternalLink,
-  Presentation,
-  Send,
+  Globe,
+  Youtube,
+  Instagram,
+  Facebook,
+  MessageSquare,
+  Link as LinkIcon
 } from 'lucide-react';
 import communityData from '@/data';
+
+const getSocialIcon = (key: string) => {
+  const k = key.toLowerCase();
+  if (k === 'linkedin') return <Linkedin className="h-4 w-4" />;
+  if (k === 'twitter' || k === 'x') return <Twitter className="h-4 w-4" />;
+  if (k === 'github') return <Github className="h-4 w-4" />;
+  if (k === 'website' || k === 'web') return <Globe className="h-4 w-4" />;
+  if (k === 'youtube') return <Youtube className="h-4 w-4" />;
+  if (k === 'instagram' || k === 'insta') return <Instagram className="h-4 w-4" />;
+  if (k === 'facebook' || k === 'fb') return <Facebook className="h-4 w-4" />;
+  if (k === 'discord' || k === 'slack') return <MessageSquare className="h-4 w-4" />;
+  return <LinkIcon className="h-4 w-4" />;
+};
 
 export default function SpeakersSection() {
   const { speakers, socials } = communityData;
@@ -37,78 +52,70 @@ export default function SpeakersSection() {
         </div>
 
         {/* Speakers Grid */}
-        <div className="mt-12 sm:mt-16 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
+        <div className="mt-12 sm:mt-16 md:mt-20 grid gap-6 sm:gap-8 md:gap-10 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
           {speakers.map((speaker) => (
             <div
               key={speaker.id}
-              className="flex flex-col justify-between items-center text-center rounded-2xl bg-zinc-900/60 border border-zinc-800/80 p-6 sm:p-7 shadow-lg hover:border-orange-500/50 hover:bg-zinc-900/90 transition-all duration-300 group"
+              className={`group flex flex-col rounded-3xl border ${
+                speaker.featured ? 'border-orange-500/50 bg-orange-500/5' : 'border-zinc-800/80 bg-zinc-900/40'
+              } p-6 sm:p-8 backdrop-blur-md transition-all duration-300 hover:border-orange-500/30 hover:bg-zinc-900 hover:-translate-y-1 hover:shadow-2xl hover:shadow-orange-500/10`}
             >
-              <div className="flex flex-col items-center w-full">
-                {/* Avatar with glow ring */}
-                <div className="relative mb-5 h-28 w-28 sm:h-32 sm:w-32 overflow-hidden rounded-full ring-2 ring-zinc-700 transition-all duration-300 group-hover:ring-orange-500 group-hover:scale-105 shadow-md">
+              <div className="flex items-start gap-4 sm:gap-6">
+                {/* Avatar */}
+                <div className="relative h-16 w-16 sm:h-20 sm:w-20 shrink-0 rounded-2xl overflow-hidden border border-zinc-800 bg-zinc-800">
                   <Image
-                    src={speaker.avatar}
+                    src={speaker.avatar || '/placeholder-avatar.png'}
                     alt={speaker.name}
                     fill
-                    className="object-cover"
+                    unoptimized
+                    className="object-cover transition-transform duration-500 group-hover:scale-110"
                   />
                 </div>
-
-                <h3 className="text-base sm:text-lg font-bold text-white group-hover:text-orange-400 transition-colors">
-                  {speaker.name}
-                </h3>
                 
-                <div className="flex items-center gap-1.5 text-xs font-semibold text-orange-400 mt-1">
-                  <Briefcase className="h-3.5 w-3.5 shrink-0" />
-                  <span className="truncate">{speaker.company}</span>
-                </div>
-
-                {speaker.topic && (
-                  <div className="mt-4 rounded-xl bg-zinc-950/80 border border-zinc-800/80 p-3 text-xs text-zinc-300 font-medium text-left w-full">
-                    <div className="flex items-center gap-1.5 text-[10px] text-zinc-400 font-semibold uppercase tracking-wider mb-1">
-                      <Presentation className="h-3 w-3 text-orange-400" />
-                      <span>Talk Topic</span>
+                {/* Info */}
+                <div className="flex-1">
+                  <h3 className="text-lg sm:text-xl font-bold text-white group-hover:text-orange-400 transition-colors">
+                    {speaker.name}
+                  </h3>
+                  <p className="text-sm font-semibold text-zinc-400 mt-0.5">{speaker.role}</p>
+                  {speaker.company && (
+                    <div className="flex items-center gap-1.5 mt-1.5 text-xs text-zinc-500">
+                      <Building2 className="h-3.5 w-3.5" />
+                      <span>{speaker.company}</span>
                     </div>
-                    <p className="line-clamp-2 leading-relaxed text-zinc-200">{speaker.topic}</p>
-                  </div>
+                  )}
+                </div>
+              </div>
+
+              {/* Talk Topic */}
+              <div className="mt-6 flex-1">
+                <div className="inline-block rounded-lg bg-zinc-800/80 px-3 py-1.5 text-xs font-semibold text-zinc-300 mb-3 border border-zinc-700/50">
+                  Talk Topic
+                </div>
+                <h4 className="text-base sm:text-lg font-bold text-zinc-100 leading-snug">
+                  {speaker.topic}
+                </h4>
+                {speaker.bio && (
+                  <p className="mt-3 text-sm text-zinc-400 line-clamp-3 leading-relaxed">
+                    {speaker.bio}
+                  </p>
                 )}
               </div>
 
-              {/* Social Links Row */}
-              <div className="mt-5 flex items-center justify-center gap-2.5 pt-3 border-t border-zinc-800/60 w-full">
-                {speaker.socials.linkedin && (
+              {/* Social Links dynamically rendered */}
+              <div className="mt-6 flex items-center gap-2 pt-4 border-t border-zinc-800/60">
+                {speaker.socials && Object.entries(speaker.socials).map(([key, url]) => (
                   <a
-                    href={speaker.socials.linkedin}
+                    key={key}
+                    href={url as string}
                     target="_blank"
                     rel="noopener noreferrer"
-                    aria-label={`${speaker.name}'s LinkedIn`}
+                    aria-label={`${speaker.name}'s ${key}`}
                     className="flex h-9 w-9 items-center justify-center rounded-xl bg-zinc-800/80 text-zinc-300 hover:bg-orange-500 hover:text-white transition-all active:scale-95"
                   >
-                    <Linkedin className="h-4 w-4" />
+                    {getSocialIcon(key)}
                   </a>
-                )}
-                {speaker.socials.twitter && (
-                  <a
-                    href={speaker.socials.twitter}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label={`${speaker.name}'s Twitter`}
-                    className="flex h-9 w-9 items-center justify-center rounded-xl bg-zinc-800/80 text-zinc-300 hover:bg-orange-500 hover:text-white transition-all active:scale-95"
-                  >
-                    <Twitter className="h-4 w-4" />
-                  </a>
-                )}
-                {speaker.socials.github && (
-                  <a
-                    href={speaker.socials.github}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label={`${speaker.name}'s GitHub`}
-                    className="flex h-9 w-9 items-center justify-center rounded-xl bg-zinc-800/80 text-zinc-300 hover:bg-orange-500 hover:text-white transition-all active:scale-95"
-                  >
-                    <Github className="h-4 w-4" />
-                  </a>
-                )}
+                ))}
               </div>
             </div>
           ))}
@@ -122,14 +129,14 @@ export default function SpeakersSection() {
           <h3 className="text-xl sm:text-2xl 2xl:text-3xl font-black text-white">
             Have an Observability Story or Tool to Share?
           </h3>
-          <p className="mt-2 text-xs sm:text-sm md:text-base text-zinc-300 max-w-xl mx-auto leading-relaxed">
-            Our Call for Proposals (CFP) is open for community members of all backgrounds. First-time speakers and student developers are warmly supported!
+          <p className="mt-3 text-sm sm:text-base text-zinc-400 max-w-2xl mx-auto">
+            We are always looking for passionate speakers to share their experiences, case studies, or deep dives into the Grafana ecosystem.
           </p>
-          <div className="mt-6 flex justify-center">
+          <div className="mt-6 sm:mt-8 flex justify-center">
             <Button
               asChild
               size="lg"
-              className="w-full sm:w-auto bg-orange-500 hover:bg-orange-600 text-white font-bold text-sm sm:text-base px-8 h-12 rounded-full shadow-lg shadow-orange-500/25 active:scale-95 transition-all hover:scale-105"
+              className="bg-orange-500 hover:bg-orange-600 text-white font-bold h-12 px-8 rounded-full shadow-lg shadow-orange-500/25 transition-all hover:scale-105"
             >
               <a href={socials.cfp} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-2">
                 <Send className="h-4 w-4" />
