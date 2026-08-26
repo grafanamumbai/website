@@ -6,9 +6,17 @@ import Footer from '@/components/layout/footer';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { useToast } from '@/hooks/use-toast';
-import { Copy, Download, Upload, Sparkles, Check } from 'lucide-react';
+import {
+  Copy,
+  Download,
+  Upload,
+  Sparkles,
+  Check,
+  Award,
+  Share2,
+  Image as ImageIcon,
+} from 'lucide-react';
 import Image from 'next/image';
-import { Card, CardContent } from '@/components/ui/card';
 import communityData from '@/data';
 
 export default function BadgePage() {
@@ -138,46 +146,53 @@ export default function BadgePage() {
   return (
     <div className="flex flex-col min-h-screen bg-[#0c0e14] text-white">
       <Header />
-      <main className="flex-1 container mx-auto px-4 py-16 md:px-6 max-w-4xl relative">
-        <div className="text-center mb-12">
+      <main className="flex-1 container mx-auto px-4 sm:px-6 md:px-8 py-12 sm:py-20 max-w-4xl 2xl:max-w-5xl relative">
+        
+        {/* Header box */}
+        <div className="text-center mb-10 sm:mb-14">
           <div className="inline-flex items-center gap-2 rounded-full border border-orange-500/30 bg-orange-500/10 px-4 py-1 text-xs font-semibold text-orange-400 mb-4">
-            <Sparkles className="h-3.5 w-3.5" />
+            <Award className="h-3.5 w-3.5" />
             <span>Attendee Social Kit</span>
           </div>
-          <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-white">
+          <h1 className="text-2xl xs:text-3xl sm:text-5xl font-black tracking-tight text-white leading-tight">
             Generate Your Attendee Badge
           </h1>
-          <p className="mt-3 text-sm sm:text-base text-zinc-300 max-w-md mx-auto">
+          <p className="mt-3 text-xs sm:text-base text-zinc-300 max-w-md mx-auto">
             Showcase that you're joining the Grafana community in Mumbai on LinkedIn, X, and Instagram.
           </p>
         </div>
 
         {/* Social Share Box */}
-        <div className="p-6 rounded-2xl bg-zinc-900/60 border border-zinc-800/80 mb-12 shadow-lg">
-          <h3 className="text-sm font-semibold text-orange-400 uppercase tracking-wider mb-2">
-            Social Share Template
-          </h3>
-          <p className="text-sm text-zinc-300 font-mono bg-zinc-950 p-4 rounded-xl border border-zinc-800 leading-relaxed">
+        <div className="p-5 sm:p-7 rounded-2xl bg-zinc-900/60 border border-zinc-800/80 mb-10 sm:mb-12 shadow-xl">
+          <div className="flex items-center gap-2 text-xs sm:text-sm font-bold text-orange-400 uppercase tracking-wider mb-2">
+            <Share2 className="h-4 w-4" />
+            <span>Social Share Template</span>
+          </div>
+          <p className="text-xs sm:text-sm text-zinc-300 font-mono bg-zinc-950 p-4 rounded-xl border border-zinc-800 leading-relaxed overflow-x-auto">
             {socialText}
           </p>
           <div className="mt-4">
             <Button
               onClick={handleCopyToClipboard}
               size="sm"
-              className="bg-orange-500 hover:bg-orange-600 text-white font-semibold rounded-full"
+              className="bg-orange-500 hover:bg-orange-600 text-white font-bold rounded-full px-5 h-10 text-xs sm:text-sm"
             >
               {copied ? <Check className="h-4 w-4 mr-1.5" /> : <Copy className="h-4 w-4 mr-1.5" />}
-              <span>{copied ? 'Copied!' : 'Copy Share Text'}</span>
+              <span>{copied ? 'Copied to Clipboard!' : 'Copy Share Text'}</span>
             </Button>
           </div>
         </div>
 
-        {/* Badge Generation Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {/* Card 1: With Photo */}
-          <div className="p-6 rounded-2xl bg-zinc-900/60 border border-zinc-800/80 shadow-lg flex flex-col justify-between">
+        {/* Badge Generation Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
+          
+          {/* Card 1: Custom Photo Badge */}
+          <div className="p-5 sm:p-7 rounded-2xl bg-zinc-900/60 border border-zinc-800/80 shadow-xl flex flex-col justify-between">
             <div>
-              <h3 className="text-lg font-bold text-white mb-1">Custom Photo Badge</h3>
+              <div className="flex items-center gap-2 mb-1">
+                <ImageIcon className="h-4 w-4 text-orange-400" />
+                <h3 className="text-base sm:text-lg font-bold text-white">Custom Photo Badge</h3>
+              </div>
               <p className="text-xs text-zinc-400 mb-4">Upload your picture to embed inside the official template.</p>
               
               <div className="relative w-full aspect-[1200/630] rounded-xl overflow-hidden bg-zinc-950 border border-zinc-800 flex items-center justify-center">
@@ -206,18 +221,18 @@ export default function BadgePage() {
                   </div>
                 )}
                 {!userImage && (
-                  <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/40 backdrop-blur-[1px]">
-                    <Upload className="h-8 w-8 text-orange-400 mb-2" />
-                    <span className="text-xs font-semibold text-white">Upload your photo</span>
+                  <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/50 backdrop-blur-[1px]">
+                    <Upload className="h-8 w-8 text-orange-400 mb-1.5" />
+                    <span className="text-xs font-bold text-white">Upload your photo</span>
                   </div>
                 )}
               </div>
             </div>
 
             <div className="mt-6 grid grid-cols-2 gap-3">
-              <Button asChild variant="outline" className="border-zinc-700 bg-zinc-900 text-zinc-200 hover:bg-zinc-800">
+              <Button asChild variant="outline" className="border-zinc-700 bg-zinc-900 text-zinc-200 hover:bg-zinc-800 text-xs sm:text-sm h-11">
                 <label htmlFor="file-upload" className="cursor-pointer flex items-center justify-center">
-                  <Upload className="h-4 w-4 mr-1.5" />
+                  <Upload className="h-4 w-4 mr-1.5 text-orange-400" />
                   <span>Choose Photo</span>
                 </label>
               </Button>
@@ -226,7 +241,7 @@ export default function BadgePage() {
               <Button
                 onClick={handleDownload}
                 disabled={!userImage}
-                className="bg-orange-500 hover:bg-orange-600 text-white font-semibold"
+                className="bg-orange-500 hover:bg-orange-600 disabled:opacity-50 text-white font-bold text-xs sm:text-sm h-11"
               >
                 <Download className="h-4 w-4 mr-1.5" />
                 <span>Download</span>
@@ -234,10 +249,13 @@ export default function BadgePage() {
             </div>
           </div>
 
-          {/* Card 2: Without Photo */}
-          <div className="p-6 rounded-2xl bg-zinc-900/60 border border-zinc-800/80 shadow-lg flex flex-col justify-between">
+          {/* Card 2: Standard Badge */}
+          <div className="p-5 sm:p-7 rounded-2xl bg-zinc-900/60 border border-zinc-800/80 shadow-xl flex flex-col justify-between">
             <div>
-              <h3 className="text-lg font-bold text-white mb-1">Standard Badge</h3>
+              <div className="flex items-center gap-2 mb-1">
+                <Award className="h-4 w-4 text-orange-400" />
+                <h3 className="text-base sm:text-lg font-bold text-white">Standard Badge</h3>
+              </div>
               <p className="text-xs text-zinc-400 mb-4">Official event card ready to download and share instantly.</p>
               
               <div className="relative w-full aspect-[1200/630] rounded-xl overflow-hidden bg-zinc-950 border border-zinc-800">
@@ -253,13 +271,14 @@ export default function BadgePage() {
             <div className="mt-6">
               <Button
                 onClick={handleDownloadWithoutPhoto}
-                className="w-full bg-orange-500 hover:bg-orange-600 text-white font-semibold"
+                className="w-full bg-orange-500 hover:bg-orange-600 text-white font-bold text-xs sm:text-sm h-11"
               >
                 <Download className="h-4 w-4 mr-1.5" />
                 <span>Download Standard Badge</span>
               </Button>
             </div>
           </div>
+
         </div>
 
       </main>

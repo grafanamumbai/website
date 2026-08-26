@@ -12,33 +12,49 @@ import {
   SheetTitle,
   SheetDescription,
 } from '@/components/ui/sheet';
-import { Menu, ArrowRight, Sparkles } from 'lucide-react';
+import {
+  Menu,
+  ArrowRight,
+  Sparkles,
+  Home,
+  Info,
+  Mic2,
+  CalendarDays,
+  Trophy,
+  Users2,
+  Camera,
+  HelpCircle,
+  Award,
+  ExternalLink,
+  MessageSquare,
+} from 'lucide-react';
 import communityData from '@/data';
 
 const navLinks = [
-  { href: '/#about', label: 'About' },
-  { href: '/#speakers', label: 'Speakers' },
-  { href: '/#schedule', label: 'Schedule' },
-  { href: '/#contests', label: 'Contests & Swag' },
-  { href: '/#team', label: 'Team' },
-  { href: '/#gallery', label: 'Gallery' },
-  { href: '/#faq', label: 'FAQ' },
-  { href: '/badge', label: 'Badge' },
+  { href: '/#about', label: 'About', icon: Info },
+  { href: '/#speakers', label: 'Speakers', icon: Mic2 },
+  { href: '/#schedule', label: 'Schedule', icon: CalendarDays },
+  { href: '/#contests', label: 'Contests & Swag', icon: Trophy },
+  { href: '/#team', label: 'Team', icon: Users2 },
+  { href: '/#gallery', label: 'Gallery', icon: Camera },
+  { href: '/#faq', label: 'FAQ', icon: HelpCircle },
+  { href: '/badge', label: 'Badge', icon: Award },
 ];
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
-  const { chapter, currentEvent } = communityData;
+  const { chapter, currentEvent, socials } = communityData;
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-white/10 bg-[#0e1117]/85 backdrop-blur-md transition-all duration-300">
-      <div className="container mx-auto flex h-16 items-center justify-between px-4 md:px-6">
+    <header className="sticky top-0 z-50 w-full border-b border-zinc-800/80 bg-[#0e1117]/90 backdrop-blur-xl transition-all duration-300">
+      <div className="mx-auto flex h-16 sm:h-20 max-w-7xl 2xl:max-w-[1600px] 3xl:max-w-[1800px] items-center justify-between px-4 sm:px-6 md:px-8 lg:px-12">
+        
         {/* Brand Logo & Name */}
         <Link 
           href="/" 
-          className="group flex items-center gap-3 transition-opacity hover:opacity-90"
+          className="group flex items-center gap-2.5 sm:gap-3.5 transition-opacity hover:opacity-90 shrink-0"
         >
-          <div className="relative h-9 w-9 rounded-lg bg-orange-500/10 p-1 ring-1 ring-orange-500/30 transition-transform duration-300 group-hover:scale-105">
+          <div className="relative h-9 w-9 sm:h-11 sm:w-11 rounded-xl bg-orange-500/10 p-1.5 ring-1 ring-orange-500/30 transition-transform duration-300 group-hover:scale-105">
             <Image 
               src="/logo-header.png" 
               alt={chapter.name} 
@@ -47,39 +63,44 @@ export default function Header() {
             />
           </div>
           <div className="flex flex-col">
-            <span className="text-base sm:text-lg font-bold tracking-tight text-white flex items-center gap-1.5">
-              {chapter.shortName}
-              <span className="hidden sm:inline-block rounded-full bg-orange-500/20 px-2 py-0.5 text-[11px] font-semibold text-orange-400 border border-orange-500/30">
+            <div className="flex items-center gap-1.5">
+              <span className="text-sm sm:text-base md:text-lg font-bold tracking-tight text-white">
+                {chapter.shortName}
+              </span>
+              <span className="rounded-full bg-orange-500/20 px-2 py-0.5 text-[10px] sm:text-xs font-semibold text-orange-400 border border-orange-500/30">
                 Chapter
               </span>
-            </span>
-            <span className="hidden md:block text-[11px] text-zinc-400 font-medium">
+            </div>
+            <span className="text-[10px] sm:text-xs text-zinc-400 font-medium">
               Powered by Grafana Labs
             </span>
           </div>
         </Link>
 
-        {/* Desktop Navigation */}
-        <nav className="hidden lg:flex items-center gap-6 text-sm font-medium">
-          {navLinks.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className="text-zinc-300 hover:text-orange-400 transition-colors py-1 relative group"
-            >
-              {link.label}
-              <span className="absolute inset-x-0 -bottom-1 h-0.5 bg-orange-500 scale-x-0 group-hover:scale-x-100 transition-transform origin-left rounded-full duration-200" />
-            </Link>
-          ))}
+        {/* Desktop Navigation (>= lg) */}
+        <nav className="hidden lg:flex items-center gap-1 xl:gap-2 text-sm font-medium">
+          {navLinks.map((link) => {
+            const Icon = link.icon;
+            return (
+              <Link
+                key={link.href}
+                href={link.href}
+                className="flex items-center gap-1.5 px-3 py-2 text-zinc-300 hover:text-white hover:bg-zinc-800/60 rounded-lg transition-all"
+              >
+                <Icon className="h-4 w-4 text-orange-400/80" />
+                <span>{link.label}</span>
+              </Link>
+            );
+          })}
         </nav>
 
-        {/* Action Buttons */}
-        <div className="flex items-center gap-3">
+        {/* Desktop CTA Action Buttons */}
+        <div className="hidden lg:flex items-center gap-3 shrink-0">
           <Button 
             asChild 
             variant="ghost" 
             size="sm" 
-            className="hidden sm:inline-flex text-zinc-300 hover:text-white hover:bg-zinc-800"
+            className="text-zinc-300 hover:text-white hover:bg-zinc-800 text-sm h-10 px-4 rounded-xl"
           >
             <Link href="/join">Join Community</Link>
           </Button>
@@ -87,83 +108,116 @@ export default function Header() {
           <Button 
             asChild 
             size="sm" 
-            className="bg-orange-500 hover:bg-orange-600 text-white font-semibold rounded-full shadow-lg shadow-orange-500/20 transition-all hover:scale-105"
+            className="bg-orange-500 hover:bg-orange-600 text-white font-semibold rounded-xl h-10 px-5 shadow-lg shadow-orange-500/20 transition-all hover:scale-105 active:scale-95"
           >
             <a 
               href={currentEvent.registration.rsvpUrl} 
               target="_blank" 
               rel="noopener noreferrer"
-              className="flex items-center gap-1.5"
+              className="flex items-center gap-2"
             >
               <span>RSVP Now</span>
-              <ArrowRight className="h-3.5 w-3.5" />
+              <ArrowRight className="h-4 w-4" />
+            </a>
+          </Button>
+        </div>
+
+        {/* Mobile Hamburger & Quick RSVP (< lg) */}
+        <div className="flex items-center gap-2 lg:hidden">
+          <Button 
+            asChild 
+            size="sm" 
+            className="bg-orange-500 hover:bg-orange-600 text-white font-bold rounded-lg text-xs h-9 px-3.5 shadow-md"
+          >
+            <a 
+              href={currentEvent.registration.rsvpUrl} 
+              target="_blank" 
+              rel="noopener noreferrer"
+            >
+              RSVP
             </a>
           </Button>
 
-          {/* Mobile Sheet Navigation */}
           <Sheet open={isOpen} onOpenChange={setIsOpen}>
             <SheetTrigger asChild>
               <Button 
                 variant="outline" 
                 size="icon" 
-                className="lg:hidden border-zinc-800 bg-zinc-900/80 text-zinc-300 hover:text-white hover:bg-zinc-800"
+                className="h-9 w-9 border-zinc-800 bg-zinc-900 text-zinc-200 hover:text-white hover:bg-zinc-800 rounded-lg"
+                aria-label="Open Navigation Menu"
               >
                 <Menu className="h-5 w-5" />
-                <span className="sr-only">Open navigation</span>
               </Button>
             </SheetTrigger>
-            <SheetContent side="right" className="bg-[#0e1117] border-zinc-800 text-white p-6">
-              <SheetHeader className="text-left border-b border-zinc-800/80 pb-4">
-                <SheetTitle asChild>
-                  <Link 
-                    href="/" 
-                    className="flex items-center gap-3 text-lg font-bold text-white" 
-                    onClick={() => setIsOpen(false)}
-                  >
-                    <Image src="/logo-header.png" alt={chapter.name} width={32} height={32} />
-                    <span>{chapter.name}</span>
-                  </Link>
-                </SheetTitle>
-                <SheetDescription className="text-xs text-zinc-400">
-                  {chapter.tagline}
-                </SheetDescription>
-              </SheetHeader>
-              
-              <nav className="flex flex-col gap-4 mt-6 text-base font-medium">
-                {navLinks.map((link) => (
-                  <Link
-                    key={link.href}
-                    href={link.href}
-                    className="text-zinc-300 hover:text-orange-400 py-1 transition-colors"
-                    onClick={() => setIsOpen(false)}
-                  >
-                    {link.label}
-                  </Link>
-                ))}
-              </nav>
+            <SheetContent side="right" className="w-[85vw] max-w-sm bg-[#0e1117] border-zinc-800 text-white p-6 flex flex-col justify-between overflow-y-auto">
+              <div>
+                <SheetHeader className="text-left border-b border-zinc-800/80 pb-4">
+                  <SheetTitle asChild>
+                    <Link 
+                      href="/" 
+                      className="flex items-center gap-3 text-lg font-bold text-white" 
+                      onClick={() => setIsOpen(false)}
+                    >
+                      <div className="relative h-8 w-8 rounded-lg bg-orange-500/10 p-1 ring-1 ring-orange-500/30">
+                        <Image src="/logo-header.png" alt={chapter.name} fill className="object-contain" />
+                      </div>
+                      <span>{chapter.shortName}</span>
+                    </Link>
+                  </SheetTitle>
+                  <SheetDescription className="text-xs text-zinc-400 mt-1">
+                    {chapter.tagline}
+                  </SheetDescription>
+                </SheetHeader>
+                
+                {/* Nav Links with Lucide Icons */}
+                <nav className="flex flex-col gap-1.5 mt-6">
+                  {navLinks.map((link) => {
+                    const Icon = link.icon;
+                    return (
+                      <Link
+                        key={link.href}
+                        href={link.href}
+                        className="flex items-center gap-3.5 px-3.5 py-3 rounded-xl text-zinc-300 hover:text-white hover:bg-zinc-800/80 active:bg-orange-500/20 active:text-orange-400 transition-colors text-base font-medium"
+                        onClick={() => setIsOpen(false)}
+                      >
+                        <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-zinc-900 border border-zinc-800 text-orange-400">
+                          <Icon className="h-4 w-4" />
+                        </div>
+                        <span>{link.label}</span>
+                      </Link>
+                    );
+                  })}
+                </nav>
+              </div>
 
-              <div className="flex flex-col gap-3 mt-8 pt-6 border-t border-zinc-800/80">
+              {/* Bottom Drawer Actions */}
+              <div className="flex flex-col gap-3 pt-6 border-t border-zinc-800/80 mt-6">
                 <Button 
                   asChild 
-                  className="w-full bg-orange-500 hover:bg-orange-600 text-white font-semibold rounded-lg h-11" 
+                  className="w-full bg-orange-500 hover:bg-orange-600 text-white font-bold rounded-xl h-12 text-base shadow-lg shadow-orange-500/25" 
                   onClick={() => setIsOpen(false)}
                 >
-                  <a href={currentEvent.registration.rsvpUrl} target="_blank" rel="noopener noreferrer">
-                    RSVP on Meetup
+                  <a href={currentEvent.registration.rsvpUrl} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-2">
+                    <span>RSVP for Meetup</span>
+                    <ArrowRight className="h-4 w-4" />
                   </a>
                 </Button>
                 <Button 
                   asChild 
                   variant="outline" 
-                  className="w-full border-zinc-700 text-zinc-200 hover:bg-zinc-800 h-11" 
+                  className="w-full border-zinc-700 bg-zinc-900 text-zinc-200 hover:bg-zinc-800 rounded-xl h-11 text-sm" 
                   onClick={() => setIsOpen(false)}
                 >
-                  <Link href="/join">Join WhatsApp & Slack</Link>
+                  <Link href="/join" className="flex items-center justify-center gap-2">
+                    <MessageSquare className="h-4 w-4 text-orange-400" />
+                    <span>Join Community Channels</span>
+                  </Link>
                 </Button>
               </div>
             </SheetContent>
           </Sheet>
         </div>
+
       </div>
     </header>
   );
