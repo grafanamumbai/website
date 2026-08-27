@@ -14,14 +14,14 @@
     }
   },
   "socials": {
-    "website": "https://www.grafanafriendsmumbai.in/",
-    "meetup": "https://www.meetup.com/grafana-and-friends-mumbai/",
-    "linkedin": "https://www.linkedin.com/in/grafana-user-group-mumbai-50149b386/",
+    "website": "https://www.grafanafriendsmumbai.in",
+    "meetup": "https://www.meetup.com/grafana-and-friends-mumbai",
+    "linkedin": "https://www.linkedin.com/groups/15426000",
     "twitter": "https://twitter.com/grafanamumbai",
-    "instagram": "https://www.instagram.com/grafanamumbai?igsh=Mmhqcnh3Zmd2bmU5",
+    "instagram": "https://www.instagram.com/grafanamumbai",
     "slack": "https://grafana.slack.com/archives/C01FMSQ6A8L",
-    "github": "https://github.com/grafanamumbai/website",
-    "cfp": "https://grafana.qualtrics.com/jfe/form/SV_4OQ9dzUAbSHfrAG"
+    "github": "https://github.com/grafanamumbai",
+    "cfp": "https://forms.gle/eJ6dwicsM61wG5n3A"
   },
   "mascot": {
     "name": "Grot",

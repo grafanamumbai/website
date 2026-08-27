@@ -2,9 +2,9 @@
   "currentEvent": {
     "title": "Cloud Native Mumbai",
     "edition": "September 2026",
-    "theme": "Cloud Native & Open Source",
+    "theme": "Cloud Native, AI & Open Source",
     "date": "Saturday, 12th September 2026",
-    "time": "10:00 AM - 5:00 PM IST",
+    "time": "10:00 AM - 03:00 PM IST",
     "targetDateISO": "2026-09-12T10:00:00+05:30",
     "venue": {
       "name": "DevX",
@@ -14,11 +14,11 @@
     "registration": {
       "isOpen": false,
       "statusText": "Coming Soon",
-      "rsvpUrl": "https://www.meetup.com/grafana-and-friends-mumbai/",
-      "cfpUrl": "https://grafana.qualtrics.com/jfe/form/SV_4OQ9dzUAbSHfrAG"
+      "rsvpUrl": "https://www.meetup.com/grafana-and-friends-mumbai",
+      "cfpUrl": "https://forms.gle/4DduyJkaAzqnHgvZ9"
     },
     "hasUpcomingEvent": false,
-    "eventType": "Cloud Native Mumbai Community Event"
+    "eventType": "Community Meetup"
   },
   "schedule": [
     {
