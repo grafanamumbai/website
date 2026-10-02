@@ -26,6 +26,8 @@ import {
   Link as LinkIcon,
 } from 'lucide-react';
 import communityData from '@/data';
+import { GrotMascot } from '@/components/icons';
+import SectionHeader from './section-header';
 
 const getSocialIcon = (key: string) => {
   const k = key.toLowerCase();
@@ -83,8 +85,8 @@ export default function SpeakersSection() {
                   referrerPolicy="no-referrer"
                 />
               ) : (
-                <div className="flex h-full w-full items-center justify-center bg-zinc-800 text-orange-400 font-bold text-lg font-mono">
-                  {speaker.name ? speaker.name.charAt(0) : <User className="h-6 w-6" />}
+                <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-orange-500/20 to-zinc-800 p-1">
+                  <GrotMascot variant="smile" className="h-full w-full" animate={false} />
                 </div>
               )}
             </div>
@@ -96,7 +98,7 @@ export default function SpeakersSection() {
               </h3>
               <p className="text-sm font-semibold text-zinc-400 mt-0.5">{speaker.role}</p>
               {speaker.company && (
-                <div className="flex items-center gap-1.5 mt-1.5 text-xs text-zinc-500">
+                <div className="flex items-center gap-1.5 mt-1.5 text-xs text-zinc-400">
                   <Building2 className="h-3.5 w-3.5 shrink-0" />
                   <span className="truncate">{speaker.company}</span>
                 </div>
@@ -144,18 +146,13 @@ export default function SpeakersSection() {
       <div className="container mx-auto px-4 sm:px-6 md:px-8 lg:px-12 max-w-7xl 2xl:max-w-[1600px] 3xl:max-w-[1800px]">
         
         {/* Section Header */}
-        <div className="mx-auto max-w-3xl 2xl:max-w-4xl text-center">
-          <div className="inline-flex items-center gap-2 rounded-full border border-orange-500/30 bg-orange-500/10 px-3.5 py-1 text-xs font-semibold text-orange-400 mb-4">
-            <Mic2 className="h-3.5 w-3.5" />
-            <span>Featured Speakers</span>
-          </div>
-          <h2 className="text-2xl xs:text-3xl sm:text-4xl md:text-5xl 2xl:text-6xl font-black tracking-tight leading-tight">
-            Learn From Industry Experts
-          </h2>
-          <p className="mt-4 text-sm sm:text-base md:text-lg 2xl:text-xl text-zinc-300">
-            Hear practical insights, observability deep-dives, and production architecture stories from practitioners.
-          </p>
-        </div>
+        <SectionHeader
+          grot="hat"
+          icon={<Mic2 className="h-3.5 w-3.5" />}
+          label="Featured Speakers"
+          title="Learn From Industry Experts"
+          subtitle="Hear practical insights, observability deep-dives, and production architecture stories from practitioners."
+        />
 
         {/* Auto-sliding Infinite Loop Carousel */}
         <div className="mt-12 sm:mt-16 md:mt-20">

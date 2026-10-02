@@ -42,9 +42,15 @@ const navLinks = [
   { href: '/badge', label: 'Badge', icon: Award },
 ];
 
+// Sections only rendered while an event is upcoming (see page.tsx)
+const hiddenBetweenEvents = ['/#schedule', '/#contests'];
+
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
   const { chapter, currentEvent } = communityData;
+  const links = navLinks.filter(
+    (l) => currentEvent.hasUpcomingEvent || !hiddenBetweenEvents.includes(l.href)
+  );
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-zinc-800/80 bg-[#090b0e]/90 backdrop-blur-xl transition-all duration-300">
@@ -80,7 +86,7 @@ export default function Header() {
 
         {/* Desktop Navigation (>= lg) */}
         <nav className="hidden xl:flex items-center gap-1 text-sm font-medium">
-          {navLinks.map((link) => {
+          {links.map((link) => {
             const Icon = link.icon;
             return (
               <Link
@@ -96,7 +102,7 @@ export default function Header() {
         </nav>
 
         {/* Desktop CTA Action Buttons */}
-        <div className="hidden lg:flex items-center gap-3 shrink-0">
+        <div className="hidden xl:flex items-center gap-3 shrink-0">
           <Button 
             asChild 
             variant="ghost" 
@@ -124,7 +130,7 @@ export default function Header() {
         </div>
 
         {/* Mobile Hamburger & Quick RSVP (< lg) */}
-        <div className="flex items-center gap-2 lg:hidden">
+        <div className="flex items-center gap-2 xl:hidden">
           <Button 
             asChild 
             size="sm" 
@@ -172,7 +178,7 @@ export default function Header() {
                 
                 {/* Nav Links */}
                 <nav className="flex flex-col gap-1 mt-5">
-                  {navLinks.map((link) => {
+                  {links.map((link) => {
                     const Icon = link.icon;
                     return (
                       <Link

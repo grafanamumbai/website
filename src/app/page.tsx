@@ -2,6 +2,7 @@ import Header from '@/components/layout/header';
 import Footer from '@/components/layout/footer';
 import HeroSection from '@/components/sections/hero';
 import AboutSection from '@/components/sections/about';
+import NextMeetupSection from '@/components/sections/next-meetup';
 import EcosystemSection from '@/components/sections/ecosystem';
 import MascotGrotSection from '@/components/sections/mascot-grot';
 import SpeakersSection from '@/components/sections/speakers';
@@ -22,6 +23,7 @@ export default function Home() {
       <Header />
       <main className="flex-1">
         <HeroSection />
+        {!hasUpcomingEvent && <NextMeetupSection />}
         <AboutSection />
         <EcosystemSection />
         <MascotGrotSection />

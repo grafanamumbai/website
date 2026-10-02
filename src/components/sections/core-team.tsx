@@ -13,6 +13,8 @@ import {
   Link as LinkIcon,
 } from 'lucide-react';
 import communityData, { TeamMember } from '@/data';
+import { GrotMascot } from '@/components/icons';
+import SectionHeader from './section-header';
 
 const getSocialIcon = (key: string) => {
   const k = key.toLowerCase();
@@ -56,8 +58,8 @@ function CoreLeaderCard({ member }: { member: TeamMember }) {
                 loading="lazy"
               />
             ) : (
-              <div className="flex h-full w-full items-center justify-center bg-zinc-800 text-orange-400 font-bold text-xl font-mono">
-                {member.name ? member.name.charAt(0) : <User className="h-8 w-8" />}
+              <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-orange-500/20 to-zinc-800 p-1.5">
+                <GrotMascot variant="smile" className="h-full w-full" animate={false} />
               </div>
             )}
           </div>
@@ -129,8 +131,8 @@ function VolunteerCard({ member }: { member: TeamMember }) {
               loading="lazy"
             />
           ) : (
-            <div className="flex h-full w-full items-center justify-center bg-zinc-800 text-orange-400 font-bold font-mono text-base">
-              {member.name ? member.name.charAt(0) : <User className="h-5 w-5" />}
+            <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-orange-500/20 to-zinc-800 p-0.5">
+              <GrotMascot variant="smile" className="h-full w-full" animate={false} />
             </div>
           )}
         </div>
@@ -140,11 +142,11 @@ function VolunteerCard({ member }: { member: TeamMember }) {
           <h4 className="text-sm sm:text-base font-bold text-white group-hover:text-orange-400 transition-colors truncate">
             {member.name}
           </h4>
-          <p className="text-[11px] sm:text-xs text-orange-400 font-medium truncate">
+          <p className="text-xs text-orange-400 font-medium truncate">
             {member.role}
           </p>
           {member.company && (
-            <p className="text-[10px] sm:text-[11px] text-zinc-400 truncate mt-0.5">
+            <p className="text-[11px] sm:text-[11px] text-zinc-400 truncate mt-0.5">
               {member.company}
             </p>
           )}
@@ -180,18 +182,14 @@ export default function CoreTeamSection() {
       <div className="container mx-auto px-4 sm:px-6 md:px-8 lg:px-12 max-w-7xl 2xl:max-w-[1600px] 3xl:max-w-[1800px]">
         
         {/* Section Header */}
-        <div className="mx-auto max-w-3xl 2xl:max-w-4xl text-center">
-          <div className="inline-flex items-center gap-2 rounded-full border border-orange-500/30 bg-orange-500/10 px-3.5 py-1 text-xs font-semibold text-orange-400 mb-4">
-            <Users className="h-3.5 w-3.5" />
-            <span>Community Team & Volunteers</span>
-          </div>
-          <h2 className="text-2xl xs:text-3xl sm:text-4xl md:text-5xl 2xl:text-6xl font-black tracking-tight leading-tight">
-            The People Behind the Scenes
-          </h2>
-          <p className="mt-4 text-sm sm:text-base md:text-lg 2xl:text-xl text-zinc-400">
-            Meet the passionate organizers, advocates, and volunteers driving Mumbai&apos;s observability community.
-          </p>
-        </div>
+        <SectionHeader
+          grot="smile"
+          side="left"
+          icon={<Users className="h-3.5 w-3.5" />}
+          label="Community Team & Volunteers"
+          title="The People Behind the Scenes"
+          subtitle="Meet the passionate organizers, advocates, and volunteers driving Mumbai's observability community."
+        />
 
         {/* 1. Core Organizing Leadership */}
         <div className="mt-12 sm:mt-16">

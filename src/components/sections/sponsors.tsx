@@ -23,6 +23,7 @@ import {
 } from 'lucide-react';
 import communityData, { PartnerItem, Sponsor } from '@/data';
 import { GrotMascot, MeetupLogo } from '@/components/icons';
+import SectionHeader from './section-header';
 
 const getSocialIcon = (key: string) => {
   const k = key.toLowerCase();
@@ -73,7 +74,7 @@ function PartnerCard({ partner }: { partner: PartnerItem }) {
             )}
           </div>
 
-          <span className="text-[10px] sm:text-xs font-semibold px-2.5 py-1 rounded-full bg-orange-500/10 text-orange-400 border border-orange-500/30">
+          <span className="text-xs font-semibold px-2.5 py-1 rounded-full bg-orange-500/10 text-orange-400 border border-orange-500/30">
             {partner.type}
           </span>
         </div>
@@ -84,7 +85,7 @@ function PartnerCard({ partner }: { partner: PartnerItem }) {
         </h3>
 
         {partner.description && (
-          <p className="mt-2 text-xs sm:text-sm text-zinc-400 leading-relaxed font-normal">
+          <p className="mt-2 text-sm text-zinc-400 leading-relaxed font-normal">
             {partner.description}
           </p>
         )}
@@ -154,18 +155,13 @@ export default function SponsorsSection() {
       <div className="container mx-auto px-4 sm:px-6 md:px-8 lg:px-12 max-w-7xl 2xl:max-w-[1600px] 3xl:max-w-[1800px]">
         
         {/* Section Header */}
-        <div className="mx-auto max-w-3xl 2xl:max-w-4xl text-center">
-          <div className="inline-flex items-center gap-2 rounded-full border border-orange-500/30 bg-orange-500/10 px-3.5 py-1 text-xs font-semibold text-orange-400 mb-4">
-            <ShieldCheck className="h-3.5 w-3.5" />
-            <span>Sponsors & Community Ecosystem</span>
-          </div>
-          <h2 className="text-2xl xs:text-3xl sm:text-4xl md:text-5xl 2xl:text-6xl font-black tracking-tight leading-tight">
-            Supported By Our Partners & Sponsors
-          </h2>
-          <p className="mt-4 text-sm sm:text-base md:text-lg 2xl:text-xl text-zinc-300">
-            Our community meetups, venue arrangements, and open-source initiatives are made possible by Grafana Labs and our valued partners.
-          </p>
-        </div>
+        <SectionHeader
+          grot="smile"
+          icon={<ShieldCheck className="h-3.5 w-3.5" />}
+          label="Sponsors & Community Ecosystem"
+          title="Supported By Our Partners & Sponsors"
+          subtitle="Our community meetups, venue arrangements, and open-source initiatives are made possible by Grafana Labs and our valued partners."
+        />
 
         {/* Primary Sponsor Card */}
         <div className="mt-12 sm:mt-16 max-w-3xl 2xl:max-w-4xl mx-auto">
@@ -194,7 +190,7 @@ export default function SponsorsSection() {
                     {sponsor.tier}
                   </div>
                   <h3 className="text-lg sm:text-xl font-bold text-white">{sponsor.name}</h3>
-                  <p className="text-xs sm:text-sm text-zinc-400 leading-relaxed font-normal">
+                  <p className="text-sm text-zinc-400 leading-relaxed font-normal">
                     {sponsor.description}
                   </p>
 
@@ -239,7 +235,7 @@ export default function SponsorsSection() {
           <div className="mt-14 sm:mt-20">
             <div className="text-center mb-8">
               <h3 className="text-xl sm:text-2xl font-bold text-white">Community & Collaboration Partners</h3>
-              <p className="text-xs sm:text-sm text-zinc-400 mt-1">Connect with our ecosystem partners across their social channels and Linktree hubs.</p>
+              <p className="text-sm text-zinc-400 mt-1">Connect with our ecosystem partners across their social channels and Linktree hubs.</p>
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 max-w-6xl mx-auto">
@@ -259,7 +255,7 @@ export default function SponsorsSection() {
           <h3 className="text-xl sm:text-3xl font-black text-white">
             Win Exclusive Grafana & Grot Merchandise
           </h3>
-          <p className="mt-2 text-xs sm:text-sm md:text-base text-zinc-300 max-w-xl mx-auto">
+          <p className="mt-2 text-sm md:text-base text-zinc-300 max-w-xl mx-auto">
             Participate in our interactive live quizzes, trivia, and community demos to take home official Grafana and Grot mascot swag!
           </p>
 
@@ -291,7 +287,7 @@ export default function SponsorsSection() {
 
         {/* Sponsor CTA Box */}
         <div className="mt-14 sm:mt-18 text-center">
-          <p className="text-xs sm:text-sm text-zinc-400 mb-4">
+          <p className="text-sm text-zinc-400 mb-4">
             Interested in sponsoring, providing venue, or hosting a future Grafana & Friends meetup in Mumbai?
           </p>
           <Button

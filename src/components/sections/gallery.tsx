@@ -12,6 +12,7 @@ import {
 import Autoplay from 'embla-carousel-autoplay';
 import React from 'react';
 import communityData from '@/data';
+import SectionHeader from './section-header';
 
 export default function GallerySection() {
   const { gallery } = communityData;
@@ -24,18 +25,14 @@ export default function GallerySection() {
       <div className="container mx-auto px-4 sm:px-6 md:px-8 lg:px-12 max-w-7xl 2xl:max-w-[1600px] 3xl:max-w-[1800px]">
         
         {/* Section Header */}
-        <div className="mx-auto max-w-3xl 2xl:max-w-4xl text-center">
-          <div className="inline-flex items-center gap-2 rounded-full border border-orange-500/30 bg-orange-500/10 px-3.5 py-1 text-xs font-semibold text-orange-400 mb-4">
-            <Camera className="h-3.5 w-3.5" />
-            <span>Community Memories</span>
-          </div>
-          <h2 className="text-2xl xs:text-3xl sm:text-4xl md:text-5xl 2xl:text-6xl font-black tracking-tight leading-tight">
-            Moments From Past Meetups
-          </h2>
-          <p className="mt-4 text-sm sm:text-base md:text-lg 2xl:text-xl text-zinc-300">
-            A glimpse into the energy, learning, and connections at Grafana & Friends Mumbai.
-          </p>
-        </div>
+        <SectionHeader
+          grot="hat"
+          side="left"
+          icon={<Camera className="h-3.5 w-3.5" />}
+          label="Community Memories"
+          title="Moments From Past Meetups"
+          subtitle="A glimpse into the energy, learning, and connections at Grafana & Friends Mumbai."
+        />
 
         {/* Carousel Grid */}
         <div className="mt-12 sm:mt-16 max-w-6xl 2xl:max-w-[1400px] mx-auto px-2 sm:px-4">
@@ -61,7 +58,7 @@ export default function GallerySection() {
                       <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent" />
                       
                       <div className="absolute bottom-3 left-3 right-3 sm:bottom-4 sm:left-4 sm:right-4 text-left">
-                        <div className="inline-flex items-center gap-1 rounded-full bg-orange-500/85 backdrop-blur-md px-2.5 py-0.5 text-[10px] sm:text-xs font-semibold text-white mb-1.5">
+                        <div className="inline-flex items-center gap-1 rounded-full bg-orange-500/85 backdrop-blur-md px-2.5 py-0.5 text-xs font-semibold text-white mb-1.5">
                           <Calendar className="h-3 w-3" />
                           <span>{item.date}</span>
                         </div>

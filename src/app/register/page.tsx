@@ -95,7 +95,7 @@ export default function RegisterPage() {
         {/* Hero Section */}
         <section className="relative z-10 py-12 sm:py-20 md:py-24 px-4 sm:px-6 container mx-auto max-w-4xl 2xl:max-w-5xl text-center">
           
-          <div className="inline-flex items-center gap-2 rounded-full border border-orange-500/30 bg-orange-500/10 px-3.5 py-1.5 text-xs sm:text-sm font-semibold text-orange-400 mb-6">
+          <div className="inline-flex items-center gap-2 rounded-full border border-orange-500/30 bg-orange-500/10 px-3.5 py-1.5 text-sm font-semibold text-orange-400 mb-6">
             <span className="h-2 w-2 rounded-full bg-emerald-400 animate-pulse" />
             <span>{currentEvent.registration.statusText || "Registration"} • 100% Free</span>
           </div>
@@ -120,8 +120,8 @@ export default function RegisterPage() {
                   <Calendar className="h-5 w-5" />
                 </div>
                 <div>
-                  <p className="text-[11px] sm:text-xs text-zinc-400 font-medium uppercase tracking-wider">Date</p>
-                  <p className="text-xs sm:text-sm font-bold text-white leading-tight">{currentEvent.date}</p>
+                  <p className="text-xs text-zinc-400 font-medium uppercase tracking-wider">Date</p>
+                  <p className="text-sm font-bold text-white leading-tight">{currentEvent.date}</p>
                 </div>
               </div>
 
@@ -130,8 +130,8 @@ export default function RegisterPage() {
                   <Clock className="h-5 w-5" />
                 </div>
                 <div>
-                  <p className="text-[11px] sm:text-xs text-zinc-400 font-medium uppercase tracking-wider">Time</p>
-                  <p className="text-xs sm:text-sm font-bold text-white leading-tight">{currentEvent.time}</p>
+                  <p className="text-xs text-zinc-400 font-medium uppercase tracking-wider">Time</p>
+                  <p className="text-sm font-bold text-white leading-tight">{currentEvent.time}</p>
                 </div>
               </div>
 
@@ -140,8 +140,8 @@ export default function RegisterPage() {
                   <MapPin className="h-5 w-5" />
                 </div>
                 <div>
-                  <p className="text-[11px] sm:text-xs text-zinc-400 font-medium uppercase tracking-wider">Venue</p>
-                  <p className="text-xs sm:text-sm font-bold text-white leading-tight">{currentEvent.venue.name}</p>
+                  <p className="text-xs text-zinc-400 font-medium uppercase tracking-wider">Venue</p>
+                  <p className="text-sm font-bold text-white leading-tight">{currentEvent.venue.name}</p>
                 </div>
               </div>
 
@@ -161,7 +161,7 @@ export default function RegisterPage() {
                     <span className="font-mono text-base xs:text-lg sm:text-xl font-bold text-white block leading-tight">
                       {unit.value}
                     </span>
-                    <span className="text-[8px] xs:text-[9px] text-zinc-400 uppercase font-semibold">
+                    <span className="text-[11px] text-zinc-400 uppercase font-semibold">
                       {unit.label}
                     </span>
                   </div>
@@ -193,7 +193,7 @@ export default function RegisterPage() {
                     {perk.icon}
                     <h4 className="text-sm sm:text-base font-bold text-white">{perk.title}</h4>
                   </div>
-                  <p className="text-xs sm:text-sm text-zinc-400 leading-relaxed pl-8">
+                  <p className="text-sm text-zinc-400 leading-relaxed pl-8">
                     {perk.description}
                   </p>
                 </div>

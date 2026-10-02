@@ -18,7 +18,7 @@ import communityData from '@/data';
 import { MeetupLogo, CncfIcon, GrotMascot } from '@/components/icons';
 
 export default function Footer() {
-  const { chapter, socials, currentEvent } = communityData;
+  const { chapter, socials, currentEvent, mascot } = communityData;
 
   return (
     <footer className="border-t border-zinc-800/80 bg-[#07080b] text-zinc-300">
@@ -41,29 +41,35 @@ export default function Footer() {
                 {chapter.name}
               </span>
             </Link>
-            <p className="text-xs sm:text-sm text-zinc-400 max-w-md leading-relaxed">
+            <p className="text-sm text-zinc-400 max-w-md leading-relaxed">
               {chapter.description}
             </p>
-            <div className="flex items-center gap-2 text-xs text-zinc-400 pt-1">
-              <div className="h-4 w-4">
-                <GrotMascot className="h-full w-full" animate={false} />
+            <div className="flex items-end gap-3 pt-3">
+              <div className="h-20 w-28 shrink-0">
+                <GrotMascot variant="smile" className="h-full w-full drop-shadow-xl" animate={false} />
               </div>
-              <span>Grafana & Friends Mumbai is powered by Grafana Labs.</span>
+              <p className="mb-3 max-w-xs rounded-2xl rounded-bl-sm border border-zinc-800 bg-zinc-900 px-4 py-3 text-sm italic text-zinc-300">
+                {mascot?.quote || '"May your queries be fast, your dashboards clear, and your latency low!"'}
+              </p>
             </div>
           </div>
 
           {/* Col 2: Quick Navigation */}
           <div className="space-y-3">
-            <h4 className="text-xs sm:text-sm font-bold text-white tracking-wider uppercase">
+            <h4 className="text-sm font-bold text-white tracking-wider uppercase">
               Navigation
             </h4>
-            <ul className="space-y-2 text-xs sm:text-sm text-zinc-400">
+            <ul className="space-y-2 text-sm text-zinc-400">
               <li><Link href="/#about" className="hover:text-orange-400 transition-colors">About Chapter</Link></li>
-              <li><Link href="/#ecosystem" className="hover:text-orange-400 transition-colors">CNCF & Observability Stack</Link></li>
+              <li><Link href="/#tracks" className="hover:text-orange-400 transition-colors">CNCF & Observability Stack</Link></li>
               <li><Link href="/#mascot" className="hover:text-orange-400 transition-colors">Meet Grot Mascot</Link></li>
               <li><Link href="/#speakers" className="hover:text-orange-400 transition-colors">Speakers & Talks</Link></li>
-              <li><Link href="/#schedule" className="hover:text-orange-400 transition-colors">Schedule & Agenda</Link></li>
-              <li><Link href="/#contests" className="hover:text-orange-400 transition-colors">Contests & Swag</Link></li>
+              {currentEvent.hasUpcomingEvent && (
+                <>
+                  <li><Link href="/#schedule" className="hover:text-orange-400 transition-colors">Schedule & Agenda</Link></li>
+                  <li><Link href="/#contests" className="hover:text-orange-400 transition-colors">Contests & Swag</Link></li>
+                </>
+              )}
               <li><Link href="/#team" className="hover:text-orange-400 transition-colors">Team & Volunteers</Link></li>
               <li><Link href="/#faq" className="hover:text-orange-400 transition-colors">FAQ</Link></li>
               <li><Link href="/badge" className="hover:text-orange-400 transition-colors">Badge Generator</Link></li>
@@ -72,7 +78,7 @@ export default function Footer() {
 
           {/* Col 3: Community & Socials */}
           <div className="space-y-3">
-            <h4 className="text-xs sm:text-sm font-bold text-white tracking-wider uppercase">
+            <h4 className="text-sm font-bold text-white tracking-wider uppercase">
               Connect With Us
             </h4>
             <p className="text-xs text-zinc-400 leading-relaxed">
@@ -139,7 +145,7 @@ export default function Footer() {
         </div>
 
         {/* Legal & Trademark Disclosure Bar */}
-        <div className="pt-6 border-t border-zinc-800/60 flex flex-col md:flex-row items-center justify-between gap-4 text-[11px] text-zinc-500 text-center md:text-left">
+        <div className="pt-6 border-t border-zinc-800/60 flex flex-col md:flex-row items-center justify-between gap-4 text-[11px] text-zinc-400 text-center md:text-left">
           <div className="space-y-1">
             <p>
               Grafana is a registered trademark of Grafana Labs. CNCF and Prometheus are registered trademarks of The Linux Foundation.

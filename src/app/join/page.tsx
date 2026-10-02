@@ -19,7 +19,7 @@ import {
   Mail,
 } from 'lucide-react';
 import communityData from '@/data';
-import { MeetupLogo } from '@/components/icons';
+import { MeetupLogo, GrotMascot } from '@/components/icons';
 
 export default function JoinPage() {
   const { chapter, socials } = communityData;
@@ -93,13 +93,8 @@ export default function JoinPage() {
           
           {/* Header Box */}
           <div className="mb-8 sm:mb-12 flex flex-col items-center text-center">
-            <div className="relative mb-4 h-16 w-16 sm:h-20 sm:w-20 rounded-full bg-orange-500/10 p-2 ring-1 ring-orange-500/30 shadow-xl overflow-hidden">
-              <Image 
-                src="/grafana-logo.png" 
-                alt="Grafana & Friends Mumbai" 
-                fill 
-                className="object-cover" 
-              />
+            <div className="mb-2 h-28 w-40 sm:h-36 sm:w-52">
+              <GrotMascot variant="smile" eager animate={false} className="h-full w-full drop-shadow-2xl" />
             </div>
             <div className="inline-flex items-center gap-2 rounded-full border border-orange-500/30 bg-orange-500/10 px-3.5 py-1 text-xs font-semibold text-orange-400 mb-3">
               <Users2 className="h-3.5 w-3.5" />
@@ -133,17 +128,17 @@ export default function JoinPage() {
                         {link.name}
                       </h3>
                       {link.badge && (
-                        <span className="hidden xs:inline-block text-[10px] font-semibold px-2 py-0.5 rounded-full bg-zinc-800 text-zinc-400 border border-zinc-700/60 shrink-0">
+                        <span className="hidden xs:inline-block text-[11px] font-semibold px-2 py-0.5 rounded-full bg-zinc-800 text-zinc-400 border border-zinc-700/60 shrink-0">
                           {link.badge}
                         </span>
                       )}
                     </div>
-                    <p className="text-[11px] sm:text-xs text-zinc-400 mt-0.5 line-clamp-1">
+                    <p className="text-xs text-zinc-400 mt-0.5 line-clamp-1">
                       {link.subtitle}
                     </p>
                   </div>
                 </div>
-                <ArrowRight className="h-4 w-4 sm:h-5 sm:w-5 text-zinc-500 group-hover:text-orange-400 group-hover:translate-x-1 transition-all duration-200 shrink-0 ml-2" />
+                <ArrowRight className="h-4 w-4 sm:h-5 sm:w-5 text-zinc-400 group-hover:text-orange-400 group-hover:translate-x-1 transition-all duration-200 shrink-0 ml-2" />
               </a>
             ))}
           </div>

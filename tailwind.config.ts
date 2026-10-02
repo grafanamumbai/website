@@ -82,10 +82,21 @@ export default {
           from: { height: 'var(--radix-accordion-content-height)' },
           to: { height: '0' },
         },
+        float: {
+          '0%, 100%': { transform: 'translateY(0)' },
+          '50%': { transform: 'translateY(-10px)' },
+        },
+        wiggle: {
+          '0%, 100%': { transform: 'rotate(0)' },
+          '25%': { transform: 'rotate(-6deg) scale(1.05)' },
+          '75%': { transform: 'rotate(6deg) scale(1.05)' },
+        },
       },
       animation: {
         'accordion-down': 'accordion-down 0.2s ease-out',
         'accordion-up': 'accordion-up 0.2s ease-out',
+        float: 'float 5s ease-in-out infinite',
+        wiggle: 'wiggle 0.7s ease-in-out',
       },
     },
   },

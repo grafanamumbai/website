@@ -12,6 +12,7 @@ import {
 } from 'lucide-react';
 import communityData from '@/data';
 import { Button } from '@/components/ui/button';
+import SectionHeader from './section-header';
 
 export default function ContestsSection() {
   const { contests, currentEvent } = communityData;
@@ -21,18 +22,13 @@ export default function ContestsSection() {
       <div className="container mx-auto px-4 sm:px-6 md:px-8 lg:px-12 max-w-7xl 2xl:max-w-[1600px] 3xl:max-w-[1800px]">
         
         {/* Section Header */}
-        <div className="mx-auto max-w-3xl 2xl:max-w-4xl text-center">
-          <div className="inline-flex items-center gap-2 rounded-full border border-orange-500/30 bg-orange-500/10 px-3.5 py-1 text-xs font-semibold text-orange-400 mb-4">
-            <Trophy className="h-3.5 w-3.5" />
-            <span>Community Challenges</span>
-          </div>
-          <h2 className="text-2xl xs:text-3xl sm:text-4xl md:text-5xl 2xl:text-6xl font-black tracking-tight leading-tight">
-            Contests & Special Giveaways
-          </h2>
-          <p className="mt-4 text-sm sm:text-base md:text-lg 2xl:text-xl text-zinc-300">
-            Participate before and during the meetup for a chance to win official Grafana prizes and swag!
-          </p>
-        </div>
+        <SectionHeader
+          grot="trophy"
+          icon={<Trophy className="h-3.5 w-3.5" />}
+          label="Community Challenges"
+          title="Contests & Special Giveaways"
+          subtitle="Participate before and during the meetup for a chance to win official Grafana prizes and swag!"
+        />
 
         {/* Tabs Container */}
         <div className="mt-10 sm:mt-16 max-w-3xl 2xl:max-w-4xl mx-auto">
@@ -60,19 +56,19 @@ export default function ContestsSection() {
                       <Sparkles className="h-6 w-6 text-orange-400 shrink-0" />
                       <span>{contest.title}</span>
                     </h3>
-                    <p className="mt-2 text-xs sm:text-sm md:text-base text-zinc-300 leading-relaxed font-normal">
+                    <p className="mt-2 text-sm md:text-base text-zinc-300 leading-relaxed font-normal">
                       {contest.description}
                     </p>
                   </div>
 
                   <div className="space-y-3.5 pt-2">
-                    <h4 className="text-xs sm:text-sm font-bold text-orange-400 uppercase tracking-wider flex items-center gap-1.5">
+                    <h4 className="text-sm font-bold text-orange-400 uppercase tracking-wider flex items-center gap-1.5">
                       <Flame className="h-4 w-4" />
                       <span>How to Participate & Win:</span>
                     </h4>
                     <ul className="space-y-3">
                       {contest.rules.map((rule, idx) => (
-                        <li key={idx} className="flex items-start gap-3 text-xs sm:text-sm text-zinc-300 leading-relaxed">
+                        <li key={idx} className="flex items-start gap-3 text-sm text-zinc-300 leading-relaxed">
                           <CheckCircle2 className="h-4 w-4 sm:h-5 sm:w-5 text-emerald-400 shrink-0 mt-0.5" />
                           <span>{rule}</span>
                         </li>

@@ -10,7 +10,7 @@ import {
   Network,
 } from 'lucide-react';
 import communityData from '@/data';
-import { CncfIcon } from '@/components/icons';
+import SectionHeader from './section-header';
 
 export default function AboutSection() {
   const { chapter } = communityData;
@@ -47,21 +47,20 @@ export default function AboutSection() {
       <div className="container mx-auto px-4 sm:px-6 md:px-8 lg:px-12 max-w-7xl 2xl:max-w-[1600px] 3xl:max-w-[1800px]">
         
         {/* Section Header */}
-        <div className="mx-auto max-w-3xl 2xl:max-w-4xl text-center">
-          <div className="inline-flex items-center gap-2 rounded-full border border-orange-500/30 bg-orange-500/10 px-3.5 py-1 text-xs font-semibold text-orange-400 mb-4">
-            <BookOpen className="h-3.5 w-3.5" />
-            <span>About The Chapter</span>
-          </div>
-          <h2 className="text-2xl xs:text-3xl sm:text-4xl md:text-5xl 2xl:text-6xl font-black tracking-tight leading-tight">
-            Building Mumbai&apos;s Premier{' '}
-            <span className="bg-gradient-to-r from-orange-400 via-amber-300 to-yellow-500 bg-clip-text text-transparent">
-              Observability Community
-            </span>
-          </h2>
-          <p className="mt-4 text-sm sm:text-base md:text-lg 2xl:text-xl text-zinc-300 leading-relaxed font-normal">
-            {chapter.description}
-          </p>
-        </div>
+        <SectionHeader
+          grot="smile"
+          icon={<BookOpen className="h-3.5 w-3.5" />}
+          label="About The Chapter"
+          title={
+            <>
+              Building Mumbai&apos;s Premier{' '}
+              <span className="bg-gradient-to-r from-orange-400 via-amber-300 to-yellow-500 bg-clip-text text-transparent">
+                Observability Community
+              </span>
+            </>
+          }
+          subtitle={chapter.description}
+        />
 
         {/* 3 Pillars Grid */}
         <div className="mt-12 sm:mt-16 grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
@@ -89,14 +88,14 @@ export default function AboutSection() {
                   {pillar.tags.map((tag) => (
                     <span
                       key={tag}
-                      className="text-[10px] font-mono px-2 py-0.5 rounded bg-zinc-800/70 text-zinc-300 border border-zinc-700/50"
+                      className="text-[11px] font-mono px-2 py-0.5 rounded bg-zinc-800/70 text-zinc-300 border border-zinc-700/50"
                     >
                       {tag}
                     </span>
                   ))}
                 </div>
 
-                <p className="text-xs sm:text-sm text-zinc-400 leading-relaxed">
+                <p className="text-sm text-zinc-400 leading-relaxed">
                   {pillar.description}
                 </p>
               </div>

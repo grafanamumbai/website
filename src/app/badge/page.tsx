@@ -164,18 +164,18 @@ export default function BadgePage() {
 
         {/* Social Share Box */}
         <div className="p-5 sm:p-7 rounded-2xl bg-zinc-900/60 border border-zinc-800/80 mb-10 sm:mb-12 shadow-xl">
-          <div className="flex items-center gap-2 text-xs sm:text-sm font-bold text-orange-400 uppercase tracking-wider mb-2">
+          <div className="flex items-center gap-2 text-sm font-bold text-orange-400 uppercase tracking-wider mb-2">
             <Share2 className="h-4 w-4" />
             <span>Social Share Template</span>
           </div>
-          <p className="text-xs sm:text-sm text-zinc-300 font-mono bg-zinc-950 p-4 rounded-xl border border-zinc-800 leading-relaxed overflow-x-auto">
+          <p className="text-sm text-zinc-300 font-mono bg-zinc-950 p-4 rounded-xl border border-zinc-800 leading-relaxed overflow-x-auto">
             {socialText}
           </p>
           <div className="mt-4">
             <Button
               onClick={handleCopyToClipboard}
               size="sm"
-              className="bg-orange-500 hover:bg-orange-600 text-white font-bold rounded-full px-5 h-10 text-xs sm:text-sm"
+              className="bg-orange-500 hover:bg-orange-600 text-white font-bold rounded-full px-5 h-10 text-sm"
             >
               {copied ? <Check className="h-4 w-4 mr-1.5" /> : <Copy className="h-4 w-4 mr-1.5" />}
               <span>{copied ? 'Copied to Clipboard!' : 'Copy Share Text'}</span>
@@ -230,7 +230,7 @@ export default function BadgePage() {
             </div>
 
             <div className="mt-6 grid grid-cols-2 gap-3">
-              <Button asChild variant="outline" className="border-zinc-700 bg-zinc-900 text-zinc-200 hover:bg-zinc-800 text-xs sm:text-sm h-11">
+              <Button asChild variant="outline" className="border-zinc-700 bg-zinc-900 text-zinc-200 hover:bg-zinc-800 text-sm h-11">
                 <label htmlFor="file-upload" className="cursor-pointer flex items-center justify-center">
                   <Upload className="h-4 w-4 mr-1.5 text-orange-400" />
                   <span>Choose Photo</span>
@@ -241,7 +241,7 @@ export default function BadgePage() {
               <Button
                 onClick={handleDownload}
                 disabled={!userImage}
-                className="bg-orange-500 hover:bg-orange-600 disabled:opacity-50 text-white font-bold text-xs sm:text-sm h-11"
+                className="bg-orange-500 hover:bg-orange-600 disabled:opacity-50 text-white font-bold text-sm h-11"
               >
                 <Download className="h-4 w-4 mr-1.5" />
                 <span>Download</span>
@@ -271,7 +271,7 @@ export default function BadgePage() {
             <div className="mt-6">
               <Button
                 onClick={handleDownloadWithoutPhoto}
-                className="w-full bg-orange-500 hover:bg-orange-600 text-white font-bold text-xs sm:text-sm h-11"
+                className="w-full bg-orange-500 hover:bg-orange-600 text-white font-bold text-sm h-11"
               >
                 <Download className="h-4 w-4 mr-1.5" />
                 <span>Download Standard Badge</span>
