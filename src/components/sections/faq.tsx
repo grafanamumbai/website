@@ -6,7 +6,7 @@ export default function FaqSection({ n }: { n?: string }) {
   const { faqs, chapter } = communityData;
 
   return (
-    <Chapter id="faq" n={n} label="FAQ" grot="search" title="Questions people ask">
+    <Chapter id="faq" n={n} label="FAQ" tone="sky" grot="search" title="Questions people ask">
       <dl className="grid gap-x-12 gap-y-10 md:grid-cols-2">
         {faqs.map((faq) => (
           <div key={faq.question} className="border-t border-ink pt-5">

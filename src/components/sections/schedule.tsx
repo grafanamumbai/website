@@ -23,7 +23,7 @@ export default function ScheduleSection({ n }: { n?: string }) {
       id="schedule"
       n={n}
       label="Schedule"
-      tone="deep"
+      tone="butter"
       title="The day, hour by hour"
       intro={`${currentEvent.date} · ${currentEvent.time} · ${currentEvent.venue.name}`}
     >

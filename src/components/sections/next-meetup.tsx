@@ -6,7 +6,7 @@ export default function NextMeetupSection() {
   const { socials } = communityData;
 
   return (
-    <section id="next" className="mt-16 bg-brand text-ink sm:mt-20">
+    <section id="next" className="grain mt-16 bg-butter text-ink sm:mt-20">
       <div className="mx-auto grid max-w-[1200px] items-center gap-6 px-5 py-12 sm:px-8 md:grid-cols-[1fr_auto] lg:px-10">
         <div>
           <p className="font-mono text-[0.8125rem]">Next meetup</p>

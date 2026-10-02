@@ -72,6 +72,14 @@
         "linkedin": "https://www.linkedin.com/in/inshirah-shaikh",
         "github": "https://github.com/inshirah-01"
       }
+    },
+    {
+      "id": "your-name",
+      "name": "Your Name",
+      "role": "Community Volunteer",
+      "company": "Grafana & Friends Mumbai",
+      "avatar": "/team/me.jpg",
+      "socials": {}
     }
   ]
 }

@@ -29,6 +29,7 @@
     --input: 41 31% 79%;
     --ring: 14 87% 54%;
     --radius: 0.375rem;
+    --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .4 0 0 0 0 .3 0 0 0 0 .15 0 0 0 .55 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.07'/%3E%3C/svg%3E");
   }
 
   * {
@@ -46,7 +47,7 @@
     font-size: 1.0625rem;
     line-height: 1.65;
     /* faint paper grain so the flat colour doesn't feel sterile */
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .4 0 0 0 0 .3 0 0 0 0 .15 0 0 0 .55 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.07'/%3E%3C/svg%3E");
+    background-image: var(--grain);
   }
 
   h1, h2, h3 {
@@ -112,6 +113,11 @@
   }
 
   /* Photo that looks like a print on the table */
+  /* paper grain on tinted sections too (body has it already) */
+  .grain {
+    background-image: var(--grain);
+  }
+
   .print {
     @apply bg-[#fffdf8] p-1.5 sm:p-2;
     box-shadow: 0 1px 2px rgba(60, 40, 10, 0.18), 0 22px 30px -14px rgba(60, 40, 10, 0.4);

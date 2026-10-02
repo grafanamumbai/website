@@ -7,6 +7,7 @@ export default function ContestsSection({ n }: { n?: string }) {
   return (
     <Chapter
       id="contests"
+      tone="butter"
       n={n}
       label="Contests"
       grot="trophy"

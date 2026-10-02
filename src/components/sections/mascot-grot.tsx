@@ -31,7 +31,7 @@ export default function MascotGrotSection({ n }: { n?: string }) {
       id="mascot"
       n={n}
       label="Grot"
-      tone="deep"
+      tone="sage"
       title="Meet Grot, our mascot"
       intro="Grot is Grafana's dinosaur. According to the lore it slept for 65 million years before waking up to triage dashboards. It has opinions about your queries."
     >

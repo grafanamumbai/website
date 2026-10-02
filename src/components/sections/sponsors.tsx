@@ -56,6 +56,7 @@ export default function SponsorsSection({ n }: { n?: string }) {
   return (
     <Chapter
       id="sponsors"
+      tone="lilac"
       n={n}
       label="Partners"
       grot="smile"

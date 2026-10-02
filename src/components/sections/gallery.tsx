@@ -1,6 +1,5 @@
-import Image from 'next/image';
 import communityData from '@/data';
-import { cn } from '@/lib/utils';
+import GalleryFigure from '@/components/gallery-figure';
 import Chapter from './chapter';
 
 // Deliberately uneven: spans, offsets and crops repeat every five photos.
@@ -20,6 +19,7 @@ export default function GallerySection({ n }: { n?: string }) {
       id="gallery"
       n={n}
       label="Photos"
+      tone="sky"
       grot="hat"
       title="From past meetups"
       intro="Real rooms, real people. Come say hello at the next one."
@@ -28,21 +28,14 @@ export default function GallerySection({ n }: { n?: string }) {
         {gallery.map((item, i) => {
           const l = layout[i % layout.length];
           return (
-            <figure key={item.id} className={cn(l.span, l.offset)}>
-              <div className={cn('relative overflow-hidden rounded-[4px] bg-paper-deep', l.ratio)}>
-                <Image
-                  src={item.image}
-                  alt={`${item.title}. ${item.description}`}
-                  fill
-                  sizes="(min-width: 1024px) 60vw, 100vw"
-                  className="object-cover"
-                />
-              </div>
-              <figcaption className="mt-3 border-t border-rule pt-2">
-                <span className="font-display text-lg font-medium tracking-[-0.01em]">{item.title}</span>
-                <span className="label block">{item.description}</span>
-              </figcaption>
-            </figure>
+            <GalleryFigure
+              key={item.id}
+              src={item.image}
+              title={item.title}
+              description={item.description}
+              ratio={l.ratio}
+              className={`${l.span} ${l.offset}`}
+            />
           );
         })}
       </div>

@@ -213,6 +213,13 @@
       "description": "A speaker walks through how trace context moves between services.",
       "image": "/photos/event-5.jpg",
       "date": "Past meetup"
+    },
+    {
+      "id": "event-6",
+      "title": "More from the community",
+      "description": "A moment from one of our meetups.",
+      "image": "/photos/event-6.jpg",
+      "date": "Past meetup"
     }
   ],
   "faqs": [
