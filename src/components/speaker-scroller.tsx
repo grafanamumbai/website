@@ -48,10 +48,9 @@ export default function SpeakerScroller({ children, label }: { children: React.R
         tabIndex={0}
         role="region"
         aria-label={label}
-        // Bleeds to both screen edges so cards slide off either side. The equal padding lines the first card up with the page
-        // content at rest (and the last one at the end). No scroll-snap: its percentages resolve against the scroll box, not the
-        // parent, which would misalign it. The scrollbar is hidden; arrows, touch and keys scroll.
-        className="scrollbar-none -mx-[calc(50vw-50%)] flex items-stretch gap-6 overflow-x-auto px-[calc(50vw-50%)] pb-5"
+        // Stays inside the page container like every other section: cards clip at the content edges on both sides.
+        // The scrollbar is hidden; the arrows, touch, trackpad and keyboard scroll.
+        className="scrollbar-none flex items-stretch gap-6 overflow-x-auto pb-5"
       >
         {children}
       </div>
