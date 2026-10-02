@@ -1,7 +1,7 @@
 import communityData, { TeamMember } from '@/data';
 import PersonPhoto from '@/components/person-photo';
 import { socialLabel } from '@/lib/social';
-import Chapter from './chapter';
+import Chapter, { type Tone } from './chapter';
 
 function Links({ member, className }: { member: TeamMember; className?: string }) {
   const links = Object.entries(member.socials ?? {}).filter(([, url]) => url);
@@ -24,13 +24,14 @@ function Links({ member, className }: { member: TeamMember; className?: string }
   );
 }
 
-export default function CoreTeamSection({ n }: { n?: string }) {
+export default function CoreTeamSection({ n, tone }: { n?: string; tone?: Tone }) {
   const { coreTeam, volunteers } = communityData;
 
   return (
     <Chapter
       id="team"
       n={n}
+      tone={tone}
       label="Team"
       grot="smile"
       title="The people behind it"

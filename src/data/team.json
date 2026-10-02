@@ -74,12 +74,15 @@
       }
     },
     {
-      "id": "your-name",
-      "name": "Your Name",
-      "role": "Community Volunteer",
-      "company": "Grafana & Friends Mumbai",
-      "avatar": "/team/me.jpg",
-      "socials": {}
+      "id": "vedant-wagh",
+      "name": "Vedant Wagh",
+      "role": "SDE @deboistech",
+      "company": "Community Volunteer",
+      "avatar": "/team/vedant.jpg",
+      "socials": {
+        "linkedin": "https://www.linkedin.com/in/vedantwagh1405/",
+        "github": "https://github.com/ArtisticSyndrome"
+      }
     }
   ]
 }

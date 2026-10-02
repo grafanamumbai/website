@@ -137,7 +137,7 @@ export default function HeroSection() {
                 <div className="relative aspect-[4/3] overflow-hidden bg-paper-deep">
                   <Image
                     src="/photos/event-5.jpg"
-                    alt="A speaker presenting a slide on context propagation in distributed tracing"
+                    alt="A packed room waving at the camera at GrafanaCon"
                     fill
                     sizes="240px"
                     className="object-cover"

@@ -1,14 +1,14 @@
 import communityData from '@/data';
-import Chapter from './chapter';
+import Chapter, { type Tone } from './chapter';
 
-export default function ContestsSection({ n }: { n?: string }) {
+export default function ContestsSection({ n, tone }: { n?: string; tone?: Tone }) {
   const { contests, currentEvent } = communityData;
 
   return (
     <Chapter
       id="contests"
-      tone="butter"
       n={n}
+      tone={tone}
       label="Contests"
       grot="trophy"
       title="Two ways to win swag"

@@ -1,12 +1,13 @@
 import communityData from '@/data';
-import Chapter from './chapter';
+import Chapter, { type Tone } from './chapter';
 
 // Every answer is visible at once: only 6 questions, so an accordion would just hide them.
-export default function FaqSection({ n }: { n?: string }) {
+export default function FaqSection({ n, tone }: { n?: string; tone?: Tone }) {
   const { faqs, chapter } = communityData;
 
   return (
-    <Chapter id="faq" n={n} label="FAQ" tone="sky" grot="search" title="Questions people ask">
+    <Chapter id="faq" n={n}
+      tone={tone} label="FAQ" grot="search" title="Questions people ask">
       <dl className="grid gap-x-12 gap-y-10 md:grid-cols-2">
         {faqs.map((faq) => (
           <div key={faq.question} className="border-t border-ink pt-5">

@@ -1,16 +1,12 @@
 import { GrotMascot } from '@/components/icons';
 import { cn } from '@/lib/utils';
 
-export type Tone = 'paper' | 'deep' | 'lilac' | 'butter' | 'sky' | 'sage';
+export type Tone = 'paper' | 'deep';
 
-// Section backgrounds. Paper is the base; the tints break up the cream so the page changes colour as you scroll.
+// Section backgrounds: cream (paper) and sand (deep). page.tsx alternates them in render order.
 const tones: Record<Tone, string> = {
   paper: 'border-t border-rule',
   deep: 'grain bg-paper-deep',
-  lilac: 'grain bg-lilac',
-  butter: 'grain bg-butter',
-  sky: 'grain bg-sky',
-  sage: 'grain bg-sage',
 };
 
 type ChapterProps = {

@@ -180,17 +180,17 @@
   ],
   "gallery": [
     {
+      "id": "event-5",
+      "title": "GrafanaCon",
+      "description": "The biggest event we run.",
+      "image": "/photos/event-5.jpg",
+      "date": "Past meetup"
+    },
+    {
       "id": "event-1",
       "title": "Quiz prize at the VIT conference",
       "description": "A quiz winner is handed a bouquet on stage at Vidyalankar Institute of Technology.",
       "image": "/photos/event-1.jpg",
-      "date": "Past meetup"
-    },
-    {
-      "id": "event-2",
-      "title": "CSI-VIT × Grafana × MumPy tech conference",
-      "description": "Organisers, speakers and students on stage together after the sessions.",
-      "image": "/photos/event-2.jpg",
       "date": "Past meetup"
     },
     {
@@ -201,24 +201,17 @@
       "date": "Past meetup"
     },
     {
+      "id": "event-2",
+      "title": "CSI-VIT × Grafana × MumPy tech conference",
+      "description": "Organisers, speakers and students on stage together after the sessions.",
+      "image": "/photos/event-2.jpg",
+      "date": "Past meetup"
+    },
+    {
       "id": "event-4",
       "title": "A meetup crowd in Grafana tees",
       "description": "The group photo after the talks and the Mentimeter quiz.",
       "image": "/photos/event-4.jpg",
-      "date": "Past meetup"
-    },
-    {
-      "id": "event-5",
-      "title": "Context propagation, explained",
-      "description": "A speaker walks through how trace context moves between services.",
-      "image": "/photos/event-5.jpg",
-      "date": "Past meetup"
-    },
-    {
-      "id": "event-6",
-      "title": "More from the community",
-      "description": "A moment from one of our meetups.",
-      "image": "/photos/event-6.jpg",
       "date": "Past meetup"
     }
   ],

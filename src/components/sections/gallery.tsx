@@ -1,25 +1,25 @@
 import communityData from '@/data';
 import GalleryFigure from '@/components/gallery-figure';
-import Chapter from './chapter';
+import Chapter, { type Tone } from './chapter';
 
 // Deliberately uneven: spans, offsets and crops repeat every five photos.
 const layout = [
-  { span: 'md:col-span-5', ratio: 'aspect-[4/3]', offset: '' },
-  { span: 'md:col-span-7', ratio: 'aspect-[4/3]', offset: 'md:mt-14' },
+  { span: 'md:col-span-7', ratio: 'aspect-[4/3]', offset: '' },
+  { span: 'md:col-span-5', ratio: 'aspect-[4/3]', offset: 'md:mt-14' },
   { span: 'md:col-span-12', ratio: 'aspect-[2.1/1]', offset: '' },
   { span: 'md:col-span-7', ratio: 'aspect-[4/3]', offset: '' },
   { span: 'md:col-span-5', ratio: 'aspect-[16/10]', offset: 'md:mt-14' },
 ];
 
-export default function GallerySection({ n }: { n?: string }) {
+export default function GallerySection({ n, tone }: { n?: string; tone?: Tone }) {
   const { gallery } = communityData;
 
   return (
     <Chapter
       id="gallery"
       n={n}
+      tone={tone}
       label="Photos"
-      tone="sky"
       grot="hat"
       title="From past meetups"
       intro="Real rooms, real people. Come say hello at the next one."

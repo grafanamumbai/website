@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import communityData from '@/data';
 import { driveThumb, socialLabel } from '@/lib/social';
-import Chapter from './chapter';
+import Chapter, { type Tone } from './chapter';
 
 // Logo on a light tile; falls back to the first letter if the image is missing or fails.
 function Logo({ name, src, size }: { name: string; src?: string; size: string }) {
@@ -49,15 +49,15 @@ function LinkRow({ item }: { item: Linkable }) {
   );
 }
 
-export default function SponsorsSection({ n }: { n?: string }) {
+export default function SponsorsSection({ n, tone }: { n?: string; tone?: Tone }) {
   const { sponsors, swags, chapter, currentEvent } = communityData;
   const allPartners = [...(currentEvent.communityPartners || []), ...(currentEvent.collaborationPartners || [])];
 
   return (
     <Chapter
       id="sponsors"
-      tone="lilac"
       n={n}
+      tone={tone}
       label="Partners"
       grot="smile"
       title="Who makes this possible"

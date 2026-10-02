@@ -1,5 +1,5 @@
 import communityData from '@/data';
-import Chapter from './chapter';
+import Chapter, { type Tone } from './chapter';
 
 const things = [
   {
@@ -16,13 +16,14 @@ const things = [
   },
 ];
 
-export default function AboutSection({ n }: { n?: string }) {
+export default function AboutSection({ n, tone }: { n?: string; tone?: Tone }) {
   const { chapter } = communityData;
 
   return (
     <Chapter
       id="about"
       n={n}
+      tone={tone}
       label="About"
       grot="smile"
       title="Run by volunteers. Open to anyone."

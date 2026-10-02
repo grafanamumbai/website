@@ -101,7 +101,7 @@ export default function RegisterPage() {
           </div>
         </section>
 
-        <ScheduleSection />
+        <ScheduleSection tone="deep" />
       </main>
 
       <Footer />

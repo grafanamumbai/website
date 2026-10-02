@@ -18,10 +18,13 @@ export default function Home() {
   const { hasUpcomingEvent } = communityData.currentEvent;
   const hasSpeakers = communityData.speakers && communityData.speakers.length > 0;
 
-  // Section numbers follow what is actually rendered, so hidden sections never leave gaps.
-  // (JSX expressions are evaluated top to bottom, and `&&` skips the call when the section is hidden.)
+  // Number and background follow what is actually rendered, so hidden sections never leave gaps and
+  // cream/sand always alternate. (JSX expressions run top to bottom, and `&&` skips the call when a section is hidden.)
   let count = 0;
-  const num = () => String(++count).padStart(2, '0');
+  const sec = () => ({
+    n: String(++count).padStart(2, '0'),
+    tone: count % 2 === 1 ? ('paper' as const) : ('deep' as const),
+  });
 
   return (
     <div className="flex min-h-screen flex-col">
@@ -29,16 +32,16 @@ export default function Home() {
       <main id="main" className="flex-1">
         <HeroSection />
         {!hasUpcomingEvent && <NextMeetupSection />}
-        <AboutSection n={num()} />
-        {(hasUpcomingEvent || hasSpeakers) && <SpeakersSection n={num()} />}
-        {hasUpcomingEvent && <ScheduleSection n={num()} />}
-        <EcosystemSection n={num()} />
-        <GallerySection n={num()} />
-        <MascotGrotSection n={num()} />
-        <CoreTeamSection n={num()} />
-        {hasUpcomingEvent && <ContestsSection n={num()} />}
-        <SponsorsSection n={num()} />
-        <FaqSection n={num()} />
+        <AboutSection {...sec()} />
+        {(hasUpcomingEvent || hasSpeakers) && <SpeakersSection {...sec()} />}
+        {hasUpcomingEvent && <ScheduleSection {...sec()} />}
+        <EcosystemSection {...sec()} />
+        <GallerySection {...sec()} />
+        <MascotGrotSection {...sec()} />
+        <CoreTeamSection {...sec()} />
+        {hasUpcomingEvent && <ContestsSection {...sec()} />}
+        <SponsorsSection {...sec()} />
+        <FaqSection {...sec()} />
       </main>
       <Footer />
     </div>

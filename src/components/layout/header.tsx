@@ -103,9 +103,9 @@ export default function Header() {
             {currentEvent.hasUpcomingEvent ? (
               'RSVP'
             ) : (
-              <>
+              <span>
                 Join<span className="hidden sm:inline"> on Meetup</span>
-              </>
+              </span>
             )}
           </a>
 

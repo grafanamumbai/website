@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import communityData from '@/data';
 import { GrotMascot } from '@/components/icons';
-import Chapter from './chapter';
+import Chapter, { type Tone } from './chapter';
 
 const poses = ['search', 'hat', 'smile', 'trophy'] as const;
 
@@ -20,7 +20,7 @@ const fallbackTips = [
   },
 ];
 
-export default function MascotGrotSection({ n }: { n?: string }) {
+export default function MascotGrotSection({ n, tone }: { n?: string; tone?: Tone }) {
   const { mascot } = communityData;
   const tips = mascot?.tips?.length ? mascot.tips : fallbackTips;
   const [i, setI] = useState(0);
@@ -30,8 +30,9 @@ export default function MascotGrotSection({ n }: { n?: string }) {
     <Chapter
       id="mascot"
       n={n}
+      tone={tone}
       label="Grot"
-      tone="sage"
+      grot="smile"
       title="Meet Grot, our mascot"
       intro="Grot is Grafana's dinosaur. According to the lore it slept for 65 million years before waking up to triage dashboards. It has opinions about your queries."
     >

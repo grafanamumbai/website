@@ -2,14 +2,14 @@ import communityData, { Speaker } from '@/data';
 import PersonPhoto from '@/components/person-photo';
 import SpeakerScroller from '@/components/speaker-scroller';
 import { socialLabel } from '@/lib/social';
-import Chapter from './chapter';
+import Chapter, { type Tone } from './chapter';
 
 // Every speaker gets the same card, so a long line-up stays easy to scan.
 function SpeakerCard({ speaker }: { speaker: Speaker }) {
   const links = Object.entries(speaker.socials ?? {}).filter(([, url]) => url);
 
   return (
-    <article className="grid w-[min(25rem,80vw)] shrink-0 snap-start grid-cols-[6rem_minmax(0,1fr)] content-start gap-5 border-t border-ink pt-6">
+    <article className="grid w-[min(25rem,80vw)] shrink-0 grid-cols-[6rem_minmax(0,1fr)] content-start gap-5 border-t border-ink pt-6">
       <PersonPhoto
         name={speaker.name}
         avatar={speaker.avatar}
@@ -45,15 +45,16 @@ function SpeakerCard({ speaker }: { speaker: Speaker }) {
   );
 }
 
-export default function SpeakersSection({ n }: { n?: string }) {
+export default function SpeakersSection({ n, tone }: { n?: string; tone?: Tone }) {
   const { speakers, socials, currentEvent } = communityData;
 
   return (
     <Chapter
       id="speakers"
       n={n}
+      tone={tone}
       label="Speakers"
-      tone="lilac"
+      grot="hat"
       wide
       title={currentEvent.hasUpcomingEvent ? "Who's speaking" : 'People who have spoken, and will again'}
       intro="Practitioners sharing what they run, what broke, and what they would do differently."

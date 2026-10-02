@@ -33,14 +33,6 @@ export default {
         rule: 'rgba(77, 60, 30, 0.2)',
         brand: '#F05A28',
         ember: '#A93A0D',
-        // section tints, taken from Grot's own colours (visor, body) plus two calm neutrals
-        lilac: '#E6E3F7',
-        butter: '#F8E9A8',
-        sky: '#DCE9F0',
-        sage: '#E1EBDC',
-        // deep violet: the 'wall' behind Grot, topic popups and the footer
-        iris: '#4B40B8',
-        night: '#1F1C3D',
         background: 'hsl(var(--background))',
         foreground: 'hsl(var(--foreground))',
         card: {

@@ -1,6 +1,6 @@
 import communityData from '@/data';
 import { cn } from '@/lib/utils';
-import Chapter from './chapter';
+import Chapter, { type Tone } from './chapter';
 
 const typeLabel: Record<string, string> = {
   welcome: 'Doors open',
@@ -15,15 +15,15 @@ const typeLabel: Record<string, string> = {
 // Rows that are not a session get quieter text so the talks stand out
 const quiet = new Set(['welcome', 'break', 'networking']);
 
-export default function ScheduleSection({ n }: { n?: string }) {
+export default function ScheduleSection({ n, tone }: { n?: string; tone?: Tone }) {
   const { schedule, currentEvent } = communityData;
 
   return (
     <Chapter
       id="schedule"
       n={n}
+      tone={tone}
       label="Schedule"
-      tone="butter"
       title="The day, hour by hour"
       intro={`${currentEvent.date} · ${currentEvent.time} · ${currentEvent.venue.name}`}
     >

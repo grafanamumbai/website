@@ -25,7 +25,7 @@ export default function Footer() {
   );
 
   return (
-    <footer className="grain bg-night text-paper">
+    <footer className="bg-ink text-paper">
       <div className="mx-auto max-w-[1200px] px-5 pb-10 pt-16 sm:px-8 lg:px-10 lg:pt-20">
         <div className="grid items-end gap-10 lg:grid-cols-[1fr_auto]">
           <p className="max-w-3xl font-display text-[clamp(2.25rem,5.5vw,4.5rem)] font-semibold leading-[1] tracking-[-0.025em]">
