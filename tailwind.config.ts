@@ -21,12 +21,17 @@ export default {
         '10xl': '120rem',   // 1920px
       },
       fontFamily: {
-        sans: ['Inter', 'system-ui', 'sans-serif'],
-        mono: ['JetBrains Mono', 'monospace'],
-        body: ['Inter', 'system-ui', 'sans-serif'],
-        headline: ['Inter', 'system-ui', 'sans-serif'],
+        sans: ['var(--font-geist)', 'system-ui', 'sans-serif'],
+        display: ['var(--font-fraunces)', 'Georgia', 'serif'],
+        mono: ['var(--font-geist-mono)', 'ui-monospace', 'monospace'],
       },
       colors: {
+        // palette: see .handoff/REDESIGN_PLAN.md section 4
+        paper: { DEFAULT: '#F5F0E6', deep: '#EBE4D4' },
+        ink: { DEFAULT: '#1C1A17', soft: '#4B463E', mute: '#6B645A' },
+        rule: '#D9D0BD',
+        brand: '#F05A28',
+        ember: '#B8400F',
         background: 'hsl(var(--background))',
         foreground: 'hsl(var(--foreground))',
         card: {

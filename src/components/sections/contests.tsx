@@ -1,105 +1,40 @@
-'use client';
-
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import {
-  Trophy,
-  Gift,
-  Sparkles,
-  CheckCircle2,
-  ArrowRight,
-  Share2,
-  Flame,
-} from 'lucide-react';
 import communityData from '@/data';
-import { Button } from '@/components/ui/button';
-import SectionHeader from './section-header';
+import Chapter from './chapter';
 
-export default function ContestsSection() {
+export default function ContestsSection({ n }: { n?: string }) {
   const { contests, currentEvent } = communityData;
 
   return (
-    <section id="contests" className="py-16 sm:py-24 md:py-28 2xl:py-36 bg-[#0a0c10] text-white border-t border-zinc-800/80">
-      <div className="container mx-auto px-4 sm:px-6 md:px-8 lg:px-12 max-w-7xl 2xl:max-w-[1600px] 3xl:max-w-[1800px]">
-        
-        {/* Section Header */}
-        <SectionHeader
-          grot="trophy"
-          icon={<Trophy className="h-3.5 w-3.5" />}
-          label="Community Challenges"
-          title="Contests & Special Giveaways"
-          subtitle="Participate before and during the meetup for a chance to win official Grafana prizes and swag!"
-        />
-
-        {/* Tabs Container */}
-        <div className="mt-10 sm:mt-16 max-w-3xl 2xl:max-w-4xl mx-auto">
-          <Tabs defaultValue={contests[0]?.id || 'refer-and-earn'} className="w-full">
-            
-            <TabsList className="grid w-full grid-cols-2 bg-zinc-900 border border-zinc-800 p-1.5 rounded-2xl h-auto">
-              {contests.map((contest) => (
-                <TabsTrigger
-                  key={contest.id}
-                  value={contest.id}
-                  className="data-[state=active]:bg-orange-500 data-[state=active]:text-white text-zinc-300 font-bold py-2.5 sm:py-3 rounded-xl transition-all text-xs xs:text-sm sm:text-base flex items-center justify-center gap-1.5"
-                >
-                  <Gift className="h-4 w-4 shrink-0" />
-                  <span className="truncate">{contest.title}</span>
-                </TabsTrigger>
+    <Chapter
+      id="contests"
+      n={n}
+      label="Contests"
+      grot="trophy"
+      title="Two ways to win swag"
+      intro="Both run before and during the meetup. Winners are announced on stage."
+    >
+      <div className="grid gap-x-12 gap-y-14 md:grid-cols-2">
+        {contests.map((contest) => (
+          <article key={contest.id} className="border-t border-ink pt-6">
+            <h3 className="font-display text-3xl font-semibold leading-tight tracking-[-0.01em]">{contest.title}</h3>
+            <p className="mt-3 max-w-[44ch] text-ink-soft">{contest.description}</p>
+            <ol className="mt-6">
+              {contest.rules.map((rule, i) => (
+                <li key={i} className="grid grid-cols-[2rem_1fr] gap-3 border-t border-rule py-3.5">
+                  <span className="font-mono text-[0.8125rem] text-ember">{i + 1}</span>
+                  <span>{rule}</span>
+                </li>
               ))}
-            </TabsList>
-
-            {contests.map((contest) => (
-              <TabsContent key={contest.id} value={contest.id} className="mt-6 sm:mt-8">
-                <div className="p-6 sm:p-10 rounded-2xl bg-zinc-900/60 border border-zinc-800/80 shadow-2xl space-y-6 sm:space-y-8">
-                  
-                  <div>
-                    <h3 className="text-xl sm:text-2xl md:text-3xl font-black text-white flex items-center gap-2.5">
-                      <Sparkles className="h-6 w-6 text-orange-400 shrink-0" />
-                      <span>{contest.title}</span>
-                    </h3>
-                    <p className="mt-2 text-sm md:text-base text-zinc-300 leading-relaxed font-normal">
-                      {contest.description}
-                    </p>
-                  </div>
-
-                  <div className="space-y-3.5 pt-2">
-                    <h4 className="text-sm font-bold text-orange-400 uppercase tracking-wider flex items-center gap-1.5">
-                      <Flame className="h-4 w-4" />
-                      <span>How to Participate & Win:</span>
-                    </h4>
-                    <ul className="space-y-3">
-                      {contest.rules.map((rule, idx) => (
-                        <li key={idx} className="flex items-start gap-3 text-sm text-zinc-300 leading-relaxed">
-                          <CheckCircle2 className="h-4 w-4 sm:h-5 sm:w-5 text-emerald-400 shrink-0 mt-0.5" />
-                          <span>{rule}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-
-                  <div className="pt-6 border-t border-zinc-800 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-                    <span className="text-xs text-zinc-400 font-medium">
-                      Prizes announced live on stage during the meetup!
-                    </span>
-                    <Button
-                      asChild
-                      size="sm"
-                      className="w-full sm:w-auto bg-orange-500 hover:bg-orange-600 text-white font-bold rounded-full px-6 h-11 text-sm shadow-lg shadow-orange-500/20 active:scale-95 transition-all hover:scale-105"
-                    >
-                      <a href={currentEvent.registration.rsvpUrl} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-2">
-                        <span>Register to Enter</span>
-                        <ArrowRight className="h-4 w-4" />
-                      </a>
-                    </Button>
-                  </div>
-
-                </div>
-              </TabsContent>
-            ))}
-
-          </Tabs>
-        </div>
-
+            </ol>
+          </article>
+        ))}
       </div>
-    </section>
+
+      <div className="mt-14">
+        <a href={currentEvent.registration.rsvpUrl} target="_blank" rel="noopener noreferrer" className="btn btn-ink">
+          Register to enter <span aria-hidden>→</span>
+        </a>
+      </div>
+    </Chapter>
   );
 }

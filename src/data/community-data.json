@@ -2,8 +2,8 @@
   "chapter": {
     "name": "Grafana & Friends Mumbai",
     "shortName": "G&F Mumbai",
-    "tagline": "The Official Observability & Open-Source Community in Mumbai",
-    "description": "A vibrant community of developers, SREs, DevOps engineers, and cloud-native enthusiasts in Mumbai, powered by Grafana Labs. We meet to explore metrics, logs, traces, continuous profiling, and modern cloud-native observability practices.",
+    "tagline": "Free observability meetups in Mumbai",
+    "description": "A free community meetup for developers, SREs and DevOps engineers in Mumbai, supported by Grafana Labs. We get together to talk about metrics, logs, traces, profiling and the things that break in production.",
     "location": "Mumbai, Maharashtra, India",
     "email": "grafanamumbai@gmail.com",
     "stats": {
@@ -63,9 +63,18 @@
       "tagline": "Real-time Telemetry & Visualization",
       "badge": "Core Track",
       "description": "Learn to query high-throughput time-series data with PromQL, visualize custom data sources with Grafana plugins, and configure multi-channel alerts.",
-      "technologies": ["Prometheus", "Grafana Mimir", "Infinity Plugin", "Alertmanager"],
+      "technologies": [
+        "Prometheus",
+        "Grafana Mimir",
+        "Infinity Plugin",
+        "Alertmanager"
+      ],
       "icon": "metrics",
-      "highlights": ["PromQL Query Optimization", "Multi-tenant Mimir Storage", "SLO & Golden Signal Dashboards"]
+      "highlights": [
+        "PromQL Query Optimization",
+        "Multi-tenant Mimir Storage",
+        "SLO & Golden Signal Dashboards"
+      ]
     },
     {
       "id": "track-logs",
@@ -73,9 +82,18 @@
       "tagline": "Cost-Effective Log Exploration",
       "badge": "LGTM Stack",
       "description": "Explore horizontal log aggregation using Grafana Loki. Learn structured metadata, regex label extraction, and pinpointing exceptions from millions of lines.",
-      "technologies": ["Grafana Loki", "Promtail", "LogQL", "Grafana Alloy"],
+      "technologies": [
+        "Grafana Loki",
+        "Promtail",
+        "LogQL",
+        "Grafana Alloy"
+      ],
       "icon": "logs",
-      "highlights": ["Zero-index Log Aggregation", "LogQL Stream Selectors", "Live Log Streaming & Alerts"]
+      "highlights": [
+        "Zero-index Log Aggregation",
+        "LogQL Stream Selectors",
+        "Live Log Streaming & Alerts"
+      ]
     },
     {
       "id": "track-traces",
@@ -83,9 +101,18 @@
       "tagline": "End-to-End Request Journey",
       "badge": "CNCF Standard",
       "description": "Instrument cloud-native microservices with OpenTelemetry SDKs, collect distributed spans via Grafana Alloy, and trace cross-service bottlenecks in Tempo.",
-      "technologies": ["OpenTelemetry", "Grafana Tempo", "TraceQL", "Jaeger"],
+      "technologies": [
+        "OpenTelemetry",
+        "Grafana Tempo",
+        "TraceQL",
+        "Jaeger"
+      ],
       "icon": "traces",
-      "highlights": ["OTel Collector Pipelines", "TraceQL Filter Queries", "Span-to-Metrics Correlation"]
+      "highlights": [
+        "OTel Collector Pipelines",
+        "TraceQL Filter Queries",
+        "Span-to-Metrics Correlation"
+      ]
     },
     {
       "id": "track-profiling",
@@ -93,121 +120,130 @@
       "tagline": "Zero-Code Kernel Instrumentation",
       "badge": "Next-Gen SRE",
       "description": "Harness Linux eBPF with Grafana Beyla for auto-instrumentation without code changes, and analyze CPU/memory flame graphs down to the line of code.",
-      "technologies": ["Grafana Beyla", "Grafana Pyroscope", "eBPF", "AI Observability"],
+      "technologies": [
+        "Grafana Beyla",
+        "Grafana Pyroscope",
+        "eBPF",
+        "AI Observability"
+      ],
       "icon": "profiling",
-      "highlights": ["Zero-Code eBPF Tracing", "Continuous CPU Flame Graphs", "AI Pipeline & LLM Tracing"]
+      "highlights": [
+        "Zero-Code eBPF Tracing",
+        "Continuous CPU Flame Graphs",
+        "AI Pipeline & LLM Tracing"
+      ]
     }
   ],
   "swags": [
     {
       "id": "swag-tshirt",
-      "name": "Exclusive Community T-Shirt",
-      "description": "Custom Grafana & Friends Mumbai edition tee for quiz winners and active participants.",
+      "name": "Community T-shirt",
+      "description": "A Grafana & Friends Mumbai edition tee for quiz winners and active participants.",
       "image": "/logo-header.png"
     },
     {
       "id": "swag-stickers",
-      "name": "Holographic Sticker Pack",
-      "description": "Grafana, Loki, Tempo, Mimir, and Prometheus vinyl laptop stickers for all attendees.",
+      "name": "Sticker pack",
+      "description": "Grafana, Loki, Tempo, Mimir and Prometheus vinyl laptop stickers for every attendee.",
       "image": "/logo-header.png"
     },
     {
       "id": "swag-plushie",
-      "name": "Official Grot Mascot Swag & Plushies",
-      "description": "Exclusive Grot mascot collectibles, badges, and special speaker appreciation tokens.",
+      "name": "Grot collectibles",
+      "description": "Grot collectibles, badges and thank-you tokens for speakers.",
       "image": "/logo-header.png"
     }
   ],
   "contests": [
     {
       "id": "refer-and-earn",
-      "title": "Refer & Grow the Community",
+      "title": "Refer a friend",
       "icon": "Gift",
       "description": "Invite fellow developers and SREs to join the Grafana & Friends Mumbai meetup group.",
       "rules": [
-        "Register for the meetup on Meetup.com / Konfhub.",
-        "Share the event link with your college or team networks.",
-        "Top referrers receive exclusive Grafana swag bundles at the event check-in desk!"
+        "Register for the meetup on Meetup.com or Konfhub.",
+        "Share the event link with your college or team.",
+        "The top referrers get Grafana swag at the check-in desk."
       ]
     },
     {
       "id": "social-mania",
-      "title": "Social Media Mania & Meme Contest",
+      "title": "Meme contest",
       "icon": "Sparkles",
-      "description": "Share your observability stories, memes, and event excitement across LinkedIn and X/Twitter.",
+      "description": "Share your observability stories, memes and event excitement on LinkedIn and X.",
       "rules": [
-        "Create an observability meme or post about your favorite Grafana dashboard.",
-        "Tag @grafanamumbai on Twitter/LinkedIn with the hashtag #GrafanaMumbai.",
-        "Best posts win premium Grafana merchandise and will be featured on stage!"
+        "Post an observability meme, or a post about your favourite Grafana dashboard.",
+        "Tag @grafanamumbai on X or LinkedIn and use #GrafanaMumbai.",
+        "The best posts win Grafana merch and get shown on stage."
       ]
     }
   ],
   "gallery": [
     {
       "id": "event-1",
-      "title": "Community Keynote Session",
-      "description": "Packed house exploring distributed tracing with Tempo and OpenTelemetry.",
-      "image": "/event1.jpeg",
-      "date": "Previous Meetup"
+      "title": "Quiz prize at the VIT conference",
+      "description": "A quiz winner is handed a bouquet on stage at Vidyalankar Institute of Technology.",
+      "image": "/photos/event-1.jpg",
+      "date": "Past meetup"
     },
     {
       "id": "event-2",
-      "title": "Hands-on Dashboard Workshop",
-      "description": "Attendees building real-time alerting dashboards in Grafana.",
-      "image": "/event2.jpeg",
-      "date": "Previous Meetup"
+      "title": "CSI-VIT × Grafana × MumPy tech conference",
+      "description": "Organisers, speakers and students on stage together after the sessions.",
+      "image": "/photos/event-2.jpg",
+      "date": "Past meetup"
     },
     {
       "id": "event-3",
-      "title": "Networking & Hallway Conversations",
-      "description": "Connecting SREs, DevOps professionals, and open-source contributors.",
-      "image": "/event3.jpg",
-      "date": "Previous Meetup"
+      "title": "Grafana × AWS User Group, Mumbai",
+      "description": "A joint meetup with a full room for the group photo.",
+      "image": "/photos/event-3.jpg",
+      "date": "Past meetup"
     },
     {
       "id": "event-4",
-      "title": "Community Swag & Quiz Winners",
-      "description": "Celebrating our active community participants with official Grafana goodies.",
-      "image": "/event4.png",
-      "date": "Previous Meetup"
+      "title": "A meetup crowd in Grafana tees",
+      "description": "The group photo after the talks and the Mentimeter quiz.",
+      "image": "/photos/event-4.jpg",
+      "date": "Past meetup"
     },
     {
       "id": "event-5",
-      "title": "Group Photo of Mumbai Chapter",
-      "description": "The passionate observability community in Mumbai gathering together.",
-      "image": "/event5.jpg",
-      "date": "Previous Meetup"
+      "title": "Context propagation, explained",
+      "description": "A speaker walks through how trace context moves between services.",
+      "image": "/photos/event-5.jpg",
+      "date": "Past meetup"
     }
   ],
   "faqs": [
     {
       "question": "What is Grafana & Friends Mumbai and how can I join?",
-      "answer": "Grafana & Friends Mumbai is the official local community chapter for developers, SREs, DevOps engineers, and students passionate about observability. You can join for free on Meetup.com to get notified about all upcoming in-person and virtual meetups.",
+      "answer": "Grafana & Friends Mumbai is the official local chapter for developers, SREs, DevOps engineers and students who care about observability. Join the group on Meetup.com and you will be notified of every in-person and virtual meetup.",
       "category": "General"
     },
     {
       "question": "Is attending the meetups free?",
-      "answer": "Yes! All Grafana & Friends Mumbai community meetups, workshops, and events are 100% free of charge and open to everyone, powered by Grafana Labs and our community partners.",
+      "answer": "Yes. Every meetup, workshop and event is free and open to everyone. Grafana Labs and our community partners cover the costs.",
       "category": "Registration"
     },
     {
       "question": "How can I become a speaker or present a talk?",
-      "answer": "We welcome community talks of all experience levels! Whether you want to share a 10-minute lightning demo or a 30-minute deep-dive talk on metrics, logs, traces, or incident response, submit your proposal through our open Call for Speakers (CFP) form.",
+      "answer": "We welcome talks at every experience level. A 10-minute lightning demo or a 30-minute deep dive on metrics, logs, traces or incident response all work. Send a proposal through the Call for Speakers form.",
       "category": "Speaking"
     },
     {
       "question": "What is the format and typical agenda of a meetup?",
-      "answer": "Our meetups typically feature 2-3 technical talks, hands-on demonstrations, community Q&A, interactive quizzes with swag giveaways, and dedicated networking over complimentary food and beverages.",
+      "answer": "A typical meetup has 2 or 3 technical talks, hands-on demos, Q&A, a quiz with swag, and time to talk over food and drinks.",
       "category": "Event"
     },
     {
       "question": "Can my company sponsor or host a future meetup?",
-      "answer": "Yes! We are always looking for venue partners, community sponsors, and food/swag collaborators in Mumbai. Please reach out to our organizing team at grafanamumbai@gmail.com.",
+      "answer": "Yes. We are always looking for venues, sponsors, and food or swag partners in Mumbai. Email the organising team at grafanamumbai@gmail.com.",
       "category": "Sponsorship"
     },
     {
       "question": "What Code of Conduct applies to community events?",
-      "answer": "We adhere strictly to the Grafana Events Code of Conduct and Contributor Covenant to ensure a safe, inclusive, welcoming, and harassment-free environment for all participants.",
+      "answer": "We follow the Grafana Events Code of Conduct and the Contributor Covenant, so events stay safe, inclusive and free of harassment.",
       "category": "Guidelines"
     }
   ]

@@ -1,26 +1,9 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Button } from '@/components/ui/button';
-import {
-  Calendar,
-  Clock,
-  MapPin,
-  ArrowRight,
-  Users,
-  Mic2,
-  ShieldCheck,
-} from 'lucide-react';
+import Image from 'next/image';
 import communityData from '@/data';
-import { MeetupLogo, GrotMascot } from '@/components/icons';
-
-// Floating "signal" chips orbiting Grot: one per observability pillar.
-const orbit = [
-  { label: 'Metrics', tool: 'Prometheus', dot: 'bg-red-500', pos: 'top-8 left-0 sm:-left-4', delay: '0s' },
-  { label: 'Logs', tool: 'Loki', dot: 'bg-cyan-400', pos: 'top-20 right-0 sm:-right-4', delay: '1.2s' },
-  { label: 'Traces', tool: 'Tempo', dot: 'bg-purple-500', pos: 'bottom-28 left-0 sm:-left-8', delay: '2.4s' },
-  { label: 'Profiles', tool: 'Pyroscope', dot: 'bg-emerald-400', pos: 'bottom-12 right-2 sm:-right-2', delay: '3.6s' },
-];
+import { GrotMascot } from '@/components/icons';
 
 export default function HeroSection() {
   const { chapter, currentEvent, socials } = communityData;
@@ -59,181 +42,124 @@ export default function HeroSection() {
     return () => clearInterval(interval);
   }, [currentEvent.targetDateISO, hasUpcomingEvent]);
 
+  const showCountdown =
+    hasUpcomingEvent && currentEvent.targetDateISO && new Date(currentEvent.targetDateISO).getTime() > new Date().getTime();
+  const pad = (n: number) => String(n).padStart(2, '0');
+
+  const stats = [
+    { label: 'members', value: chapter.stats.members },
+    { label: 'meetups held', value: chapter.stats.meetups },
+    { label: 'speakers hosted', value: chapter.stats.speakers },
+    { label: 'to attend', value: 'Free' },
+  ];
+
   return (
-    <section className="relative overflow-hidden bg-[#090b0e] py-12 sm:py-16 lg:py-20 2xl:py-28 text-white">
-      {/* Background: warm glow behind Grot + faint dot grid */}
-      <div
-        className="absolute inset-0 pointer-events-none opacity-30"
-        style={{
-          backgroundImage: 'radial-gradient(circle at 78% 30%, rgba(244, 104, 0, 0.3) 0%, transparent 55%), radial-gradient(circle at 10% 90%, rgba(66, 92, 199, 0.18) 0%, transparent 50%)',
-        }}
-      />
-      <div
-        className="absolute inset-0 pointer-events-none opacity-10"
-        style={{
-          backgroundImage: 'radial-gradient(rgba(255, 255, 255, 0.2) 1px, transparent 1px)',
-          backgroundSize: '32px 32px'
-        }}
-      />
+    <section className="pt-10 sm:pt-14 lg:pt-20">
+      <div className="mx-auto max-w-[1200px] px-5 sm:px-8 lg:px-10">
+        <div className="grid items-center gap-12 lg:grid-cols-12 lg:gap-8">
 
-      <div className="container relative z-10 mx-auto px-4 sm:px-6 md:px-8 lg:px-12 max-w-7xl 2xl:max-w-[1600px] 3xl:max-w-[1800px]">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-6 items-center">
+          {/* Copy */}
+          <div className="lg:col-span-6">
+            <p className="label">Mumbai chapter · powered by Grafana Labs</p>
 
-          {/* Grot stage: first on mobile, right column on desktop */}
-          <div className="order-first lg:order-last lg:col-span-5 relative mx-auto w-full max-w-[22rem] sm:max-w-[28rem] lg:max-w-none h-64 sm:h-96 lg:h-[34rem]">
-            <div className="absolute inset-4 sm:inset-8 rounded-full bg-orange-500/20 blur-3xl" />
-            <div className="absolute inset-8 sm:inset-14 rounded-full border border-orange-500/20" />
-            <div className="absolute inset-16 sm:inset-24 rounded-full border border-dashed border-orange-500/10" />
-            <div className="absolute inset-0 flex items-center justify-center motion-safe:animate-float">
-              <GrotMascot variant="hat" eager animate={false} className="h-full w-full drop-shadow-2xl" />
-            </div>
-            {orbit.map((chip) => (
-              <div
-                key={chip.label}
-                style={{ animationDelay: chip.delay }}
-                className={`absolute ${chip.pos} hidden sm:flex items-center gap-2 rounded-xl border border-zinc-700/70 bg-zinc-900/90 px-3 py-1.5 backdrop-blur-md shadow-lg motion-safe:animate-float`}
-              >
-                <span className={`h-2 w-2 rounded-full ${chip.dot}`} />
-                <span className="text-sm font-bold text-white">{chip.label}</span>
-                <span className="text-xs font-mono text-zinc-400">{chip.tool}</span>
-              </div>
-            ))}
-          </div>
-
-          {/* Copy column */}
-          <div className="lg:col-span-7 text-center lg:text-left">
-            <div className="inline-flex items-center gap-2 rounded-full border border-orange-500/30 bg-orange-500/10 px-3.5 py-1.5 text-sm font-semibold text-orange-400 backdrop-blur-md shadow-sm">
-              <span className="relative flex h-2.5 w-2.5">
-                <span className="motion-safe:animate-ping absolute inline-flex h-full w-full rounded-full bg-orange-400 opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-orange-500"></span>
-              </span>
-              <span className="truncate">Official Chapter • Powered by Grafana Labs</span>
-            </div>
-
-            <h1 className="mt-5 text-4xl sm:text-5xl md:text-6xl 2xl:text-7xl font-black tracking-tight text-white leading-[1.05]">
+            <h1 className="mt-5 text-[clamp(2.75rem,6.2vw,5.25rem)] font-semibold leading-[0.98] tracking-[-0.03em]">
               {hasUpcomingEvent ? (
-                <span className="bg-gradient-to-r from-orange-400 via-amber-300 to-yellow-500 bg-clip-text text-transparent">
-                  {currentEvent.title}
-                </span>
+                currentEvent.title
               ) : (
                 <>
-                  Grafana & Friends <br className="hidden sm:block" />
-                  <span className="bg-gradient-to-r from-orange-400 via-amber-300 to-yellow-500 bg-clip-text text-transparent">
-                    Mumbai Chapter
-                  </span>
+                  Free meetups for Mumbai&apos;s{' '}
+                  <span className="bg-[linear-gradient(transparent_60%,#F05A28_60%,#F05A28_92%,transparent_92%)] px-1 -mx-1">
+                    observability
+                  </span>{' '}
+                  crowd.
                 </>
               )}
             </h1>
 
-            <p className="mt-5 text-base sm:text-lg md:text-xl 2xl:text-2xl text-zinc-300 max-w-2xl mx-auto lg:mx-0 leading-relaxed">
-              {hasUpcomingEvent ? chapter.description : "The premier hub for developers, SREs, and DevOps professionals in Mumbai exploring metrics, logs, traces, continuous profiling, and cloud-native observability."}
+            <p className="mt-6 max-w-[34rem] text-lg text-ink-soft sm:text-xl">
+              {hasUpcomingEvent
+                ? `${currentEvent.edition}. ${currentEvent.theme}.`
+                : 'Talks and demos on Grafana, Prometheus, Loki, Tempo and OpenTelemetry, from people who run them in production. Anyone can come. Nobody pays.'}
             </p>
 
             {hasUpcomingEvent && (
-              <>
-                {/* Event Quick Info Card */}
-                <div className="mt-8 max-w-2xl mx-auto lg:mx-0 rounded-2xl border border-zinc-800 bg-zinc-900/80 p-4 sm:p-5 backdrop-blur-md shadow-2xl">
-                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-left divide-y sm:divide-y-0 sm:divide-x divide-zinc-800/80">
-                    {[
-                      { Icon: Calendar, label: 'Date', value: currentEvent.date },
-                      { Icon: Clock, label: 'Time', value: currentEvent.time },
-                      { Icon: MapPin, label: 'Location', value: currentEvent.venue.name },
-                    ].map(({ Icon, label, value }, i) => (
-                      <div key={label} className={`flex items-center gap-3.5 ${i > 0 ? 'pt-3 sm:pt-0 sm:pl-5' : 'pt-1 sm:pt-0'}`}>
-                        <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-orange-500/10 border border-orange-500/20 text-orange-400">
-                          <Icon className="h-5 w-5" />
-                        </div>
-                        <div>
-                          <p className="text-xs text-zinc-400 font-medium uppercase tracking-wider">{label}</p>
-                          <p className="text-sm font-bold text-white leading-tight">{value}</p>
-                        </div>
-                      </div>
-                    ))}
+              <dl className="mt-8 grid max-w-xl grid-cols-1 border-y-2 border-ink sm:grid-cols-3 sm:divide-x sm:divide-rule">
+                {[
+                  ['Date', currentEvent.date],
+                  ['Time', currentEvent.time],
+                  ['Venue', currentEvent.venue.name],
+                ].map(([k, v]) => (
+                  <div key={k} className="py-3 sm:px-4 sm:first:pl-0">
+                    <dt className="label">{k}</dt>
+                    <dd className="mt-0.5 font-display text-lg font-medium leading-snug">{v}</dd>
                   </div>
-                </div>
-
-                {/* Live Countdown Timer */}
-                {currentEvent.targetDateISO && new Date(currentEvent.targetDateISO).getTime() > new Date().getTime() && (
-                  <div className="mt-6 flex items-center justify-center lg:justify-start gap-2.5 sm:gap-3">
-                    {[
-                      { label: 'Days', value: timeLeft.days },
-                      { label: 'Hours', value: timeLeft.hours },
-                      { label: 'Minutes', value: timeLeft.minutes },
-                      { label: 'Seconds', value: timeLeft.seconds },
-                    ].map((unit) => (
-                      <div
-                        key={unit.label}
-                        className="flex flex-col items-center justify-center rounded-xl border border-zinc-800/90 bg-zinc-950/90 px-2.5 py-2 sm:px-4 sm:py-3 shadow-lg min-w-[64px] sm:min-w-[84px]"
-                      >
-                        <span className="font-mono text-2xl sm:text-3xl font-extrabold text-white leading-tight">
-                          {String(unit.value).padStart(2, '0')}
-                        </span>
-                        <span className="text-xs text-zinc-400 font-semibold uppercase tracking-wider mt-0.5">
-                          {unit.label}
-                        </span>
-                      </div>
-                    ))}
-                  </div>
-                )}
-              </>
+                ))}
+              </dl>
             )}
 
-            {/* Action Buttons */}
-            <div className="mt-8 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3 sm:gap-4 max-w-md sm:max-w-none mx-auto lg:mx-0 w-full">
-              <Button
-                asChild
-                size="lg"
-                className="w-full sm:w-auto bg-orange-500 hover:bg-orange-600 active:scale-95 text-white font-bold text-base h-12 px-8 rounded-full shadow-xl shadow-orange-500/25 transition-all hover:scale-105"
-              >
-                <a
-                  href={hasUpcomingEvent ? currentEvent.registration.rsvpUrl : socials.meetup}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center justify-center gap-2.5"
-                >
-                  <MeetupLogo className="h-4 w-4" />
-                  <span>{hasUpcomingEvent ? "RSVP for Meetup (Free)" : "Join Community / Meetup"}</span>
-                  <ArrowRight className="h-4 w-4 ml-1" />
-                </a>
-              </Button>
+            {showCountdown && (
+              <p className="label mt-4 tabular-nums" aria-label="Time until the meetup">
+                starts in {timeLeft.days}d {pad(timeLeft.hours)}h {pad(timeLeft.minutes)}m {pad(timeLeft.seconds)}s
+              </p>
+            )}
 
-              <Button
-                asChild
-                size="lg"
-                variant="outline"
-                className="w-full sm:w-auto border-zinc-700 bg-zinc-900/90 hover:bg-zinc-800 text-zinc-200 hover:text-white text-base h-12 px-7 rounded-full transition-all hover:border-zinc-500"
+            <div className="mt-9 flex flex-wrap items-center gap-x-7 gap-y-4">
+              <a
+                href={hasUpcomingEvent ? currentEvent.registration.rsvpUrl : socials.meetup}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn btn-primary"
               >
-                <a
-                  href={socials.cfp}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center justify-center gap-2.5"
-                >
-                  <Mic2 className="h-4 w-4 text-orange-400" />
-                  <span>Submit a Talk (CFP)</span>
-                </a>
-              </Button>
+                {hasUpcomingEvent ? 'RSVP on Meetup' : 'Join the Meetup group'} <span aria-hidden>→</span>
+              </a>
+              <a href={socials.cfp} target="_blank" rel="noopener noreferrer" className="link font-medium">
+                Give a talk
+              </a>
+            </div>
+          </div>
+
+          {/* Photos from past meetups, with Grot standing on the stack */}
+          <div className="lg:col-span-6">
+            <div className="relative mx-auto max-w-[36rem] pb-14 pr-4 sm:pb-16 lg:max-w-none lg:pr-0">
+              <figure className="print -rotate-[1.5deg]">
+                <div className="relative aspect-[4/3] overflow-hidden bg-paper-deep">
+                  <Image
+                    src="/photos/event-2.jpg"
+                    alt="Attendees and speakers of the CSI-VIT x Grafana x MumPy tech conference on stage together"
+                    fill
+                    priority
+                    sizes="(min-width: 1024px) 560px, 90vw"
+                    className="object-cover"
+                  />
+                </div>
+              </figure>
+              <figure className="print absolute -bottom-0 left-[-2%] hidden w-[42%] rotate-[3deg] sm:block">
+                <div className="relative aspect-[4/3] overflow-hidden bg-paper-deep">
+                  <Image
+                    src="/photos/event-5.jpg"
+                    alt="A speaker presenting a slide on context propagation in distributed tracing"
+                    fill
+                    sizes="240px"
+                    className="object-cover"
+                  />
+                </div>
+              </figure>
+              <div className="pointer-events-none absolute -bottom-2 right-0 w-[40%] max-w-[15rem] sm:right-[-2%]">
+                <GrotMascot variant="hat" eager animate={false} className="h-full w-full drop-shadow-[0_10px_14px_rgba(60,40,10,0.35)]" />
+              </div>
             </div>
           </div>
         </div>
 
-        {/* Community Stats Strip */}
-        <div className="mt-14 sm:mt-16 pt-8 border-t border-zinc-800/80 grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-6 text-center">
-          {[
-            { Icon: Users, value: chapter.stats.members, label: 'Community Members', tone: 'text-orange-400' },
-            { Icon: Calendar, value: chapter.stats.meetups, label: 'Meetups Hosted', tone: 'text-orange-400' },
-            { Icon: Mic2, value: chapter.stats.speakers, label: 'Expert Speakers', tone: 'text-orange-400' },
-            { Icon: ShieldCheck, value: '100% Free', label: 'Open to Everyone', tone: 'text-emerald-400' },
-          ].map(({ Icon, value, label, tone }) => (
-            <div key={label} className="p-3 sm:p-4 rounded-xl bg-zinc-900/40 border border-zinc-800/60">
-              <div className={`flex justify-center mb-1 ${tone}`}>
-                <Icon className="h-5 w-5" />
-              </div>
-              <p className={`text-2xl sm:text-3xl font-extrabold font-mono ${tone === 'text-emerald-400' ? tone : 'text-white'}`}>{value}</p>
-              <p className="text-xs text-zinc-400 mt-0.5">{label}</p>
+        {/* Facts, as a plain strip */}
+        <dl className="mt-14 grid grid-cols-2 border-y border-ink/80 sm:mt-16 md:grid-cols-4 md:divide-x md:divide-rule">
+          {stats.map((s) => (
+            <div key={s.label} className="px-1 py-5 md:px-6 md:first:pl-0">
+              <dd className="font-display text-4xl font-semibold tracking-[-0.01em] sm:text-5xl">{s.value}</dd>
+              <dt className="label mt-1">{s.label}</dt>
             </div>
           ))}
-        </div>
+        </dl>
       </div>
     </section>
   );
