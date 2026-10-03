@@ -21,12 +21,18 @@ export default {
         '10xl': '120rem',   // 1920px
       },
       fontFamily: {
-        sans: ['Inter', 'system-ui', 'sans-serif'],
-        mono: ['JetBrains Mono', 'monospace'],
-        body: ['Inter', 'system-ui', 'sans-serif'],
-        headline: ['Inter', 'system-ui', 'sans-serif'],
+        sans: ['var(--font-geist)', 'system-ui', 'sans-serif'],
+        display: ['var(--font-fraunces)', 'Georgia', 'serif'],
+        mono: ['var(--font-geist-mono)', 'ui-monospace', 'monospace'],
       },
       colors: {
+        // palette: see .handoff/REDESIGN_PLAN.md section 4
+        paper: { DEFAULT: '#F5F0E6', deep: '#EBE4D4' },
+        ink: { DEFAULT: '#1C1A17', soft: '#4B463E', mute: '#6B645A' },
+        // hairline is translucent so it works on every section tint
+        rule: 'rgba(77, 60, 30, 0.2)',
+        brand: '#F05A28',
+        ember: '#A93A0D',
         background: 'hsl(var(--background))',
         foreground: 'hsl(var(--foreground))',
         card: {
@@ -82,10 +88,21 @@ export default {
           from: { height: 'var(--radix-accordion-content-height)' },
           to: { height: '0' },
         },
+        float: {
+          '0%, 100%': { transform: 'translateY(0)' },
+          '50%': { transform: 'translateY(-10px)' },
+        },
+        wiggle: {
+          '0%, 100%': { transform: 'rotate(0)' },
+          '25%': { transform: 'rotate(-6deg) scale(1.05)' },
+          '75%': { transform: 'rotate(6deg) scale(1.05)' },
+        },
       },
       animation: {
         'accordion-down': 'accordion-down 0.2s ease-out',
         'accordion-up': 'accordion-up 0.2s ease-out',
+        float: 'float 5s ease-in-out infinite',
+        wiggle: 'wiggle 0.7s ease-in-out',
       },
     },
   },

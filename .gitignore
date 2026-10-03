@@ -47,3 +47,5 @@ firestore-debug.log
 # agent artifacts
 .agents/
 .gsd/
+# local handoff / planning docs (not for repo)
+.handoff/

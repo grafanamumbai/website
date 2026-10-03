@@ -3,27 +3,16 @@
 import { useRef, useState, useEffect } from 'react';
 import Header from '@/components/layout/header';
 import Footer from '@/components/layout/footer';
-import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { useToast } from '@/hooks/use-toast';
-import {
-  Copy,
-  Download,
-  Upload,
-  Sparkles,
-  Check,
-  Award,
-  Share2,
-  Image as ImageIcon,
-} from 'lucide-react';
 import Image from 'next/image';
 import communityData from '@/data';
 
 export default function BadgePage() {
   const { toast } = useToast();
-  const { chapter, currentEvent } = communityData;
+  const { currentEvent } = communityData;
   const socialText = `I am attending ${currentEvent.title}! Join me in Mumbai for a full day of observability, Grafana deep-dives, and networking. #GrafanaMumbai #GrafanaConLocal #Observability #DevOps #SRE`;
-  
+
   const badgeTemplateUrl = '/badge1.png';
   const badgeNoPhotoUrl = '/badge2.png';
 
@@ -40,8 +29,8 @@ export default function BadgePage() {
     navigator.clipboard.writeText(socialText);
     setCopied(true);
     toast({
-      title: 'Copied to Clipboard!',
-      description: 'You can now share it on LinkedIn and Twitter/X.',
+      title: 'Copied to clipboard',
+      description: 'Paste it into LinkedIn or X.',
     });
     setTimeout(() => setCopied(false), 3000);
   };
@@ -89,7 +78,7 @@ export default function BadgePage() {
           ctx.arc(x + size / 2, y + size / 2, size / 2, 0, Math.PI * 2, true);
           ctx.closePath();
           ctx.clip();
-          
+
           const aspect = user_image.width / user_image.height;
           let srcX = 0;
           let srcY = 0;
@@ -144,143 +133,89 @@ export default function BadgePage() {
   };
 
   return (
-    <div className="flex flex-col min-h-screen bg-[#090b0e] text-white">
+    <div className="flex min-h-screen flex-col">
       <Header />
-      <main className="flex-1 container mx-auto px-4 sm:px-6 md:px-8 py-12 sm:py-20 max-w-4xl 2xl:max-w-5xl relative">
-        
-        {/* Header box */}
-        <div className="text-center mb-10 sm:mb-14">
-          <div className="inline-flex items-center gap-2 rounded-full border border-orange-500/30 bg-orange-500/10 px-4 py-1 text-xs font-semibold text-orange-400 mb-4">
-            <Award className="h-3.5 w-3.5" />
-            <span>Attendee Social Kit</span>
-          </div>
-          <h1 className="text-2xl xs:text-3xl sm:text-5xl font-black tracking-tight text-white leading-tight">
-            Generate Your Attendee Badge
-          </h1>
-          <p className="mt-3 text-xs sm:text-base text-zinc-300 max-w-md mx-auto">
-            Showcase that you're joining the Grafana community in Mumbai on LinkedIn, X, and Instagram.
-          </p>
-        </div>
+      <main id="main" className="mx-auto w-full max-w-[1200px] flex-1 px-5 py-14 sm:px-8 sm:py-20 lg:px-10">
+        <p className="label">Attendee badge</p>
+        <h1 className="mt-2 max-w-3xl text-[clamp(2.25rem,5vw,4rem)] font-semibold leading-[1.02] tracking-[-0.025em]">
+          Make your badge, tell people you&apos;re coming
+        </h1>
+        <p className="mt-5 max-w-[56ch] text-lg text-ink-soft">
+          Add your photo to the official template, or take the standard one. Post it on LinkedIn, X or Instagram.
+        </p>
 
-        {/* Social Share Box */}
-        <div className="p-5 sm:p-7 rounded-2xl bg-zinc-900/60 border border-zinc-800/80 mb-10 sm:mb-12 shadow-xl">
-          <div className="flex items-center gap-2 text-xs sm:text-sm font-bold text-orange-400 uppercase tracking-wider mb-2">
-            <Share2 className="h-4 w-4" />
-            <span>Social Share Template</span>
-          </div>
-          <p className="text-xs sm:text-sm text-zinc-300 font-mono bg-zinc-950 p-4 rounded-xl border border-zinc-800 leading-relaxed overflow-x-auto">
-            {socialText}
-          </p>
-          <div className="mt-4">
-            <Button
-              onClick={handleCopyToClipboard}
-              size="sm"
-              className="bg-orange-500 hover:bg-orange-600 text-white font-bold rounded-full px-5 h-10 text-xs sm:text-sm"
-            >
-              {copied ? <Check className="h-4 w-4 mr-1.5" /> : <Copy className="h-4 w-4 mr-1.5" />}
-              <span>{copied ? 'Copied to Clipboard!' : 'Copy Share Text'}</span>
-            </Button>
-          </div>
-        </div>
+        <div className="mt-12 grid gap-x-12 gap-y-14 md:grid-cols-2">
 
-        {/* Badge Generation Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
-          
-          {/* Card 1: Custom Photo Badge */}
-          <div className="p-5 sm:p-7 rounded-2xl bg-zinc-900/60 border border-zinc-800/80 shadow-xl flex flex-col justify-between">
-            <div>
-              <div className="flex items-center gap-2 mb-1">
-                <ImageIcon className="h-4 w-4 text-orange-400" />
-                <h3 className="text-base sm:text-lg font-bold text-white">Custom Photo Badge</h3>
-              </div>
-              <p className="text-xs text-zinc-400 mb-4">Upload your picture to embed inside the official template.</p>
-              
-              <div className="relative w-full aspect-[1200/630] rounded-xl overflow-hidden bg-zinc-950 border border-zinc-800 flex items-center justify-center">
+          {/* Badge with your photo */}
+          <section className="flex flex-col border-t border-ink pt-6">
+            <h2 className="text-2xl font-semibold tracking-[-0.01em]">With your photo</h2>
+            <p className="mt-1 text-ink-soft">Upload a picture and it goes inside the circle.</p>
+
+            <div className="print mt-5 -rotate-[0.6deg]">
+              <div className="relative aspect-[1200/630] w-full overflow-hidden bg-paper-deep">
                 <canvas ref={canvasRef} className="hidden" />
-                <Image
-                  src={badgeTemplateUrl}
-                  alt="Badge Template"
-                  fill
-                  className="object-cover"
-                />
+                <Image src={badgeTemplateUrl} alt="Badge template" fill sizes="(min-width: 768px) 45vw, 90vw" className="object-cover" />
                 {userImage && (
                   <div
-                    className="absolute aspect-square rounded-full overflow-hidden border-4 border-orange-500"
-                    style={{
-                      top: '30.7%',
-                      left: '13.3%',
-                      width: '27%',
-                    }}
+                    className="absolute aspect-square overflow-hidden rounded-full border-4 border-orange-500"
+                    style={{ top: '30.7%', left: '13.3%', width: '27%' }}
                   >
-                    <Image
-                      src={userImage}
-                      alt="Your photo"
-                      fill
-                      className="object-cover"
-                    />
+                    <Image src={userImage} alt="Your photo" fill className="object-cover" />
                   </div>
                 )}
                 {!userImage && (
-                  <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/50 backdrop-blur-[1px]">
-                    <Upload className="h-8 w-8 text-orange-400 mb-1.5" />
-                    <span className="text-xs font-bold text-white">Upload your photo</span>
+                  <div className="absolute inset-0 flex items-center justify-center bg-ink/55">
+                    <span className="rounded-md bg-paper px-3 py-1.5 text-sm font-semibold text-ink">No photo yet</span>
                   </div>
                 )}
               </div>
             </div>
 
-            <div className="mt-6 grid grid-cols-2 gap-3">
-              <Button asChild variant="outline" className="border-zinc-700 bg-zinc-900 text-zinc-200 hover:bg-zinc-800 text-xs sm:text-sm h-11">
-                <label htmlFor="file-upload" className="cursor-pointer flex items-center justify-center">
-                  <Upload className="h-4 w-4 mr-1.5 text-orange-400" />
-                  <span>Choose Photo</span>
-                </label>
-              </Button>
+            <div className="mt-6 flex flex-wrap items-center gap-x-6 gap-y-3">
+              <label htmlFor="file-upload" className="btn btn-ink cursor-pointer">
+                Choose a photo
+              </label>
               <Input id="file-upload" type="file" accept="image/*" className="hidden" onChange={handleFileChange} />
-
-              <Button
+              <button
+                type="button"
                 onClick={handleDownload}
                 disabled={!userImage}
-                className="bg-orange-500 hover:bg-orange-600 disabled:opacity-50 text-white font-bold text-xs sm:text-sm h-11"
+                className="btn btn-primary disabled:cursor-not-allowed disabled:opacity-40"
               >
-                <Download className="h-4 w-4 mr-1.5" />
-                <span>Download</span>
-              </Button>
+                Download
+              </button>
             </div>
-          </div>
+          </section>
 
-          {/* Card 2: Standard Badge */}
-          <div className="p-5 sm:p-7 rounded-2xl bg-zinc-900/60 border border-zinc-800/80 shadow-xl flex flex-col justify-between">
-            <div>
-              <div className="flex items-center gap-2 mb-1">
-                <Award className="h-4 w-4 text-orange-400" />
-                <h3 className="text-base sm:text-lg font-bold text-white">Standard Badge</h3>
-              </div>
-              <p className="text-xs text-zinc-400 mb-4">Official event card ready to download and share instantly.</p>
-              
-              <div className="relative w-full aspect-[1200/630] rounded-xl overflow-hidden bg-zinc-950 border border-zinc-800">
-                <Image
-                  src={badgeNoPhotoUrl}
-                  alt="Standard Badge"
-                  fill
-                  className="object-cover"
-                />
+          {/* Standard badge */}
+          <section className="flex flex-col border-t border-ink pt-6">
+            <h2 className="text-2xl font-semibold tracking-[-0.01em]">Standard</h2>
+            <p className="mt-1 text-ink-soft">The official card, ready to share as it is.</p>
+
+            <div className="print mt-5 rotate-[0.6deg]">
+              <div className="relative aspect-[1200/630] w-full overflow-hidden bg-paper-deep">
+                <Image src={badgeNoPhotoUrl} alt="Standard attendee badge" fill sizes="(min-width: 768px) 45vw, 90vw" className="object-cover" />
               </div>
             </div>
 
             <div className="mt-6">
-              <Button
-                onClick={handleDownloadWithoutPhoto}
-                className="w-full bg-orange-500 hover:bg-orange-600 text-white font-bold text-xs sm:text-sm h-11"
-              >
-                <Download className="h-4 w-4 mr-1.5" />
-                <span>Download Standard Badge</span>
-              </Button>
+              <button type="button" onClick={handleDownloadWithoutPhoto} className="btn btn-primary">
+                Download standard badge
+              </button>
             </div>
-          </div>
-
+          </section>
         </div>
 
+        {/* Caption to paste */}
+        <section className="mt-16 max-w-3xl border-t border-ink pt-6">
+          <h2 className="text-2xl font-semibold tracking-[-0.01em]">A caption to go with it</h2>
+          <p className="mt-4 rounded-md border border-rule bg-[#fffdf8] p-4 font-mono text-[0.8125rem] leading-relaxed text-ink-soft">
+            {socialText}
+          </p>
+          <button type="button" onClick={handleCopyToClipboard} className="btn btn-ink mt-4">
+            {copied ? 'Copied' : 'Copy caption'}
+          </button>
+        </section>
       </main>
       <Footer />
     </div>

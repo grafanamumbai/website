@@ -6,6 +6,7 @@ interface GrotMascotProps {
   className?: string;
   variant?: 'hat' | 'smile' | 'search' | 'trophy';
   animate?: boolean;
+  eager?: boolean;
 }
 
 const variantMap: Record<string, { src: string; alt: string }> = {
@@ -31,6 +32,7 @@ export function GrotMascot({
   className = 'w-24 h-24',
   variant = 'hat',
   animate = true,
+  eager = false,
 }: GrotMascotProps) {
   const selected = variantMap[variant] || variantMap.hat;
 
@@ -43,7 +45,7 @@ export function GrotMascot({
         className={`h-full w-full object-contain ${
           animate ? 'transition-transform duration-500 hover:scale-105' : ''
         }`}
-        loading="lazy"
+        loading={eager ? 'eager' : 'lazy'}
       />
     </div>
   );
